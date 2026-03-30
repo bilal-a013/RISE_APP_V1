@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import DifficultyBadge from '@/components/ui/DifficultyBadge'
 import LessonContent from '@/components/lesson/LessonContent'
+import { getMockContent } from '@/lib/mockLessons'
 import type { DifficultyLevel, Lesson, LessonProgress, Topic, Subject } from '@rise/shared'
 
 interface PageProps {
@@ -50,6 +51,10 @@ export default async function LessonPage({ params }: PageProps) {
   const { lesson, progress } = result
   const diffLevel: DifficultyLevel = progress?.difficulty_level ?? 'building'
 
+  // Fall back to mock content when Supabase content is null
+  const content = lesson.content ?? getMockContent(lesson.slug)
+  const lessonWithContent = { ...lesson, content }
+
   return (
     <div className="rise-page">
       {/* Back button + meta */}
@@ -78,8 +83,8 @@ export default async function LessonPage({ params }: PageProps) {
       </div>
 
       {/* Lesson content */}
-      {lesson.content ? (
-        <LessonContent lesson={lesson} difficultyLevel={diffLevel} />
+      {lessonWithContent.content ? (
+        <LessonContent lesson={lessonWithContent} difficultyLevel={diffLevel} />
       ) : (
         <div className="rise-card text-center py-12">
           <span className="text-3xl mb-3 block">🔧</span>
