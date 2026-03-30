@@ -78,7 +78,58 @@ export interface TutorSession {
   createdAt: string;
 }
 
+// ─── Difficulty ───────────────────────────────────────────────────────────────
+
+export type DifficultyLevel = 'building' | 'getting_there' | 'confident';
+
+export interface DifficultyIndicator {
+  level: DifficultyLevel;
+  label: string;
+  colour: string;
+  description: string;
+}
+
+export const DIFFICULTY_CONFIG: Record<DifficultyLevel, DifficultyIndicator> = {
+  building: {
+    level: 'building',
+    label: 'Building',
+    colour: '#EF4444',
+    description: 'Still finding it tricky — extra support included',
+  },
+  getting_there: {
+    level: 'getting_there',
+    label: 'Getting There',
+    colour: '#F59E0B',
+    description: 'Making good progress — standard pace',
+  },
+  confident: {
+    level: 'confident',
+    label: 'Confident',
+    colour: '#10B981',
+    description: 'Got this — challenge mode on',
+  },
+};
+
+export function getDifficultyFromScore(score: number): DifficultyLevel {
+  if (score >= 80) return 'confident';
+  if (score >= 50) return 'getting_there';
+  return 'building';
+}
+
 // ─── Progress ─────────────────────────────────────────────────────────────────
+
+export interface LessonProgress {
+  id: string;
+  student_id: string;
+  lesson_id: string;
+  status: 'not_started' | 'in_progress' | 'completed';
+  started_at: string | null;
+  completed_at: string | null;
+  last_accessed_at: string | null;
+  time_spent_seconds: number;
+  difficulty_level: DifficultyLevel;
+  lesson_1_score: number | null;
+}
 
 export interface StudySession {
   id: string;
