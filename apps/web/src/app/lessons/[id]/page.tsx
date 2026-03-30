@@ -59,7 +59,7 @@ export default async function LessonPage({ params }: PageProps) {
     <div className="rise-page">
       {/* Back button + meta */}
       <div className="flex items-center gap-3 mb-5">
-        <Link href={`/subjects/${lesson.topic?.subject?.slug}`}>
+        <Link href={lesson.topic?.subject?.slug ? `/subjects/${lesson.topic.subject.slug}` : '/subjects'}>
           <div className="w-9 h-9 rounded-xl bg-white shadow flex items-center justify-center">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
               <path d="M11 4L6 9L11 14" stroke="#7C3AED" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />

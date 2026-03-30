@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 import DifficultyBadge from '@/components/ui/DifficultyBadge'
+import { logout } from '@/app/auth/actions'
 import type { DifficultyLevel, Lesson, LessonProgress, StudentSession, Topic, Subject } from '@rise/shared'
 
 interface CurrentLesson {
@@ -107,10 +108,20 @@ export default async function HomePage() {
 
   return (
     <div className="rise-page">
-      {/* Greeting */}
-      <div className="mb-6">
-        <p className="text-sm font-semibold text-[#7C3AED] mb-1">Good morning 👋</p>
-        <h1 className="text-2xl font-black text-gray-900">Ready to rise?</h1>
+      {/* Greeting + logout */}
+      <div className="flex items-start justify-between mb-6">
+        <div>
+          <p className="text-sm font-semibold text-[#7C3AED] mb-1">Good morning 👋</p>
+          <h1 className="text-2xl font-black text-gray-900">Ready to rise?</h1>
+        </div>
+        <form action={logout}>
+          <button
+            type="submit"
+            className="text-xs font-bold text-slate-400 hover:text-slate-600 mt-1"
+          >
+            Sign out
+          </button>
+        </form>
       </div>
 
       {/* Current Lesson Card — zero friction */}

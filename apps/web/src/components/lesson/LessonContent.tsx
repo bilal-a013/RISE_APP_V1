@@ -1,34 +1,68 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useTransition } from 'react'
 import type { Lesson, LessonBlock, DifficultyLevel } from '@rise/shared'
 import { DIFFICULTY_CONFIG } from '@rise/shared'
 import GenericMCQ from '@/components/artifacts/GenericMCQ'
+import { completelesson } from '@/app/actions/lesson'
 
 interface LessonContentProps {
   lesson: Lesson
   difficultyLevel: DifficultyLevel
 }
 
+const SELF_ASSESS: { level: DifficultyLevel; label: string; sub: string }[] = [
+  { level: 'building', label: '🔴 Still working on it', sub: 'I need more practice' },
+  { level: 'getting_there', label: '🟡 Getting there', sub: 'I mostly understand it' },
+  { level: 'confident', label: '🟢 Got it!', sub: 'I could explain this to someone' },
+]
+
 export default function LessonContent({ lesson, difficultyLevel }: LessonContentProps) {
-  const [tryItDone, setTryItDone] = useState(false)
   const [showSolution, setShowSolution] = useState(false)
+  const [mcqCorrect, setMcqCorrect] = useState(false)
+  const [selectedDifficulty, setSelectedDifficulty] = useState<DifficultyLevel | null>(null)
+  const [completed, setCompleted] = useState(false)
+  const [isPending, startTransition] = useTransition()
 
   if (!lesson.content) return null
 
   const { hook, blocks, try_it, summary, interactive_type, interactive_config } = lesson.content
-  const config = DIFFICULTY_CONFIG[difficultyLevel]
+
+  function handleComplete() {
+    if (!selectedDifficulty) return
+    startTransition(async () => {
+      const score = mcqCorrect ? 1 : 0
+      const result = await completelesson(lesson.id, selectedDifficulty, score)
+      if (!result.error) setCompleted(true)
+    })
+  }
+
+  if (completed) {
+    return (
+      <div className="rise-card text-center py-10">
+        <span className="text-5xl mb-4 block">🎉</span>
+        <h2 className="text-xl font-black text-gray-900 mb-1">Lesson complete!</h2>
+        <p className="text-sm text-slate-500 mb-6">
+          Marked as{' '}
+          <span className="font-bold">{DIFFICULTY_CONFIG[selectedDifficulty!].label}</span>
+        </p>
+        <a href="/subjects" className="rise-btn-primary block">
+          Back to subjects
+        </a>
+      </div>
+    )
+  }
 
   return (
     <div className="space-y-4">
       {/* Hook */}
-      <div className={`rise-card border-l-4 border-[#7C3AED]`}>
+      <div className="rise-card border-l-4 border-[#7C3AED]">
         <p className="text-base font-bold text-gray-800 leading-relaxed">{hook}</p>
       </div>
 
       {/* Content blocks */}
       {blocks.map((block, i) => (
-        <ContentBlock key={i} block={block} difficultyLevel={difficultyLevel} />
+        <ContentBlock key={i} block={block} />
       ))}
 
       {/* Try It */}
@@ -47,12 +81,12 @@ export default function LessonContent({ lesson, difficultyLevel }: LessonContent
             <GenericMCQ
               config={interactive_config as { options: { label: string; correct: boolean }[] }}
               correctAnswer={try_it.answer}
-              onCorrect={() => setTryItDone(true)}
+              onCorrect={() => setMcqCorrect(true)}
             />
           ) : (
-            <div className="bg-white rounded-2xl p-4 border border-[#FCD34D]/30">
-              <p className="text-xs text-slate-500 text-center">Interactive: {interactive_type}</p>
-              <p className="text-xs text-slate-400 text-center mt-1">(Component coming soon)</p>
+            <div className="bg-white rounded-2xl p-4 border border-[#FCD34D]/30 text-center">
+              <p className="text-xs text-slate-500">Interactive: {interactive_type}</p>
+              <p className="text-xs text-slate-400 mt-1">(Component coming soon)</p>
             </div>
           )}
 
@@ -77,9 +111,7 @@ export default function LessonContent({ lesson, difficultyLevel }: LessonContent
                 ))}
               </ol>
               <div className="mt-2 pt-2 border-t border-gray-100">
-                <p className="text-xs font-bold text-green-700">
-                  Answer: {try_it.answer}
-                </p>
+                <p className="text-xs font-bold text-green-700">Answer: {try_it.answer}</p>
               </div>
             </div>
           )}
@@ -104,33 +136,47 @@ export default function LessonContent({ lesson, difficultyLevel }: LessonContent
         </div>
       )}
 
-      {/* Mark complete CTA */}
-      <div className="pt-2 pb-4">
-        <button className="rise-btn-yellow text-sm font-black">
-          Mark as complete ✓
+      {/* Self-assessment + Mark complete */}
+      <div className="rise-card border-2 border-[#7C3AED]/10">
+        <h3 className="text-base font-black text-gray-900 mb-1">How did you find this?</h3>
+        <p className="text-xs text-slate-500 mb-4">Be honest — it helps set your next lesson difficulty.</p>
+
+        <div className="space-y-2 mb-4">
+          {SELF_ASSESS.map((opt) => (
+            <button
+              key={opt.level}
+              onClick={() => setSelectedDifficulty(opt.level)}
+              className={`w-full text-left rounded-2xl border-2 px-4 py-3 transition-all ${
+                selectedDifficulty === opt.level
+                  ? 'border-[#7C3AED] bg-[#F3F0FF]'
+                  : 'border-gray-100 bg-white hover:border-[#7C3AED]/30'
+              }`}
+            >
+              <p className="text-sm font-black text-gray-900">{opt.label}</p>
+              <p className="text-xs text-slate-500">{opt.sub}</p>
+            </button>
+          ))}
+        </div>
+
+        <button
+          onClick={handleComplete}
+          disabled={!selectedDifficulty || isPending}
+          className={`rise-btn-yellow text-sm transition-opacity ${
+            !selectedDifficulty || isPending ? 'opacity-40 cursor-not-allowed' : ''
+          }`}
+        >
+          {isPending ? 'Saving...' : 'Mark as complete ✓'}
         </button>
       </div>
     </div>
   )
 }
 
-function ContentBlock({ block, difficultyLevel }: { block: LessonBlock; difficultyLevel: DifficultyLevel }) {
+function ContentBlock({ block }: { block: LessonBlock }) {
   const blockStyles = {
-    concept: {
-      bg: 'bg-white',
-      accent: 'border-l-4 border-[#7C3AED]',
-      icon: '💡',
-    },
-    rule: {
-      bg: 'bg-[#F3F0FF]',
-      accent: 'border-l-4 border-[#7C3AED]',
-      icon: '📏',
-    },
-    example: {
-      bg: 'bg-white',
-      accent: 'border-l-4 border-[#FCD34D]',
-      icon: '🔍',
-    },
+    concept: { bg: 'bg-white', accent: 'border-l-4 border-[#7C3AED]', icon: '💡' },
+    rule: { bg: 'bg-[#F3F0FF]', accent: 'border-l-4 border-[#7C3AED]', icon: '📏' },
+    example: { bg: 'bg-white', accent: 'border-l-4 border-[#FCD34D]', icon: '🔍' },
   }
 
   const style = blockStyles[block.type]
