@@ -3,8 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "prebuild": "node scripts/ensure-env-local.mjs",
+    "predev": "node scripts/ensure-env-local.mjs",
     "dev": "next dev",
     "build": "next build",
+    "prestart": "node scripts/ensure-env-local.mjs",
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit"
