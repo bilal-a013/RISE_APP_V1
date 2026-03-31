@@ -68,24 +68,29 @@ export default async function SubjectPage({ params }: PageProps) {
   const { subject, topics } = result
 
   return (
-    <div className="rise-page">
-      {/* Header */}
-      <div className="flex items-center gap-3 mb-6">
+    <div className="rise-page rise-page-wide">
+      <div className="mb-6 flex items-start gap-4 border-b border-[#ede6fb] pb-6">
         <Link href="/subjects">
-          <div className="w-9 h-9 rounded-xl bg-white shadow flex items-center justify-center">
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#f4ecff] shadow-[0_10px_20px_rgba(124,58,237,0.10)]">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
               <path d="M11 4L6 9L11 14" stroke="#7C3AED" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </div>
         </Link>
-        <div>
-          <h1 className="text-xl font-black text-gray-900">{subject.name}</h1>
-          <p className="text-xs text-slate-500">{topics.length} topics</p>
+        <div className="min-w-0 flex-1">
+          <p className="text-xs font-black uppercase tracking-[0.24em] text-[#a39cb8]">Subject overview</p>
+          <h1 className="mt-2 text-[2.2rem] font-black text-[#221d37]">{subject.name}</h1>
+          <p className="mt-2 max-w-2xl text-base font-medium text-[#8d88a7]">
+            Browse each topic, inspect lesson completion, and continue the right task without losing context.
+          </p>
+        </div>
+        <div className="hidden rounded-[1.4rem] bg-[#f7f2ff] px-5 py-4 text-right lg:block">
+          <p className="text-xs font-black uppercase tracking-[0.18em] text-[#aa9fd0]">Topics</p>
+          <p className="mt-2 text-3xl font-black text-[#7C3AED]">{topics.length}</p>
         </div>
       </div>
 
-      {/* Topics */}
-      <div className="space-y-4">
+      <div className="grid gap-4 xl:grid-cols-2">
         {topics.map((topic) => {
           const completedCount = topic.lessons.filter((l) => l.progress?.completed_at).length
           const total = topic.lessons.length
@@ -93,23 +98,20 @@ export default async function SubjectPage({ params }: PageProps) {
 
           return (
             <div key={topic.id} className="rise-card">
-              {/* Topic header */}
               <div className="flex items-center justify-between mb-3">
-                <h2 className="text-base font-black text-gray-900">{topic.name}</h2>
-                <span className="text-xs font-bold text-slate-400">
+                <h2 className="text-base font-black text-[#231d39]">{topic.name}</h2>
+                <span className="text-xs font-bold text-[#968faf]">
                   {completedCount}/{total}
                 </span>
               </div>
 
-              {/* Progress bar */}
-              <div className="h-1.5 bg-gray-100 rounded-full mb-4 overflow-hidden">
+              <div className="mb-4 h-2 overflow-hidden rounded-full bg-[#eee8fb]">
                 <div
-                  className="h-full bg-[#7C3AED] rounded-full transition-all"
+                  className="h-full rounded-full bg-[linear-gradient(90deg,#c17bff_0%,#962aff_45%,#7C3AED_100%)] transition-all"
                   style={{ width: `${pct}%` }}
                 />
               </div>
 
-              {/* Lessons */}
               <div className="space-y-2">
                 {topic.lessons.map((lesson) => {
                   const done = !!lesson.progress?.completed_at
@@ -118,9 +120,8 @@ export default async function SubjectPage({ params }: PageProps) {
                   return (
                     <Link key={lesson.id} href={`/lessons/${lesson.id}`}>
                       <div className={`flex items-center gap-3 p-3 rounded-2xl transition-colors ${
-                        done ? 'bg-gray-50' : 'bg-[#F3F0FF] hover:bg-[#EDE9FF]'
+                        done ? 'bg-[#f8f5fd]' : 'bg-[#f4ecff] hover:bg-[#ece0ff]'
                       }`}>
-                        {/* Status icon */}
                         <div className={`w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 ${
                           done ? 'bg-green-100' : 'bg-white shadow-sm'
                         }`}>
@@ -132,10 +133,10 @@ export default async function SubjectPage({ params }: PageProps) {
                         </div>
 
                         <div className="flex-1 min-w-0">
-                          <p className={`text-sm font-bold truncate ${done ? 'text-slate-400' : 'text-gray-900'}`}>
+                          <p className={`truncate text-sm font-bold ${done ? 'text-slate-400' : 'text-[#241d39]'}`}>
                             {lesson.title}
                           </p>
-                          <p className="text-xs text-slate-400 capitalize">{lesson.type}</p>
+                          <p className="text-xs capitalize text-slate-400">{lesson.type}</p>
                         </div>
 
                         {lesson.progress && (

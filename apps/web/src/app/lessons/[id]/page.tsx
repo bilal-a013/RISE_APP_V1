@@ -56,35 +56,65 @@ export default async function LessonPage({ params }: PageProps) {
   const lessonWithContent = { ...lesson, content }
 
   return (
-    <div className="rise-page">
-      {/* Back button + meta */}
-      <div className="flex items-center gap-3 mb-5">
+    <div className="rise-page rise-page-wide">
+      <div className="mb-6 border-b border-[#ede6fb] pb-6">
+        <div className="flex items-center gap-3">
         <Link href={lesson.topic?.subject?.slug ? `/subjects/${lesson.topic.subject.slug}` : '/subjects'}>
-          <div className="w-9 h-9 rounded-xl bg-white shadow flex items-center justify-center">
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#f4ecff] shadow-[0_10px_20px_rgba(124,58,237,0.10)]">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
               <path d="M11 4L6 9L11 14" stroke="#7C3AED" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </div>
         </Link>
-        <div className="flex-1 min-w-0">
-          <p className="text-xs font-bold text-[#7C3AED] uppercase tracking-wider truncate">
-            {lesson.topic?.subject?.name} · {lesson.topic?.name}
-          </p>
-          <h1 className="text-lg font-black text-gray-900 leading-tight">{lesson.title}</h1>
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center justify-between gap-3">
+            <p className="truncate text-xs font-black uppercase tracking-[0.22em] text-[#a7a4b8]">
+              {lesson.topic?.subject?.name}
+            </p>
+            <p className="text-sm font-bold text-[#c0bccf]">
+              {progress?.completed_at ? 'Completed' : '1 / 8'}
+            </p>
+          </div>
+          <h1 className="mt-2 text-[2rem] font-black leading-[1.05] text-[#1c1930]">{lesson.title}</h1>
+        </div>
         </div>
       </div>
 
-      {/* Type + Difficulty row */}
-      <div className="flex items-center gap-2 mb-6">
-        <span className="text-xs font-bold bg-white border border-gray-200 text-gray-600 px-3 py-1 rounded-full capitalize">
-          {lesson.type === 'learn' ? '📖 Learn' : '✏️ Practise'}
-        </span>
-        <DifficultyBadge level={diffLevel} size="sm" />
+      <div className="mb-6 grid gap-4 xl:grid-cols-[minmax(0,1.4fr)_minmax(300px,0.6fr)]">
+        <div className="rise-soft-panel px-5 py-5">
+          <div className="flex items-start gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#eedfff] text-sm font-black text-[#7C3AED]">
+              T
+            </div>
+            <div>
+              <p className="text-sm font-medium leading-relaxed text-[#8f2eff]">
+                Your tutor covered this with you recently. This lesson helps you practise it independently in the web app.
+              </p>
+              <p className="mt-2 text-sm font-medium text-[#7d7892]">
+                Work through the explanation, try the interactive question, then self-assess so the next lesson difficulty stays accurate.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="rise-card bg-[linear-gradient(180deg,#241a4a_0%,#18142f_100%)] p-5 text-white">
+          <p className="text-xs font-black uppercase tracking-[0.18em] text-white/45">Lesson details</p>
+          <div className="mt-4 flex flex-wrap items-center gap-2">
+            <span className="rise-chip capitalize">
+              {lesson.type === 'learn' ? '📖 Learn' : '✏️ Practise'}
+            </span>
+            <DifficultyBadge level={diffLevel} size="sm" />
+          </div>
+          <p className="mt-4 rounded-full bg-[#fff3ca] px-3 py-2 text-xs font-black text-[#7b5200]">
+            ⚡ +50 XP on completion
+          </p>
+        </div>
       </div>
 
-      {/* Lesson content */}
       {lessonWithContent.content ? (
-        <LessonContent lesson={lessonWithContent} difficultyLevel={diffLevel} />
+        <div className="max-w-5xl">
+          <LessonContent lesson={lessonWithContent} difficultyLevel={diffLevel} />
+        </div>
       ) : (
         <div className="rise-card text-center py-12">
           <span className="text-3xl mb-3 block">🔧</span>

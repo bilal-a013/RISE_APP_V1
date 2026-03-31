@@ -39,10 +39,10 @@ export default function LessonContent({ lesson, difficultyLevel }: LessonContent
 
   if (completed) {
     return (
-      <div className="rise-card text-center py-10">
+      <div className="rise-card py-10 text-center">
         <span className="text-5xl mb-4 block">🎉</span>
-        <h2 className="text-xl font-black text-gray-900 mb-1">Lesson complete!</h2>
-        <p className="text-sm text-slate-500 mb-6">
+        <h2 className="mb-1 text-xl font-black text-[#1e1935]">Lesson complete!</h2>
+        <p className="mb-6 text-sm text-slate-500">
           Marked as{' '}
           <span className="font-bold">{DIFFICULTY_CONFIG[selectedDifficulty!].label}</span>
         </p>
@@ -55,25 +55,22 @@ export default function LessonContent({ lesson, difficultyLevel }: LessonContent
 
   return (
     <div className="space-y-4">
-      {/* Hook */}
-      <div className="rise-card border-l-4 border-[#7C3AED]">
-        <p className="text-base font-bold text-gray-800 leading-relaxed">{hook}</p>
+      <div className="rise-soft-panel border-l-4 border-[#b14dff] px-4 py-4">
+        <p className="text-base font-medium leading-relaxed text-[#7d29f0]">{hook}</p>
       </div>
 
-      {/* Content blocks */}
       {blocks.map((block, i) => (
         <ContentBlock key={i} block={block} />
       ))}
 
-      {/* Try It */}
       {try_it && (
-        <div className="rise-card border border-[#FCD34D]/40 bg-[#FFFBEB]">
-          <div className="flex items-center gap-2 mb-3">
+        <div className="rise-card border border-[#ffe082] bg-[linear-gradient(180deg,#fff7dd_0%,#fffdf2_100%)]">
+          <div className="mb-3 flex items-center gap-2">
             <span className="text-lg">✏️</span>
-            <h3 className="text-base font-black text-gray-900">Try It</h3>
+            <h3 className="text-base font-black text-[#211d35]">Try It</h3>
           </div>
 
-          <p className="text-sm font-semibold text-gray-800 mb-4 leading-relaxed">
+          <p className="mb-4 text-sm font-semibold leading-relaxed text-gray-800">
             {try_it.question}
           </p>
 
@@ -84,7 +81,7 @@ export default function LessonContent({ lesson, difficultyLevel }: LessonContent
               onCorrect={() => setMcqCorrect(true)}
             />
           ) : (
-            <div className="bg-white rounded-2xl p-4 border border-[#FCD34D]/30 text-center">
+            <div className="rounded-2xl border border-[#FCD34D]/30 bg-white p-4 text-center">
               <p className="text-xs text-slate-500">Interactive: {interactive_type}</p>
               <p className="text-xs text-slate-400 mt-1">(Component coming soon)</p>
             </div>
@@ -100,8 +97,8 @@ export default function LessonContent({ lesson, difficultyLevel }: LessonContent
           )}
 
           {showSolution && (
-            <div className="mt-3 bg-white rounded-2xl p-4 border border-gray-100">
-              <p className="text-xs font-black text-gray-700 mb-2">Worked Solution</p>
+            <div className="mt-3 rounded-[1.5rem] border border-gray-100 bg-white p-4">
+              <p className="mb-2 text-xs font-black uppercase tracking-[0.18em] text-gray-700">Worked Solution</p>
               <ol className="space-y-1">
                 {try_it.worked_solution.map((step, i) => (
                   <li key={i} className="text-xs text-gray-600 flex gap-2">
@@ -120,10 +117,10 @@ export default function LessonContent({ lesson, difficultyLevel }: LessonContent
 
       {/* Summary */}
       {summary.length > 0 && (
-        <div className="rise-card bg-[#F3F0FF]">
-          <div className="flex items-center gap-2 mb-3">
+        <div className="rise-card bg-[linear-gradient(180deg,#f5edff_0%,#f9f5ff_100%)]">
+          <div className="mb-3 flex items-center gap-2">
             <span className="text-lg">⚡</span>
-            <h3 className="text-base font-black text-gray-900">Key Points</h3>
+            <h3 className="text-base font-black text-[#271f4d]">Key Points</h3>
           </div>
           <ul className="space-y-2">
             {summary.map((point, i) => (
@@ -136,10 +133,9 @@ export default function LessonContent({ lesson, difficultyLevel }: LessonContent
         </div>
       )}
 
-      {/* Self-assessment + Mark complete */}
-      <div className="rise-card border-2 border-[#7C3AED]/10">
-        <h3 className="text-base font-black text-gray-900 mb-1">How did you find this?</h3>
-        <p className="text-xs text-slate-500 mb-4">Be honest — it helps set your next lesson difficulty.</p>
+      <div className="rise-card border-2 border-[#eddfff]">
+        <h3 className="mb-1 text-base font-black text-[#221d37]">How did you find this?</h3>
+        <p className="mb-4 text-xs text-slate-500">Be honest — it helps set your next lesson difficulty.</p>
 
         <div className="space-y-2 mb-4">
           {SELF_ASSESS.map((opt) => (
@@ -148,7 +144,7 @@ export default function LessonContent({ lesson, difficultyLevel }: LessonContent
               onClick={() => setSelectedDifficulty(opt.level)}
               className={`w-full text-left rounded-2xl border-2 px-4 py-3 transition-all ${
                 selectedDifficulty === opt.level
-                  ? 'border-[#7C3AED] bg-[#F3F0FF]'
+                  ? 'border-[#7C3AED] bg-[#f5ecff] shadow-[0_10px_24px_rgba(124,58,237,0.08)]'
                   : 'border-gray-100 bg-white hover:border-[#7C3AED]/30'
               }`}
             >
@@ -174,25 +170,25 @@ export default function LessonContent({ lesson, difficultyLevel }: LessonContent
 
 function ContentBlock({ block }: { block: LessonBlock }) {
   const blockStyles = {
-    concept: { bg: 'bg-white', accent: 'border-l-4 border-[#7C3AED]', icon: '💡' },
-    rule: { bg: 'bg-[#F3F0FF]', accent: 'border-l-4 border-[#7C3AED]', icon: '📏' },
-    example: { bg: 'bg-white', accent: 'border-l-4 border-[#FCD34D]', icon: '🔍' },
+    concept: { bg: 'bg-white', accent: 'border-l-4 border-[#b14dff]', icon: '💡' },
+    rule: { bg: 'bg-[#f7f2ff]', accent: 'border-l-4 border-[#8f2eff]', icon: '📏' },
+    example: { bg: 'bg-[#fff8e2]', accent: 'border-l-4 border-[#f0bf24]', icon: '🔍' },
   }
 
   const style = blockStyles[block.type]
 
   return (
-    <div className={`rounded-3xl shadow-sm p-5 ${style.bg} ${style.accent}`}>
-      <div className="flex items-start gap-2 mb-2">
+    <div className={`rounded-[2rem] p-5 shadow-[0_12px_28px_rgba(71,46,143,0.08)] ${style.bg} ${style.accent}`}>
+      <div className="mb-2 flex items-start gap-2">
         <span className="text-base flex-shrink-0">{style.icon}</span>
-        <h3 className="text-sm font-black text-gray-900 uppercase tracking-wide">{block.heading}</h3>
+        <h3 className="text-sm font-black uppercase tracking-wide text-gray-900">{block.heading}</h3>
       </div>
 
       <p className="text-sm text-gray-700 leading-relaxed mb-3">{block.body}</p>
 
       {block.formula && (
-        <div className="bg-[#EDE9FF] rounded-2xl px-4 py-3 text-center mb-3">
-          <code className="text-sm font-black text-[#7C3AED]">{block.formula}</code>
+        <div className="mb-3 rounded-[1.4rem] bg-[#efe3ff] px-4 py-4 text-center">
+          <code className="text-lg font-black text-[#7C3AED]">{block.formula}</code>
         </div>
       )}
 

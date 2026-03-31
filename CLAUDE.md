@@ -15,7 +15,6 @@ RISE is a premium GCSE self-study platform for UK students aged 13-16. It combin
 - Mobile: Expo 51, React Native, NativeWind
 - Database: Supabase (Postgres, RLS, Auth)
 - AI: Anthropic Claude API (claude-sonnet-4-20250514)
-l (web), Expo (mobile)
 - Monorepo: npm workspaces
 
 ## Working Directory
@@ -47,8 +46,16 @@ lesson_progress has difficulty_level ('building' | 'getting_there' | 'confident'
 6. AI tutor is context-aware — knows what the student covered with their tutor
 7. Progress screen uses a Battle Pass mechanic (weekly strip + season tiers) not boring bar charts
 8. Lesson content is stored in Supabase (generated once, served identically to all students)
-9. Claude API reformats content presentation based on student difficulty level
+9. Real-time AI reformatting by difficulty level is a later enhancement, not required for the current frontend
 10. Interactive artifacts (FOIL grid, balance scale, fraction bar etc) are built as React components
+
+## Current Frontend Behaviour
+- Lesson rendering is pure React and reads from `lessons.content` in Supabase
+- If `lessons.content` is populated, the app renders that content
+- If `lessons.content` is null, the app falls back to `apps/web/src/lib/mockLessons.ts`
+- Mock content currently covers all 3 seeded lessons
+- The current experience does not require Anthropic to run
+- The same lesson content currently renders for all difficulty levels
 
 ## Lesson Content Structure (lessons.content jsonb)
 {
@@ -78,17 +85,54 @@ Each is a React component in apps/web/components/artifacts/:
 
 ## Current Build Status
 - ✅ Repo scaffolded (Next.js + Expo + shared packages)
-- ✅ Supabase schema live (6 tables, RLS,seeded (Foundation tier, learn type)
+- ✅ Supabase schema live and seeded
 - ✅ 3 lessons have full content (solving-linear-equations, simplifying-expanding-expressions, fractions-adding-subtracting)
 - ✅ Shared types updated with DifficultyLevel, DifficultyIndicator, DIFFICULTY_CONFIG
-- 🔴 Frontend not started yet
+- ✅ Web frontend is built and running locally
+- ✅ Home, subjects, progress, and lesson routes exist in `apps/web/src/app`
+- ✅ Lesson UI renders hooks, content blocks, Try It, worked solutions, summary, and fallback mock content
+- ✅ Supabase client/server setup is wired through env vars
+- ✅ Next.js app runs from the repo root with `npm install` then `npm run dev`
+- ✅ Next config uses `apps/web/next.config.mjs`
+
+## Frontend Handoff
+Claude should treat the web frontend as the active priority.
+
+Current truth:
+- The app runs locally
+- The current web app is in `apps/web`
+- The project is a git repository rooted at `RISE_APP_V1/.git`
+- The frontend should be completed before adding any AI reformatting work
+- Anthropic is out of scope for now
+
+When continuing frontend work:
+- Start from the repo root
+- Run `npm run dev` from the repo root
+- Use `apps/web/.env.local` for local Supabase credentials
+- Do not edit `.env.example` with real secrets
+- Use Supabase content when available and `mockLessons.ts` as fallback
+- Preserve the current design system and mobile-first layout
+
+Frontend focus areas remaining:
+- Finish all user-facing routes and states
+- Polish responsive layout, navigation, and empty/loading/error states
+- Complete any missing interactive artifact components
+- Ensure lesson flow, progress flow, and subject navigation feel production-ready
+- Keep using shared types from `@rise/shared`
+- Prefer server components unless interactivity requires client components
+
+Git hygiene:
+- Commit after each meaningful frontend feature
+- Never commit `.env.local` or real credentials
+- Ignore `.DS_Store`
 
 ## Environment Variables
 apps/web/.env.local needs:
 - NEXT_PUBLIC_SUPABASE_URL
 - NEXT_PUBLIC_SUPABASE_ANON_KEY
-- ANTHROPIC_API_KEY
 - SUPABASE_SERVICE_ROLE_KEY (scripts only, never expose to client)
+
+Anthropic is not required to run the current frontend.
 
 ## Rules — Always Follow These
 1. Never hardcode credentials — always use env vars
@@ -99,5 +143,5 @@ apps/web/.env.local needs:
 6. Always use the shared types from @rise/shared
 7. Supabase client for server components: use service role only in scripts, anon key in the app
 8. All colours must match the design system exactly
-9. Keall and in apps/web/components/
+9. Keep UI components organised in `apps/web/src/components/`
 10. Commit after every working feature

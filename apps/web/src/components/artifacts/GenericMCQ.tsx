@@ -33,7 +33,7 @@ export default function GenericMCQ({ config, correctAnswer, onCorrect }: Generic
         const isCorrect = opt.correct
         const showResult = selected !== null
 
-        let stateClass = 'border-gray-200 bg-white hover:border-[#7C3AED]/40 hover:bg-[#F3F0FF]'
+        let stateClass = 'border-gray-200 bg-white hover:border-[#7C3AED]/40 hover:bg-[#F8F3FF]'
         if (showResult && isSelected && isCorrect) {
           stateClass = 'border-green-400 bg-green-50'
         } else if (showResult && isSelected && !isCorrect) {
@@ -47,7 +47,7 @@ export default function GenericMCQ({ config, correctAnswer, onCorrect }: Generic
             key={idx}
             onClick={() => handleSelect(idx)}
             disabled={selected !== null}
-            className={`w-full text-left rounded-2xl border-2 px-4 py-3 transition-all ${stateClass}`}
+            className={`w-full rounded-[1.4rem] border-2 px-4 py-3 text-left transition-all shadow-[0_10px_24px_rgba(71,46,143,0.05)] ${stateClass}`}
           >
             <div className="flex items-center gap-3">
               <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${
@@ -77,7 +77,7 @@ export default function GenericMCQ({ config, correctAnswer, onCorrect }: Generic
       })}
 
       {selected !== null && (
-        <div className={`rounded-2xl px-4 py-3 mt-1 ${
+        <div className={`mt-1 rounded-[1.4rem] px-4 py-3 ${
           options[selected]?.correct ? 'bg-green-100' : 'bg-red-50'
         }`}>
           <p className={`text-sm font-bold ${

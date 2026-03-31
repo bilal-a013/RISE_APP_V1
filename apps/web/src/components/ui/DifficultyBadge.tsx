@@ -10,8 +10,8 @@ export default function DifficultyBadge({ level, size = 'md' }: DifficultyBadgeP
 
   return (
     <span
-      className={`inline-flex items-center gap-1 font-bold rounded-full border ${config.tailwindBg} ${config.tailwindText} ${config.tailwindBorder} ${
-        size === 'sm' ? 'text-xs px-2 py-0.5' : 'text-sm px-3 py-1'
+      className={`inline-flex items-center gap-1 rounded-full border font-bold shadow-[0_8px_16px_rgba(124,58,237,0.06)] ${config.tailwindBg} ${config.tailwindText} ${config.tailwindBorder} ${
+        size === 'sm' ? 'px-2.5 py-1 text-xs' : 'px-3 py-1.5 text-sm'
       }`}
     >
       <span>{config.emoji}</span>
