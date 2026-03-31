@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation'
 
 const NAV_ITEMS = [
   {
-    href: '/',
+    href: '/home',
     label: 'Home',
     icon: (active: boolean) => (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -21,7 +21,7 @@ const NAV_ITEMS = [
   },
   {
     href: '/subjects',
-    label: 'Subjects',
+    label: 'Maths',
     icon: (active: boolean) => (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
         <rect
@@ -73,57 +73,43 @@ export default function BottomNav() {
 
   return (
     <>
-      <aside className="rise-sidebar lg:sticky lg:top-6">
+      <aside className="rise-sidebar">
         <div className="mb-8 flex items-center gap-3">
-          <div className="flex h-12 w-12 items-center justify-center rounded-[1.3rem] bg-gradient-to-br from-[#a22df4] to-[#7C3AED] text-xl font-black text-white shadow-[0_16px_30px_rgba(124,58,237,0.35)]">
+          <div className="flex h-11 w-11 items-center justify-center rounded-[0.95rem] bg-gradient-to-br from-[#a22df4] to-[#7C3AED] text-xl font-black text-white shadow-[0_16px_30px_rgba(124,58,237,0.35)]">
             R
           </div>
           <div>
-            <p className="text-2xl font-black leading-none">RISE</p>
-            <p className="mt-1 text-sm font-medium text-white/60">GCSE self-study platform</p>
+            <p className="text-[1.8rem] font-black leading-none">RISE</p>
+            <p className="mt-1 text-xs font-medium uppercase tracking-[0.18em] text-white/45">Maths studio</p>
           </div>
         </div>
 
-        <div className="mb-6 rounded-[1.75rem] border border-white/10 bg-white/5 p-4">
-          <p className="text-xs font-black uppercase tracking-[0.22em] text-white/45">Live focus</p>
-          <p className="mt-3 text-2xl font-black leading-tight">Web-first tutoring experience</p>
-          <p className="mt-2 text-sm leading-relaxed text-white/65">
-            Build the browser experience first, then reuse the same logic and data model for iOS.
-          </p>
-        </div>
-
-        <nav className="space-y-2">
+        <nav className="space-y-1">
           {NAV_ITEMS.map((item) => {
-            const active = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href))
+            const active = pathname === item.href || (item.href !== '/home' && pathname.startsWith(item.href))
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex items-center gap-3 rounded-[1.3rem] px-4 py-3 transition-all ${
+                className={`flex items-center gap-3 rounded-[1.1rem] px-4 py-3 transition-all ${
                   active
                     ? 'bg-white text-[#231b44] shadow-[0_18px_40px_rgba(10,10,24,0.25)]'
                     : 'text-white/70 hover:bg-white/5 hover:text-white'
                 }`}
               >
                 <span className="shrink-0">{item.icon(active)}</span>
-                <span className="text-sm font-black tracking-wide">{item.label}</span>
+                <span className="text-sm font-black uppercase tracking-[0.12em]">{item.label}</span>
               </Link>
             )
           })}
         </nav>
-
-        <div className="mt-auto rounded-[1.75rem] border border-[#f2cd4b]/30 bg-[linear-gradient(180deg,rgba(255,216,79,0.16)_0%,rgba(255,216,79,0.03)_100%)] p-4">
-          <p className="text-xs font-black uppercase tracking-[0.22em] text-[#f7d96d]">Build target</p>
-          <p className="mt-2 text-xl font-black leading-tight text-white">Turn this into a polished web product first.</p>
-          <p className="mt-2 text-sm text-white/65">Same Supabase schema. Same learning logic. Better desktop UX.</p>
-        </div>
       </aside>
 
       <nav className="fixed bottom-4 left-0 right-0 z-50 lg:hidden">
-        <div className="max-w-sm mx-auto px-4">
+        <div className="mx-auto max-w-sm px-4">
           <div className="rise-soft-panel flex items-center justify-around rounded-[1.8rem] px-4 py-2.5">
             {NAV_ITEMS.map((item) => {
-              const active = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href))
+              const active = pathname === item.href || (item.href !== '/home' && pathname.startsWith(item.href))
               return (
                 <Link
                   key={item.href}
@@ -134,7 +120,7 @@ export default function BottomNav() {
                 >
                   {item.icon(active)}
                   <span
-                    className={`text-[10px] font-bold tracking-wide ${
+                    className={`text-[10px] font-bold uppercase tracking-[0.14em] ${
                       active ? 'text-[#7C3AED]' : 'text-slate-400'
                     }`}
                   >

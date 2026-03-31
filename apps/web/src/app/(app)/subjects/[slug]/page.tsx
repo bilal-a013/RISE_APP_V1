@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
+import { isMathsSubject } from '@/lib/onboarding'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import DifficultyBadge from '@/components/ui/DifficultyBadge'
@@ -66,6 +67,7 @@ export default async function SubjectPage({ params }: PageProps) {
   if (!result) notFound()
 
   const { subject, topics } = result
+  if (!isMathsSubject(subject)) notFound()
 
   return (
     <div className="rise-page rise-page-wide">
@@ -78,13 +80,13 @@ export default async function SubjectPage({ params }: PageProps) {
           </div>
         </Link>
         <div className="min-w-0 flex-1">
-          <p className="text-xs font-black uppercase tracking-[0.24em] text-[#a39cb8]">Subject overview</p>
-          <h1 className="mt-2 text-[2.2rem] font-black text-[#221d37]">{subject.name}</h1>
+          <p className="text-xs font-black uppercase tracking-[0.24em] text-[#a39cb8]">Maths overview</p>
+          <h1 className="mt-2 text-[2.4rem] font-black leading-none text-[#221d37]">{subject.name}</h1>
           <p className="mt-2 max-w-2xl text-base font-medium text-[#8d88a7]">
-            Browse each topic, inspect lesson completion, and continue the right task without losing context.
+            Browse the maths topics, inspect lesson completion, and open exactly the lesson the student wants next.
           </p>
         </div>
-        <div className="hidden rounded-[1.4rem] bg-[#f7f2ff] px-5 py-4 text-right lg:block">
+        <div className="hidden rounded-[1rem] bg-[#f7f2ff] px-5 py-4 text-right lg:block">
           <p className="text-xs font-black uppercase tracking-[0.18em] text-[#aa9fd0]">Topics</p>
           <p className="mt-2 text-3xl font-black text-[#7C3AED]">{topics.length}</p>
         </div>
@@ -99,7 +101,7 @@ export default async function SubjectPage({ params }: PageProps) {
           return (
             <div key={topic.id} className="rise-card">
               <div className="flex items-center justify-between mb-3">
-                <h2 className="text-base font-black text-[#231d39]">{topic.name}</h2>
+                <h2 className="text-[1.35rem] font-black leading-none text-[#231d39]">{topic.name}</h2>
                 <span className="text-xs font-bold text-[#968faf]">
                   {completedCount}/{total}
                 </span>
