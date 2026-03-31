@@ -11,28 +11,28 @@ export default function LoginPage({
       <div className="grid w-full gap-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(420px,0.85fr)]">
         <div className="rise-card flex flex-col justify-between bg-[linear-gradient(180deg,#241a4a_0%,#18142f_100%)] p-8 text-white lg:p-10">
           <div>
-            <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-[1.75rem] bg-gradient-to-br from-[#7C3AED] to-[#a855f7] text-2xl font-black text-white shadow-[0_16px_34px_rgba(124,58,237,0.35)]">
+            <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-[1.1rem] bg-gradient-to-br from-[#7C3AED] to-[#a855f7] text-2xl font-black text-white shadow-[0_16px_34px_rgba(124,58,237,0.35)]">
               R
             </div>
             <p className="text-xs font-black uppercase tracking-[0.22em] text-white/45">Welcome back</p>
-            <h1 className="mt-3 text-[3rem] font-black leading-[0.95]">Continue your GCSE journey.</h1>
+            <h1 className="mt-3 text-[3rem] font-black leading-[0.95]">Continue your maths journey.</h1>
             <p className="mt-4 max-w-xl text-base leading-relaxed text-white/72">
-              Pick up the exact lesson your tutor lined up, track your progress, and stay in rhythm from the browser.
+              Pick up the right lesson, keep the streak alive, and jump back into the sharper maths flow.
             </p>
           </div>
 
           <div className="mt-8 grid gap-3 sm:grid-cols-3">
-            <div className="rounded-[1.4rem] bg-white/10 p-4">
+            <div className="rounded-[1rem] bg-white/10 p-4">
               <p className="text-xs font-black uppercase tracking-[0.18em] text-white/45">Current lesson</p>
-              <p className="mt-2 text-sm font-bold">Resume the right task immediately.</p>
+              <p className="mt-2 text-sm font-bold">Jump straight back into what matters next.</p>
             </div>
-            <div className="rounded-[1.4rem] bg-white/10 p-4">
+            <div className="rounded-[1rem] bg-white/10 p-4">
               <p className="text-xs font-black uppercase tracking-[0.18em] text-white/45">Progress</p>
-              <p className="mt-2 text-sm font-bold">Watch XP, tiers, and difficulty evolve over time.</p>
+              <p className="mt-2 text-sm font-bold">Open the full progress view from the dashboard cards.</p>
             </div>
-            <div className="rounded-[1.4rem] bg-white/10 p-4">
-              <p className="text-xs font-black uppercase tracking-[0.18em] text-white/45">Continuity</p>
-              <p className="mt-2 text-sm font-bold">Keep online study synced with tutoring sessions.</p>
+            <div className="rounded-[1rem] bg-white/10 p-4">
+              <p className="text-xs font-black uppercase tracking-[0.18em] text-white/45">Two ways in</p>
+              <p className="mt-2 text-sm font-bold">New students and tutor-code students now enter through different paths.</p>
             </div>
           </div>
         </div>
@@ -88,7 +88,7 @@ export default function LoginPage({
           </form>
 
           <p className="mt-6 text-sm text-slate-500">
-            No account?{' '}
+            Need an account?{' '}
             <Link href="/auth/signup" className="font-black text-[#7C3AED]">
               Sign up
             </Link>

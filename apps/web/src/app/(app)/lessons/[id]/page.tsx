@@ -50,6 +50,11 @@ export default async function LessonPage({ params }: PageProps) {
 
   const { lesson, progress } = result
   const diffLevel: DifficultyLevel = progress?.difficulty_level ?? 'building'
+  const recommendedTopic =
+    typeof user?.user_metadata?.recommended_topic === 'string'
+      ? user.user_metadata.recommended_topic
+      : ''
+  const onboardingMode = user?.user_metadata?.onboarding_mode === 'tutor_code' ? 'tutor_code' : 'new_student'
 
   // Fall back to mock content when Supabase content is null
   const content = lesson.content ?? getMockContent(lesson.slug)
@@ -83,15 +88,19 @@ export default async function LessonPage({ params }: PageProps) {
       <div className="mb-6 grid gap-4 xl:grid-cols-[minmax(0,1.4fr)_minmax(300px,0.6fr)]">
         <div className="rise-soft-panel px-5 py-5">
           <div className="flex items-start gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#eedfff] text-sm font-black text-[#7C3AED]">
-              T
+            <div className="flex h-10 w-10 items-center justify-center rounded-[0.95rem] bg-[#eedfff] text-sm font-black text-[#7C3AED]">
+              {onboardingMode === 'tutor_code' ? 'T' : 'A'}
             </div>
             <div>
               <p className="text-sm font-medium leading-relaxed text-[#8f2eff]">
-                Your tutor covered this with you recently. This lesson helps you practise it independently in the web app.
+                {onboardingMode === 'tutor_code'
+                  ? 'This lesson is part of the tutor-shaped path, so it is designed to keep the student moving in the same direction they worked on together.'
+                  : recommendedTopic
+                  ? `RISE thinks ${recommendedTopic.toLowerCase()} is the strongest next move, and this lesson is part of that direction.`
+                  : 'RISE has picked this as a strong next maths step based on the student profile and progress so far.'}
               </p>
               <p className="mt-2 text-sm font-medium text-[#7d7892]">
-                Work through the explanation, try the interactive question, then self-assess so the next lesson difficulty stays accurate.
+                Work through the explanation, try the interactive question, then self-assess so the next recommendation stays accurate.
               </p>
             </div>
           </div>
