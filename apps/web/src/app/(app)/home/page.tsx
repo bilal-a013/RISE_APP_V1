@@ -150,184 +150,187 @@ export default async function HomePage() {
   const hasStartedLesson = Boolean(currentLesson?.progress)
   const pathSummary =
     onboardingMode === 'tutor_code'
-      ? `${recommendedTopic || 'Tutor-curated maths path'} is already shaping the route.`
-      : `${ageRangeLabel} learner · ${studyStyleLabel}.`
+      ? `Tutor-curated path`
+      : `${studyStyleLabel} style`
   const introCopy = lastSession
-    ? `Last tutor session: ${new Date(lastSession.session_date).toLocaleDateString('en-GB', {
+    ? `Last session: ${new Date(lastSession.session_date).toLocaleDateString('en-GB', {
         weekday: 'short',
         day: 'numeric',
         month: 'short',
-      })}. The next maths step is ready below.`
+      })}. Next step is ready.`
     : hasStartedLesson
-    ? 'You have a lesson in motion. Best move is to keep the streak alive and continue.'
-    : 'RISE has a strong maths starting point ready, with a clear next lesson waiting.'
+    ? 'Pick up exactly where you left off.'
+    : 'A focused starting point is ready for you.'
 
   return (
     <div className="rise-page rise-page-wide">
-      <div className="mb-5 flex flex-col gap-5 border-b border-[#ede6fb] pb-6 xl:flex-row xl:items-end xl:justify-between">
-        <div className="max-w-4xl">
-          <p className="text-xs font-black uppercase tracking-[0.24em] text-[#a39cb8]">Home</p>
-          <h1 className="mt-2 text-[2.9rem] font-black leading-[0.92] text-[#1f1833] xl:text-[4rem]">
+
+      {/* ── Header ──────────────────────────────────────────── */}
+      <header className="mb-6 flex items-start justify-between gap-4">
+        <div>
+          <p className="text-[10px] font-black uppercase tracking-[0.26em] text-[#a39cb8]">Home</p>
+          <h1 className="mt-1.5 text-[2.8rem] font-black leading-[0.9] text-[#1f1833] xl:text-[3.6rem]">
             {greetingForHour()}, {userName}
           </h1>
-          <div className="mt-4 rounded-[1.2rem] border border-[#ece3fb] bg-white/70 px-5 py-4 shadow-[0_14px_34px_rgba(71,46,143,0.06)] backdrop-blur-sm">
-            <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#9b94b4]">Long-term goal</p>
-            <p className="mt-2 text-[1.65rem] font-black leading-none text-[#1c1833] xl:text-[2.1rem]">
-              {targetGradeLabel} goal
-            </p>
-            <p className="mt-2 text-sm font-medium text-[#6f6a84]">
-              {workingLevelLabel} · {pathSummary}
-            </p>
+          {/* Long-term goal — inline, concise, near the top */}
+          <div className="mt-3 flex flex-wrap items-center gap-x-2.5 gap-y-2">
+            <span className="rounded-[999px] bg-[#ede4ff] px-3.5 py-1.5 text-[11px] font-black uppercase tracking-[0.14em] text-[#7C3AED]">
+              {targetGradeLabel}
+            </span>
+            <span className="text-sm font-medium text-[#847d9c]">
+              {workingLevelLabel}
+            </span>
+            {ageRangeLabel && (
+              <>
+                <span className="text-[#c4bcd6]">·</span>
+                <span className="text-sm font-medium text-[#847d9c]">{ageRangeLabel}</span>
+              </>
+            )}
+            <span className="text-[#c4bcd6]">·</span>
+            <span className="text-sm font-medium text-[#847d9c]">{pathSummary}</span>
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2 xl:justify-end">
-          <Link href="/progress" className="rise-chip">
-            <span>Open progress</span>
-          </Link>
-          <Link href="/subjects" className="rise-chip">
-            <span>Browse maths</span>
-          </Link>
+        <div className="flex shrink-0 items-center gap-2">
+          <Link href="/progress" className="rise-chip hidden lg:inline-flex">Progress</Link>
+          <Link href="/subjects" className="rise-chip hidden lg:inline-flex">Browse maths</Link>
           <form action={logout}>
             <button
               type="submit"
-              className="rounded-[999px] border border-[#e4daf7] bg-white/88 px-5 py-2.5 text-sm font-black text-[#6a27cb] transition hover:bg-white"
+              className="rounded-[999px] px-3 py-2 text-xs font-black text-[#9993b4] transition hover:text-[#6d28d9]"
             >
               Sign out
             </button>
           </form>
         </div>
-      </div>
+      </header>
 
-      <div className="grid gap-5 xl:grid-cols-[minmax(0,1.48fr)_290px]">
-        <div className="space-y-5">
-          <div className="rise-card overflow-hidden p-0">
-            <div className="border-b border-[#f0e9fb] px-6 py-6 xl:px-8">
-              <p className="text-xs font-black uppercase tracking-[0.2em] text-[#8d88a7]">
+      {/* ── Dominant lesson hero ─────────────────────────────── */}
+      {currentLesson ? (
+        <Link href={`/lessons/${currentLesson.lesson.id}`} className="block">
+          <div className="rise-lesson-hero transition-all hover:opacity-[0.97]">
+
+            {/* Hero header */}
+            <div className="px-6 pb-0 pt-7 xl:px-10 xl:pt-9">
+              <p className="text-[10px] font-black uppercase tracking-[0.24em] text-white/40">
                 {recommendation.eyebrow}
               </p>
-              <h2 className="mt-3 max-w-4xl text-[2.8rem] font-black leading-[0.9] text-[#1e1830] xl:text-[4rem]">
+              <h2 className="mt-2 max-w-3xl text-[2.4rem] font-black leading-[0.9] text-white xl:text-[3.4rem]">
                 {recommendation.title}
               </h2>
-              <p className="mt-4 max-w-3xl text-base font-medium leading-relaxed text-[#6f6a84]">
+              <p className="mt-3 max-w-2xl text-sm font-medium leading-relaxed text-white/55 xl:text-base">
                 {introCopy}
               </p>
             </div>
 
-            {currentLesson ? (
-              <Link href={`/lessons/${currentLesson.lesson.id}`} className="block">
-                <div className="relative min-h-[440px] overflow-hidden bg-[radial-gradient(circle_at_top_left,rgba(164,111,255,0.18),transparent_32%),linear-gradient(180deg,#f9f5ff_0%,#f3edff_48%,#ffffff_100%)] px-6 py-6 xl:px-8 xl:py-8">
-                  <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.48)_0%,rgba(255,255,255,0)_42%)]" />
-                  <div className="relative flex flex-col gap-5 xl:grid xl:grid-cols-[minmax(0,1fr)_260px]">
-                    <div className="rounded-[1.35rem] border border-white/60 bg-white/72 p-5 shadow-[0_24px_54px_rgba(71,46,143,0.08)] backdrop-blur-md xl:p-6">
-                      <div className="mb-4 flex flex-wrap items-center gap-2">
-                        <span className="rounded-[999px] bg-[#efe3ff] px-3 py-1 text-[11px] font-black uppercase tracking-[0.14em] text-[#8f2eff]">
-                          {hasStartedLesson ? 'Continue next lesson' : 'Ready to start'}
-                        </span>
-                        <DifficultyBadge
-                          level={(currentLesson.progress?.difficulty_level ?? 'building') as DifficultyLevel}
-                          size="sm"
-                        />
-                      </div>
-                      <LessonPreview lesson={currentLesson} blurred={hasStartedLesson} />
-                    </div>
+            {/* Hero content: lesson preview + action panel */}
+            <div className="mt-6 gap-4 px-6 pb-0 xl:grid xl:grid-cols-[minmax(0,1fr)_270px] xl:px-10">
 
-                    <div className="flex flex-col justify-between gap-4">
-                      <div className="rounded-[1.35rem] border border-[#e9def9] bg-white/72 p-5 shadow-[0_16px_34px_rgba(71,46,143,0.06)] backdrop-blur-sm">
-                        <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#9f97b8]">
-                          Next move
-                        </p>
-                        <p className="mt-2 text-[1.8rem] font-black leading-[0.92] text-[#1e1830]">
-                          {hasStartedLesson ? 'Pick up exactly where you left off.' : 'Open the lesson and get moving.'}
-                        </p>
-                        <p className="mt-3 text-sm font-medium leading-relaxed text-[#6f6a84]">
-                          {recommendation.description}
-                        </p>
-                      </div>
+              {/* Milky glass lesson preview */}
+              <div className="rise-lesson-glass p-5 xl:p-6">
+                <LessonPreview lesson={currentLesson} blurred={hasStartedLesson} />
+              </div>
 
-                      <div className="rounded-[1.35rem] border border-[#e9def9] bg-[#151127] p-5 text-white shadow-[0_18px_40px_rgba(10,10,24,0.22)]">
-                        <p className="text-[11px] font-black uppercase tracking-[0.18em] text-white/45">
-                          Lesson focus
-                        </p>
-                        <p className="mt-2 text-lg font-black">
-                          {recommendedTopic || currentLesson.lesson.topic?.name || 'Maths'}
-                        </p>
-                        <p className="mt-2 text-sm text-white/70">
-                          {onboardingMode === 'tutor_code' ? 'Tutor-shaped route.' : 'Chosen to match the student profile.'}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="relative mt-6 flex flex-wrap items-center gap-3">
-                    <div className="rounded-[999px] bg-white/80 px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#6f37d4] shadow-[0_10px_24px_rgba(71,46,143,0.08)] backdrop-blur-sm">
-                      {currentLesson.lesson.topic?.subject?.name ?? 'Maths'} · {currentLesson.lesson.topic?.name}
-                    </div>
-                    <div className="rounded-[999px] bg-white/80 px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#7c6f98] shadow-[0_10px_24px_rgba(71,46,143,0.08)] backdrop-blur-sm">
-                      {currentLesson.lesson.type === 'learn' ? 'Learn' : 'Practise'} · +50 XP
-                    </div>
-                    <div className="ml-auto">
-                      <div className="rise-btn-primary min-w-[220px] text-sm xl:min-w-[260px]">
-                        {hasStartedLesson ? 'Continue lesson' : 'Start lesson'}
-                      </div>
-                    </div>
+              {/* Right: focus info + CTA */}
+              <div className="mt-4 flex flex-col gap-3 xl:mt-0">
+                <div className="flex-1 rounded-[1.15rem] border border-white/[0.08] bg-white/[0.06] p-5 backdrop-blur-sm">
+                  <p className="text-[10px] font-black uppercase tracking-[0.20em] text-white/38">Focus</p>
+                  <p className="mt-2 text-xl font-black leading-tight text-white">
+                    {recommendedTopic || currentLesson.lesson.topic?.name || 'Maths'}
+                  </p>
+                  <p className="mt-2 text-xs font-medium leading-relaxed text-white/48">
+                    {recommendation.description}
+                  </p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    <span className="rounded-[999px] bg-white/[0.09] px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.12em] text-white/50">
+                      {currentLesson.lesson.topic?.subject?.name ?? 'Maths'}
+                    </span>
+                    <DifficultyBadge
+                      level={(currentLesson.progress?.difficulty_level ?? 'building') as DifficultyLevel}
+                      size="sm"
+                    />
                   </div>
                 </div>
-              </Link>
-            ) : (
-              <Link href="/subjects" className="block">
-                <div className="px-6 py-10 xl:px-8">
-                  <div className="rounded-[1.25rem] border border-dashed border-[#caaef2] bg-[linear-gradient(180deg,#faf7ff_0%,#ffffff_100%)] px-6 py-12 text-center">
-                    <p className="text-xs font-black uppercase tracking-[0.18em] text-[#8d88a7]">No lesson queued</p>
-                    <h3 className="mt-3 text-[2.3rem] font-black leading-[0.92] text-[#1d1830]">
-                      Open a maths topic and begin.
-                    </h3>
-                    <p className="mx-auto mt-3 max-w-xl text-sm font-medium text-[#6f6a84]">
-                      Choose the topic you want, or let the app guide the first move with a focused recommendation.
-                    </p>
-                    <div className="mt-6 inline-flex rounded-[0.95rem] bg-[#1f1737] px-6 py-3 text-sm font-black text-white">
-                      Open maths hub
-                    </div>
-                  </div>
+
+                <div
+                  className="rounded-[1.15rem] p-5 text-center"
+                  style={{
+                    background: 'linear-gradient(180deg, #ffe45c 0%, #ffd317 100%)',
+                    boxShadow: '0 12px 28px rgba(252,211,77,0.30)',
+                  }}
+                >
+                  <p className="text-sm font-black text-gray-900">
+                    {hasStartedLesson ? 'Continue lesson →' : 'Start lesson →'}
+                  </p>
+                  <p className="mt-0.5 text-xs font-semibold text-gray-700/65">+50 XP on completion</p>
                 </div>
-              </Link>
-            )}
+              </div>
+            </div>
+
+            {/* Hero breadcrumb footer */}
+            <div className="mt-5 flex flex-wrap items-center gap-2 px-6 pb-7 xl:px-10 xl:pb-9">
+              <span className="rounded-[999px] bg-white/[0.07] px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.13em] text-white/36">
+                {currentLesson.lesson.topic?.subject?.name ?? 'Maths'} · {currentLesson.lesson.topic?.name}
+              </span>
+              <span className="rounded-[999px] bg-white/[0.07] px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.13em] text-white/36">
+                {currentLesson.lesson.type === 'learn' ? 'Learn' : 'Practise'}
+              </span>
+            </div>
           </div>
-        </div>
-
-        <div className="space-y-4">
-          <Link href="/progress?focus=streak" className="block">
-            <div className="rise-card rise-card-interactive p-5">
-              <p className="text-xs font-black uppercase tracking-[0.18em] text-[#a7a0bd]">Daily streak</p>
-              <p className="mt-3 text-[2.6rem] font-black leading-none text-[#1f1833]">🔥 {streak}</p>
-              <p className="mt-2 text-sm font-medium text-[#6f6a84]">A quiet reminder to keep momentum going.</p>
+        </Link>
+      ) : (
+        <Link href="/subjects" className="block">
+          <div className="rise-lesson-hero px-6 py-14 text-center xl:px-16">
+            <p className="text-[10px] font-black uppercase tracking-[0.24em] text-white/38">No lesson queued</p>
+            <h2 className="mt-3 text-[2.4rem] font-black leading-[0.9] text-white xl:text-[3.2rem]">
+              Open a maths topic and begin.
+            </h2>
+            <p className="mx-auto mt-4 max-w-lg text-sm font-medium leading-relaxed text-white/50">
+              Choose a topic, or let the app guide the first recommendation.
+            </p>
+            <div className="mt-7 inline-flex rounded-[0.95rem] bg-white/[0.10] px-7 py-3.5 text-sm font-black text-white/80 backdrop-blur-sm">
+              Open maths hub →
             </div>
-          </Link>
+          </div>
+        </Link>
+      )}
 
-          <Link href="/progress?focus=xp" className="block">
-            <div className="rise-card rise-card-interactive p-5">
-              <p className="text-xs font-black uppercase tracking-[0.18em] text-[#a7a0bd]">XP total</p>
-              <p className="mt-3 text-[2.6rem] font-black leading-none text-[#1f1833]">⚡ {xp.toLocaleString()}</p>
-              <p className="mt-2 text-sm font-medium text-[#6f6a84]">Keep this secondary to the lesson, not equal to it.</p>
-            </div>
-          </Link>
+      {/* ── Quiet secondary strip ─────────────────────────────── */}
+      <div className="mt-4 flex flex-wrap items-center gap-2.5">
+        <Link
+          href="/progress?focus=streak"
+          className="flex items-center gap-2 rounded-[999px] border border-[#ece3fb] bg-white/80 px-4 py-2 text-sm font-black text-[#4b3a7a] shadow-[0_6px_16px_rgba(71,46,143,0.06)] transition hover:bg-white"
+        >
+          <span>🔥</span>
+          <span>{streak} day streak</span>
+        </Link>
 
-          {lastSession ? (
-            <div className="rise-card border border-[#e9dbff] bg-[linear-gradient(180deg,rgba(255,255,255,0.96)_0%,rgba(244,238,255,0.92)_100%)] p-5">
-              <p className="text-xs font-black uppercase tracking-[0.18em] text-[#bf8dff]">Last session</p>
-              <p className="mt-3 text-[1.55rem] font-black leading-[0.95] text-[#211d35]">
-                {lastSession.topics_covered[0] ?? 'Recent tutoring work'}
-              </p>
-              <p className="mt-3 text-sm font-medium text-[#87839a]">
-                {new Date(lastSession.session_date).toLocaleDateString('en-GB', {
-                  weekday: 'short',
-                  day: 'numeric',
-                  month: 'short',
-                })} · The lesson window is ready above.
-              </p>
-            </div>
-          ) : null}
-        </div>
+        <Link
+          href="/progress?focus=xp"
+          className="flex items-center gap-2 rounded-[999px] border border-[#ece3fb] bg-white/80 px-4 py-2 text-sm font-black text-[#4b3a7a] shadow-[0_6px_16px_rgba(71,46,143,0.06)] transition hover:bg-white"
+        >
+          <span>⚡</span>
+          <span>{xp.toLocaleString()} XP</span>
+        </Link>
+
+        {lastSession && (
+          <span className="flex items-center gap-2 rounded-[999px] border border-[#ece3fb] bg-white/80 px-4 py-2 text-sm font-medium text-[#7b74a0] shadow-[0_6px_16px_rgba(71,46,143,0.05)]">
+            <span className="text-[#9b84c8]">Last session</span>
+            <span className="font-black text-[#4b3a7a]">
+              {new Date(lastSession.session_date).toLocaleDateString('en-GB', {
+                day: 'numeric',
+                month: 'short',
+              })}
+            </span>
+          </span>
+        )}
+
+        <Link
+          href="/subjects"
+          className="ml-auto flex items-center gap-2 rounded-[999px] border border-[#ece3fb] bg-white/80 px-4 py-2 text-sm font-black text-[#7C3AED] shadow-[0_6px_16px_rgba(71,46,143,0.06)] transition hover:bg-white lg:ml-0"
+        >
+          Browse all maths →
+        </Link>
       </div>
     </div>
   )
@@ -342,9 +345,9 @@ function LessonPreview({ lesson, blurred = false }: { lesson: CurrentLesson; blu
     ]
 
   return (
-    <div className={`space-y-5 ${blurred ? 'blur-[4px] opacity-80' : ''}`}>
-      <div className="flex flex-wrap items-center gap-2">
-        <span className="rounded-[999px] bg-[#f5ecff] px-3 py-1 text-[11px] font-black uppercase tracking-[0.14em] text-[#a03af8]">
+    <div className={blurred ? 'blur-[4px] opacity-75' : ''}>
+      <div className="mb-4 flex flex-wrap items-center gap-2">
+        <span className="rounded-[999px] bg-[#f5ecff] px-3 py-1 text-[10px] font-black uppercase tracking-[0.14em] text-[#a03af8]">
           {lesson.lesson.topic?.subject?.name ?? 'Maths'} · {lesson.lesson.topic?.name}
         </span>
         <DifficultyBadge
@@ -353,20 +356,18 @@ function LessonPreview({ lesson, blurred = false }: { lesson: CurrentLesson; blu
         />
       </div>
 
-      <div>
-        <h3 className="text-[2.4rem] font-black leading-[0.92] text-[#1c1833] xl:text-[3rem]">
-          {lesson.lesson.title}
-        </h3>
-        <p className="mt-2 text-sm font-medium text-[#6f6a84]">
-          {lesson.lesson.type === 'learn' ? 'Learn' : 'Practise'} · +50 XP on completion
-        </p>
-      </div>
+      <h3 className="text-[2rem] font-black leading-[0.92] text-[#1c1833] xl:text-[2.6rem]">
+        {lesson.lesson.title}
+      </h3>
+      <p className="mt-1.5 text-xs font-medium text-[#7f7899]">
+        {lesson.lesson.type === 'learn' ? 'Learn' : 'Practise'} · +50 XP on completion
+      </p>
 
-      <div className="space-y-3">
+      <div className="mt-4 space-y-2.5">
         {summary.map((point, index) => (
-          <div key={index} className="flex items-start gap-3 rounded-[1rem] bg-[#faf7ff] px-4 py-4">
-            <span className="mt-0.5 text-sm font-black text-[#8b35ef]">•</span>
-            <p className="text-sm font-semibold text-[#3d3657] xl:text-base">{point}</p>
+          <div key={index} className="flex items-start gap-3 rounded-[0.85rem] bg-[#faf7ff] px-4 py-3">
+            <span className="mt-0.5 text-xs font-black text-[#8b35ef]">•</span>
+            <p className="text-sm font-semibold leading-snug text-[#3d3657]">{point}</p>
           </div>
         ))}
       </div>

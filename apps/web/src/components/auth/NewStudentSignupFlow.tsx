@@ -52,56 +52,69 @@ export default function NewStudentSignupFlow({
     step === 3
 
   return (
-    <div className="rise-card flex h-full flex-col p-6 lg:p-8">
-      <div className="flex flex-wrap items-start justify-between gap-4">
-        <div>
-          <p className="text-xs font-black uppercase tracking-[0.22em] text-[#8f89aa]">
-            {isTutorPath ? 'Tutor path' : 'New student'}
-          </p>
-          <h2 className="mt-2 text-[2.3rem] font-black leading-[0.94] text-[#1d1830] lg:text-[3rem]">
-            {isTutorPath ? 'Finish your account' : 'Build your maths setup'}
-          </h2>
-          <p className="mt-3 max-w-2xl text-base font-medium leading-relaxed text-[#6f6a84]">
-            {isTutorPath
-              ? 'Your tutor code has already shaped the path. We just need a few details so the app feels personal from the first screen.'
-              : 'Keep it short, clear, and useful. We only ask what helps RISE give a smarter first maths recommendation.'}
-          </p>
+    <div className="flex flex-col">
+
+      {/* Brand header — replaces the removed left promo card */}
+      <div className="mb-7 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="flex h-11 w-11 items-center justify-center rounded-[0.9rem] bg-gradient-to-br from-[#7C3AED] to-[#a855f7] text-lg font-black text-white shadow-[0_14px_28px_rgba(124,58,237,0.32)]">
+            R
+          </div>
+          <div>
+            <p className="text-[10px] font-black uppercase tracking-[0.26em] text-[#a39cb8]">RISE</p>
+            <p className="text-base font-black leading-none text-[#1d1830]">
+              {isTutorPath ? 'Tutor path' : 'New student'}
+            </p>
+          </div>
         </div>
-        <div className="rounded-[1rem] border border-[#eadff7] bg-[#fbf8ff] px-4 py-3 text-left lg:text-right">
-          <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#a49eb8]">
-            Subject live
-          </p>
-          <p className="mt-2 text-2xl font-black text-[#1e1931]">Maths</p>
-        </div>
+        <Link href="/" className="text-xs font-black text-[#9993b4] hover:text-[#6d28d9]">
+          ← Back
+        </Link>
+      </div>
+
+      {/* Page heading */}
+      <div className="mb-6">
+        <p className="text-[10px] font-black uppercase tracking-[0.24em] text-[#a39cb8]">
+          {isTutorPath ? 'Tutor-coded signup' : 'New-student signup'}
+        </p>
+        <h1 className="mt-2 text-[2.2rem] font-black leading-[0.92] text-[#1d1830] lg:text-[2.8rem]">
+          {isTutorPath ? 'Finish your account' : 'Build your maths setup'}
+        </h1>
+        <p className="mt-3 max-w-2xl text-sm font-medium leading-relaxed text-[#6f6a84]">
+          {isTutorPath
+            ? 'Your tutor code has shaped the path. Add a few personal details so the first screen feels ready.'
+            : 'Keep it short. We only ask what helps RISE recommend the right first lesson.'}
+        </p>
       </div>
 
       {error && (
-        <div className="mt-5 rounded-[1rem] border border-red-200 bg-red-50 px-4 py-3">
+        <div className="mb-5 rounded-[1rem] border border-red-200 bg-red-50 px-4 py-3">
           <p className="text-sm font-semibold text-red-700">{error}</p>
         </div>
       )}
 
       {message && (
-        <div className="mt-5 rounded-[1rem] border border-green-200 bg-green-50 px-4 py-3">
+        <div className="mb-5 rounded-[1rem] border border-green-200 bg-green-50 px-4 py-3">
           <p className="text-sm font-semibold text-green-700">{message}</p>
         </div>
       )}
 
       {isTutorPath && (
-        <div className="mt-5 rounded-[1.1rem] border border-[#ead7ff] bg-[linear-gradient(180deg,#f9f3ff_0%,#fefcff_100%)] p-4">
-          <p className="text-xs font-black uppercase tracking-[0.18em] text-[#8f2eff]">
+        <div className="mb-5 rounded-[1.1rem] border border-[#ead7ff] bg-[linear-gradient(180deg,#f9f3ff_0%,#fefcff_100%)] p-4">
+          <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#8f2eff]">
             Tutor code active
           </p>
           <p className="mt-2 text-lg font-black text-[#1e1931]">
             {initialValues.tutorCode} · {initialValues.recommendedTopic || 'Tutor-picked maths path'}
           </p>
           <p className="mt-2 text-sm font-medium text-[#6f6a84]">
-            The tutor path is already aimed at the right topic. You can still tweak your age range, level, and account details below.
+            The tutor path is already aimed at the right topic. Tweak age range, level, and account details below.
           </p>
         </div>
       )}
 
-      <div className="mt-6 grid gap-2 sm:grid-cols-4">
+      {/* Step tabs */}
+      <div className="mb-6 grid gap-2 sm:grid-cols-4">
         {STEPS.map((label, index) => {
           const active = index === step
           const complete = index < step
@@ -116,11 +129,11 @@ export default function NewStudentSignupFlow({
                 active
                   ? 'border-[#8f2eff] bg-[#f6efff] shadow-[0_12px_24px_rgba(124,58,237,0.10)]'
                   : complete
-                  ? 'border-[#e8def8] bg-white'
-                  : 'cursor-not-allowed border-[#efe7fb] bg-[#fbf9ff] text-[#b6afc8]'
+                  ? 'border-[#e8def8] bg-white/80'
+                  : 'cursor-not-allowed border-[#efe7fb] bg-white/50 text-[#b6afc8]'
               }`}
             >
-              <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#a7a0bd]">
+              <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#a7a0bd]">
                 {complete ? 'Done' : `Step ${index + 1}`}
               </p>
               <p className="mt-1 text-base font-black text-[#1f1a33]">{label}</p>
@@ -129,7 +142,8 @@ export default function NewStudentSignupFlow({
         })}
       </div>
 
-      <form action={signup} className="mt-6 flex flex-1 flex-col">
+      {/* Form */}
+      <form action={signup} className="flex flex-1 flex-col">
         <input type="hidden" name="full_name" value={fullName} />
         <input type="hidden" name="age_range" value={ageRange} />
         <input type="hidden" name="working_level" value={workingLevel} />
@@ -161,14 +175,11 @@ export default function NewStudentSignupFlow({
 
               <div>
                 <div className="mb-3">
-                  <p className="text-xs font-black uppercase tracking-[0.18em] text-[#7a748f]">
-                    Age range
-                  </p>
+                  <p className="text-xs font-black uppercase tracking-[0.18em] text-[#7a748f]">Age range</p>
                   <p className="mt-1 text-sm font-medium text-[#817b96]">
-                    This helps the app pitch the maths at the right pace.
+                    Helps pitch maths at the right pace.
                   </p>
                 </div>
-
                 <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
                   {AGE_RANGE_OPTIONS.map((option) => (
                     <OptionCard
@@ -186,14 +197,11 @@ export default function NewStudentSignupFlow({
           {step === 1 && (
             <div>
               <div className="mb-4">
-                <p className="text-xs font-black uppercase tracking-[0.18em] text-[#7a748f]">
-                  Working at level
-                </p>
+                <p className="text-xs font-black uppercase tracking-[0.18em] text-[#7a748f]">Working at level</p>
                 <p className="mt-1 text-sm font-medium text-[#817b96]">
-                  Pick the closest fit. We can still adjust the path later from how the student actually performs.
+                  Pick the closest fit. The path still adapts to actual performance.
                 </p>
               </div>
-
               <div className="grid gap-3 xl:grid-cols-2">
                 {WORKING_LEVEL_OPTIONS.map((option) => (
                   <OptionCard
@@ -212,14 +220,11 @@ export default function NewStudentSignupFlow({
             <div className="space-y-5">
               <div>
                 <div className="mb-4">
-                  <p className="text-xs font-black uppercase tracking-[0.18em] text-[#7a748f]">
-                    Target grade
-                  </p>
+                  <p className="text-xs font-black uppercase tracking-[0.18em] text-[#7a748f]">Target grade</p>
                   <p className="mt-1 text-sm font-medium text-[#817b96]">
-                    This helps frame how hard the opening maths recommendations should push.
+                    Frames how hard the opening recommendations should push.
                   </p>
                 </div>
-
                 <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
                   {TARGET_GRADE_OPTIONS.map((option) => (
                     <OptionCard
@@ -234,14 +239,11 @@ export default function NewStudentSignupFlow({
 
               <div>
                 <div className="mb-4">
-                  <p className="text-xs font-black uppercase tracking-[0.18em] text-[#7a748f]">
-                    How should RISE help?
-                  </p>
+                  <p className="text-xs font-black uppercase tracking-[0.18em] text-[#7a748f]">How should RISE help?</p>
                   <p className="mt-1 text-sm font-medium text-[#817b96]">
-                    We can lead the session, balance recommendations with choice, or keep things mostly student-led.
+                    Lead the session, balance with choice, or stay mostly student-led.
                   </p>
                 </div>
-
                 <div className="grid gap-3 xl:grid-cols-2">
                   {STUDY_STYLE_OPTIONS.map((option) => (
                     <OptionCard
@@ -259,10 +261,8 @@ export default function NewStudentSignupFlow({
 
           {step === 3 && (
             <div className="space-y-5">
-              <div className="rounded-[1.15rem] border border-[#ebe2f8] bg-[#fbf9ff] p-4">
-                <p className="text-xs font-black uppercase tracking-[0.18em] text-[#8d88a4]">
-                  Setup summary
-                </p>
+              <div className="rounded-[1.15rem] border border-[#ebe2f8] bg-white/60 p-4 backdrop-blur-sm">
+                <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#8d88a4]">Setup summary</p>
                 <div className="mt-3 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
                   <SummaryItem label="Name" value={fullName || 'Not set'} />
                   <SummaryItem label="Age range" value={ageRange || 'Not set'} />
@@ -314,19 +314,17 @@ export default function NewStudentSignupFlow({
           )}
         </div>
 
-        <div className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-[#f0e9fb] pt-5">
-          <div className="text-sm font-medium text-[#817b96]">
-            {step < 3
-              ? 'Keep it moving. We only need the essentials.'
-              : 'Account details finish the setup.'}
-          </div>
+        <div className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-[#ece3f8] pt-5">
+          <p className="text-sm font-medium text-[#817b96]">
+            {step < 3 ? 'Keep it moving — only the essentials.' : 'Account details finish the setup.'}
+          </p>
 
           <div className="flex flex-wrap items-center gap-3">
             {step > 0 && (
               <button
                 type="button"
                 onClick={() => setStep((current) => Math.max(0, current - 1))}
-                className="rounded-[0.95rem] border border-[#e2d8f4] bg-white px-4 py-3 text-sm font-black text-[#4b4363]"
+                className="rounded-[0.95rem] border border-[#e2d8f4] bg-white/80 px-4 py-3 text-sm font-black text-[#4b4363]"
               >
                 Back
               </button>
@@ -356,12 +354,18 @@ export default function NewStudentSignupFlow({
         </div>
       </form>
 
-      <p className="mt-6 text-sm text-[#7b7790]">
-        Already have an account?{' '}
-        <Link href="/auth/login" className="font-black text-[#6d28d9]">
-          Sign in
+      <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-[#7b7790]">
+        <span>
+          Already have an account?{' '}
+          <Link href="/auth/login" className="font-black text-[#6d28d9]">
+            Sign in
+          </Link>
+        </span>
+        <span className="text-[#ccc6da]">·</span>
+        <Link href="/auth/tutor-code" className="font-black text-[#6d28d9]">
+          Enter tutor code
         </Link>
-      </p>
+      </div>
     </div>
   )
 }
@@ -384,7 +388,7 @@ function OptionCard({
       className={`rounded-[1.05rem] border px-4 py-4 text-left transition ${
         selected
           ? 'border-[#8f2eff] bg-[#f6efff] shadow-[0_12px_24px_rgba(124,58,237,0.10)]'
-          : 'border-[#ede5fa] bg-white hover:border-[#cdbbf0] hover:bg-[#fcfbff]'
+          : 'border-[#ede5fa] bg-white/70 hover:border-[#cdbbf0] hover:bg-white/90'
       } ${large ? 'min-h-[120px]' : 'min-h-[110px]'}`}
     >
       <p className="text-lg font-black leading-none text-[#1d1830]">{option.label}</p>
@@ -395,8 +399,8 @@ function OptionCard({
 
 function SummaryItem({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-[0.95rem] border border-[#eee7fb] bg-white px-4 py-3">
-      <p className="text-[11px] font-black uppercase tracking-[0.16em] text-[#a7a0bd]">{label}</p>
+    <div className="rounded-[0.95rem] border border-[#eee7fb] bg-white/80 px-4 py-3">
+      <p className="text-[10px] font-black uppercase tracking-[0.16em] text-[#a7a0bd]">{label}</p>
       <p className="mt-1 text-base font-black text-[#1f1a33]">{value}</p>
     </div>
   )

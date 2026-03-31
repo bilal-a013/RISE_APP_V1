@@ -14,15 +14,17 @@
 @layer base {
   html {
     background:
-      radial-gradient(circle at top, rgba(146, 36, 255, 0.18), transparent 30%),
-      linear-gradient(180deg, #060816 0%, #0b1022 32%, #17122b 100%);
+      radial-gradient(ellipse at 60% top, rgba(120, 30, 255, 0.22), transparent 38%),
+      radial-gradient(ellipse at 10% 80%, rgba(80, 10, 200, 0.14), transparent 36%),
+      linear-gradient(180deg, #05070f 0%, #090c1d 36%, #130f28 100%);
   }
 
   body {
     @apply antialiased;
     background:
-      radial-gradient(circle at top, rgba(146, 36, 255, 0.14), transparent 24%),
-      linear-gradient(180deg, #060816 0%, #0b1022 32%, #17122b 100%);
+      radial-gradient(ellipse at 60% top, rgba(120, 30, 255, 0.20), transparent 36%),
+      radial-gradient(ellipse at 10% 80%, rgba(80, 10, 200, 0.12), transparent 34%),
+      linear-gradient(180deg, #05070f 0%, #090c1d 36%, #130f28 100%);
     min-height: 100dvh;
     color: var(--brand-ink);
     font-family: var(--font-inter), sans-serif;
@@ -46,6 +48,9 @@
 }
 
 @layer components {
+
+  /* ─────────────────────── SPLASH ─────────────────────── */
+
   .rise-splash {
     @apply flex min-h-dvh items-center justify-center px-6 py-12;
   }
@@ -63,45 +68,85 @@
     @apply w-full rounded-[0.95rem] px-6 py-3 text-center font-black text-white/50 transition-all hover:text-white/80 active:scale-[0.99];
   }
 
+  /* ─────────────────────── APP SHELL ─────────────────────── */
+
   .rise-app-shell {
-    @apply min-h-dvh p-2 pb-24 lg:p-2;
+    @apply min-h-dvh p-1.5 pb-24 lg:p-2;
   }
 
   .rise-phone {
-    @apply mx-auto min-h-[calc(100dvh-1rem)] max-w-[1800px];
+    @apply mx-auto min-h-[calc(100dvh-1rem)] max-w-[1960px];
   }
 
+  /* Frosted glass workspace panel */
   .rise-shell-panel {
-    @apply rounded-[1.25rem] border border-white/10;
+    @apply rounded-[1.2rem] border border-white/[0.12];
     min-height: calc(100dvh - 1rem);
     background:
-      radial-gradient(circle at top, rgba(255,255,255,0.55), rgba(255,255,255,0) 36%),
-      linear-gradient(180deg, rgba(248,245,255,0.98) 0%, rgba(241,236,255,0.98) 52%, rgba(255,255,255,0.98) 100%);
+      radial-gradient(ellipse at top center, rgba(255,255,255,0.52), rgba(255,255,255,0) 36%),
+      linear-gradient(180deg, rgba(250,246,255,0.92) 0%, rgba(242,234,255,0.90) 50%, rgba(255,252,255,0.92) 100%);
+    backdrop-filter: blur(28px) saturate(1.6);
+    -webkit-backdrop-filter: blur(28px) saturate(1.6);
     box-shadow:
-      0 20px 60px rgba(12, 10, 30, 0.45),
-      0 0 0 6px rgba(255,255,255,0.03);
+      0 28px 90px rgba(6, 4, 18, 0.58),
+      0 0 0 5px rgba(255, 255, 255, 0.018),
+      inset 0 1px 0 rgba(255, 255, 255, 0.74);
   }
 
+  /* Slim frosted dark sidebar */
   .rise-sidebar {
-    @apply hidden rounded-[1.2rem] border border-white/10 px-3 py-5 text-white lg:flex lg:flex-col;
+    @apply hidden rounded-[1.1rem] border border-white/[0.08] px-2 py-5 text-white lg:flex lg:flex-col;
     min-height: calc(100dvh - 1rem);
     position: sticky;
     top: 0.5rem;
     align-self: start;
     background:
-      radial-gradient(circle at top, rgba(162, 45, 244, 0.30), rgba(162, 45, 244, 0) 34%),
-      linear-gradient(180deg, rgba(14, 17, 36, 0.98) 0%, rgba(19, 16, 40, 0.98) 100%);
+      radial-gradient(ellipse at top, rgba(140, 36, 240, 0.24), transparent 44%),
+      linear-gradient(180deg, rgba(12, 9, 26, 0.97) 0%, rgba(17, 13, 34, 0.98) 100%);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     box-shadow:
-      0 20px 60px rgba(6, 8, 22, 0.40),
-      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      0 20px 60px rgba(4, 4, 16, 0.50),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
   }
+
+  /* ─────────────────────── AUTH STAGE ─────────────────────── */
+
+  /* Full-viewport auth container */
+  .rise-auth-stage {
+    @apply relative flex min-h-dvh items-center justify-center overflow-hidden px-5 py-10;
+  }
+
+  /* Frosted glass auth form panel */
+  .rise-auth-glass {
+    @apply relative z-10 w-full rounded-[1.6rem];
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background:
+      radial-gradient(ellipse at top left, rgba(255,255,255,0.60), rgba(255,255,255,0) 44%),
+      linear-gradient(180deg, rgba(251,247,255,0.93) 0%, rgba(243,236,255,0.91) 100%);
+    backdrop-filter: blur(36px) saturate(1.8);
+    -webkit-backdrop-filter: blur(36px) saturate(1.8);
+    box-shadow:
+      0 48px 110px rgba(4, 3, 14, 0.70),
+      0 0 0 1px rgba(255, 255, 255, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.76);
+  }
+
+  /* Ambient background orbs for auth pages */
+  .rise-auth-orb {
+    @apply pointer-events-none absolute rounded-full;
+    filter: blur(90px);
+    will-change: transform;
+  }
+
+  /* ─────────────────────── CARDS ─────────────────────── */
 
   .rise-card {
     @apply rounded-[1.25rem] p-5;
-    background: rgba(255, 255, 255, 0.92);
+    background: rgba(255, 255, 255, 0.93);
     box-shadow:
-      0 14px 34px rgba(71, 46, 143, 0.10),
-      inset 0 1px 0 rgba(255, 255, 255, 0.85);
+      0 14px 34px rgba(71, 46, 143, 0.09),
+      inset 0 1px 0 rgba(255, 255, 255, 0.92);
   }
 
   .rise-card-interactive {
@@ -111,8 +156,51 @@
   .rise-card-interactive:hover {
     box-shadow:
       0 20px 40px rgba(48, 32, 95, 0.10),
-      inset 0 1px 0 rgba(255, 255, 255, 0.85);
+      inset 0 1px 0 rgba(255, 255, 255, 0.92);
   }
+
+  /* Dark glass card — for use on dark surfaces */
+  .rise-glass-card {
+    @apply rounded-[1.25rem] border border-white/[0.09];
+    background: rgba(255, 255, 255, 0.055);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow:
+      0 14px 40px rgba(5, 3, 18, 0.32),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+
+  /* ─────────────────────── LESSON HERO ─────────────────────── */
+
+  /* Dominant full-width lesson window — dark stage */
+  .rise-lesson-hero {
+    @apply relative overflow-hidden rounded-[1.4rem];
+    background:
+      radial-gradient(ellipse at 18% 0%, rgba(138, 42, 255, 0.34) 0%, transparent 48%),
+      radial-gradient(ellipse at 88% 100%, rgba(90, 16, 210, 0.24) 0%, transparent 42%),
+      radial-gradient(ellipse at 50% 50%, rgba(60, 10, 160, 0.12) 0%, transparent 60%),
+      linear-gradient(180deg, #18103a 0%, #0d0b22 50%, #1a1040 100%);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    box-shadow:
+      0 36px 90px rgba(6, 4, 18, 0.38),
+      inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  }
+
+  /* Milky glass pane — sits inside the dark hero */
+  .rise-lesson-glass {
+    @apply rounded-[1.15rem];
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background:
+      radial-gradient(ellipse at top left, rgba(255,255,255,0.60), rgba(255,255,255,0) 40%),
+      rgba(252, 248, 255, 0.91);
+    backdrop-filter: blur(22px) saturate(1.5);
+    -webkit-backdrop-filter: blur(22px) saturate(1.5);
+    box-shadow:
+      0 20px 50px rgba(6, 4, 18, 0.22),
+      inset 0 1px 0 rgba(255, 255, 255, 0.80);
+  }
+
+  /* ─────────────────────── PAGE ─────────────────────── */
 
   .rise-page {
     @apply w-full px-4 py-5 pb-24 lg:px-8 lg:py-8 lg:pb-10;
@@ -123,26 +211,30 @@
   }
 
   .rise-page-wide {
-    @apply mx-auto max-w-[1650px];
+    @apply mx-auto max-w-[1720px];
   }
+
+  /* ─────────────────────── BUTTONS ─────────────────────── */
 
   .rise-btn-primary {
     @apply w-full rounded-[0.95rem] px-6 py-3.5 text-center font-black text-white transition-all active:scale-[0.99];
     background: linear-gradient(90deg, #7C3AED 0%, #A855F7 100%);
-    box-shadow: 0 12px 24px rgba(124, 58, 237, 0.28);
+    box-shadow: 0 12px 26px rgba(124, 58, 237, 0.32);
   }
 
   .rise-btn-yellow {
     @apply w-full rounded-[0.95rem] px-6 py-3.5 text-center font-black text-gray-900 transition-all active:scale-[0.99];
     background: linear-gradient(180deg, #ffe45c 0%, #ffd317 100%);
-    box-shadow: 0 10px 22px rgba(252, 211, 77, 0.34);
+    box-shadow: 0 10px 24px rgba(252, 211, 77, 0.36);
   }
+
+  /* ─────────────────────── MISC ─────────────────────── */
 
   .rise-chip {
     @apply inline-flex items-center gap-2 rounded-[999px] px-3 py-2 text-xs font-black;
-    background: rgba(255, 255, 255, 0.84);
+    background: rgba(255, 255, 255, 0.86);
     color: #7C3AED;
-    box-shadow: 0 10px 22px rgba(87, 68, 148, 0.10);
+    box-shadow: 0 8px 20px rgba(87, 68, 148, 0.10);
   }
 
   .rise-soft-panel {
