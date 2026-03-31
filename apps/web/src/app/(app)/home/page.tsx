@@ -2,14 +2,7 @@ import Link from 'next/link'
 import DifficultyBadge from '@/components/ui/DifficultyBadge'
 import { logout } from '@/app/auth/actions'
 import { createClient } from '@/lib/supabase/server'
-import {
-  getAgeRangeLabel,
-  getDashboardRecommendation,
-  getStudyStyleLabel,
-  getTargetGradeLabel,
-  getWorkingLevelLabel,
-  isMathsSubject,
-} from '@/lib/onboarding'
+import { isMathsSubject } from '@/lib/onboarding'
 import type {
   DifficultyLevel,
   Lesson,
@@ -136,207 +129,149 @@ export default async function HomePage() {
   ])
 
   const userMetadata = (user.user_metadata ?? {}) as Record<string, unknown>
-  const recommendation = getDashboardRecommendation(userMetadata)
-  const streak = Math.max(1, Math.min(7, completedProgress.length || 1))
-  const xp = completedProgress.length * 50
-  const userName = userMetadata.full_name?.toString().split(' ')[0] ?? 'there'
-  const onboardingMode = userMetadata.onboarding_mode === 'tutor_code' ? 'tutor_code' : 'new_student'
+  const userName =
+    typeof userMetadata.full_name === 'string' ? userMetadata.full_name.split(' ')[0] : 'there'
   const recommendedTopic =
     typeof userMetadata.recommended_topic === 'string' ? userMetadata.recommended_topic : ''
-  const targetGradeLabel = getTargetGradeLabel(userMetadata.target_grade)
-  const workingLevelLabel = getWorkingLevelLabel(userMetadata.working_level)
-  const ageRangeLabel = getAgeRangeLabel(userMetadata.age_range)
-  const studyStyleLabel = getStudyStyleLabel(userMetadata.study_style)
   const hasStartedLesson = Boolean(currentLesson?.progress)
-  const pathSummary =
-    onboardingMode === 'tutor_code'
-      ? `Tutor-curated path`
-      : `${studyStyleLabel} style`
+  const streak = Math.max(1, Math.min(7, completedProgress.length || 1))
+  const xp = completedProgress.length * 50
   const introCopy = lastSession
-    ? `Last session: ${new Date(lastSession.session_date).toLocaleDateString('en-GB', {
+    ? `Last tutor session: ${new Date(lastSession.session_date).toLocaleDateString('en-GB', {
         weekday: 'short',
         day: 'numeric',
         month: 'short',
-      })}. Next step is ready.`
+      })}.`
     : hasStartedLesson
-    ? 'Pick up exactly where you left off.'
-    : 'A focused starting point is ready for you.'
+      ? 'Continue your current lesson.'
+      : 'Start with the lesson below or pick your own maths topic.'
+
+  const topicHighlights = [
+    recommendedTopic ? { label: recommendedTopic, summary: 'Suggested' } : null,
+    { label: 'Algebra', summary: 'Equations' },
+    { label: 'Number', summary: 'Fluency' },
+    { label: 'Ratio', summary: 'Proportion' },
+    { label: 'Geometry', summary: 'Angles' },
+  ].filter(Boolean) as Array<{ label: string; summary: string }>
 
   return (
-    <div className="rise-page rise-page-wide">
-
-      {/* ── Header ──────────────────────────────────────────── */}
-      <header className="mb-6 flex items-start justify-between gap-4">
+    <div className="rise-page">
+      <div className="mb-6 flex flex-col gap-4 border-b border-[#ede6fb] pb-6 md:flex-row md:items-end md:justify-between">
         <div>
-          <p className="text-[10px] font-black uppercase tracking-[0.26em] text-[#a39cb8]">Home</p>
-          <h1 className="mt-1.5 text-[2.8rem] font-black leading-[0.9] text-[#1f1833] xl:text-[3.6rem]">
+          <p className="text-xs font-black uppercase tracking-[0.24em] text-[#a39cb8]">Home</p>
+          <h1 className="mt-2 text-[2.75rem] font-black leading-none text-[#1f1833]">
             {greetingForHour()}, {userName}
           </h1>
-          {/* Long-term goal — inline, concise, near the top */}
-          <div className="mt-3 flex flex-wrap items-center gap-x-2.5 gap-y-2">
-            <span className="rounded-[999px] bg-[#ede4ff] px-3.5 py-1.5 text-[11px] font-black uppercase tracking-[0.14em] text-[#7C3AED]">
-              {targetGradeLabel}
-            </span>
-            <span className="text-sm font-medium text-[#847d9c]">
-              {workingLevelLabel}
-            </span>
-            {ageRangeLabel && (
-              <>
-                <span className="text-[#c4bcd6]">·</span>
-                <span className="text-sm font-medium text-[#847d9c]">{ageRangeLabel}</span>
-              </>
-            )}
-            <span className="text-[#c4bcd6]">·</span>
-            <span className="text-sm font-medium text-[#847d9c]">{pathSummary}</span>
-          </div>
+          <p className="mt-3 text-base font-medium text-[#6f6a84]">{introCopy}</p>
         </div>
 
-        <div className="flex shrink-0 items-center gap-2">
-          <Link href="/progress" className="rise-chip hidden lg:inline-flex">Progress</Link>
-          <Link href="/subjects" className="rise-chip hidden lg:inline-flex">Browse maths</Link>
-          <form action={logout}>
-            <button
-              type="submit"
-              className="rounded-[999px] px-3 py-2 text-xs font-black text-[#9993b4] transition hover:text-[#6d28d9]"
-            >
-              Sign out
-            </button>
-          </form>
-        </div>
-      </header>
-
-      {/* ── Dominant lesson hero ─────────────────────────────── */}
-      {currentLesson ? (
-        <Link href={`/lessons/${currentLesson.lesson.id}`} className="block">
-          <div className="rise-lesson-hero transition-all hover:opacity-[0.97]">
-
-            {/* Hero header */}
-            <div className="px-6 pb-0 pt-7 xl:px-10 xl:pt-9">
-              <p className="text-[10px] font-black uppercase tracking-[0.24em] text-white/40">
-                {recommendation.eyebrow}
-              </p>
-              <h2 className="mt-2 max-w-3xl text-[2.4rem] font-black leading-[0.9] text-white xl:text-[3.4rem]">
-                {recommendation.title}
-              </h2>
-              <p className="mt-3 max-w-2xl text-sm font-medium leading-relaxed text-white/55 xl:text-base">
-                {introCopy}
-              </p>
-            </div>
-
-            {/* Hero content: lesson preview + action panel */}
-            <div className="mt-6 gap-4 px-6 pb-0 xl:grid xl:grid-cols-[minmax(0,1fr)_270px] xl:px-10">
-
-              {/* Milky glass lesson preview */}
-              <div className="rise-lesson-glass p-5 xl:p-6">
-                <LessonPreview lesson={currentLesson} blurred={hasStartedLesson} />
-              </div>
-
-              {/* Right: focus info + CTA */}
-              <div className="mt-4 flex flex-col gap-3 xl:mt-0">
-                <div className="flex-1 rounded-[1.15rem] border border-white/[0.08] bg-white/[0.06] p-5 backdrop-blur-sm">
-                  <p className="text-[10px] font-black uppercase tracking-[0.20em] text-white/38">Focus</p>
-                  <p className="mt-2 text-xl font-black leading-tight text-white">
-                    {recommendedTopic || currentLesson.lesson.topic?.name || 'Maths'}
-                  </p>
-                  <p className="mt-2 text-xs font-medium leading-relaxed text-white/48">
-                    {recommendation.description}
-                  </p>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    <span className="rounded-[999px] bg-white/[0.09] px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.12em] text-white/50">
-                      {currentLesson.lesson.topic?.subject?.name ?? 'Maths'}
-                    </span>
-                    <DifficultyBadge
-                      level={(currentLesson.progress?.difficulty_level ?? 'building') as DifficultyLevel}
-                      size="sm"
-                    />
-                  </div>
-                </div>
-
-                <div
-                  className="rounded-[1.15rem] p-5 text-center"
-                  style={{
-                    background: 'linear-gradient(180deg, #ffe45c 0%, #ffd317 100%)',
-                    boxShadow: '0 12px 28px rgba(252,211,77,0.30)',
-                  }}
-                >
-                  <p className="text-sm font-black text-gray-900">
-                    {hasStartedLesson ? 'Continue lesson →' : 'Start lesson →'}
-                  </p>
-                  <p className="mt-0.5 text-xs font-semibold text-gray-700/65">+50 XP on completion</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Hero breadcrumb footer */}
-            <div className="mt-5 flex flex-wrap items-center gap-2 px-6 pb-7 xl:px-10 xl:pb-9">
-              <span className="rounded-[999px] bg-white/[0.07] px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.13em] text-white/36">
-                {currentLesson.lesson.topic?.subject?.name ?? 'Maths'} · {currentLesson.lesson.topic?.name}
-              </span>
-              <span className="rounded-[999px] bg-white/[0.07] px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.13em] text-white/36">
-                {currentLesson.lesson.type === 'learn' ? 'Learn' : 'Practise'}
-              </span>
-            </div>
-          </div>
-        </Link>
-      ) : (
-        <Link href="/subjects" className="block">
-          <div className="rise-lesson-hero px-6 py-14 text-center xl:px-16">
-            <p className="text-[10px] font-black uppercase tracking-[0.24em] text-white/38">No lesson queued</p>
-            <h2 className="mt-3 text-[2.4rem] font-black leading-[0.9] text-white xl:text-[3.2rem]">
-              Open a maths topic and begin.
-            </h2>
-            <p className="mx-auto mt-4 max-w-lg text-sm font-medium leading-relaxed text-white/50">
-              Choose a topic, or let the app guide the first recommendation.
-            </p>
-            <div className="mt-7 inline-flex rounded-[0.95rem] bg-white/[0.10] px-7 py-3.5 text-sm font-black text-white/80 backdrop-blur-sm">
-              Open maths hub →
-            </div>
-          </div>
-        </Link>
-      )}
-
-      {/* ── Quiet secondary strip ─────────────────────────────── */}
-      <div className="mt-4 flex flex-wrap items-center gap-2.5">
-        <Link
-          href="/progress?focus=streak"
-          className="flex items-center gap-2 rounded-[999px] border border-[#ece3fb] bg-white/80 px-4 py-2 text-sm font-black text-[#4b3a7a] shadow-[0_6px_16px_rgba(71,46,143,0.06)] transition hover:bg-white"
-        >
-          <span>🔥</span>
-          <span>{streak} day streak</span>
-        </Link>
-
-        <Link
-          href="/progress?focus=xp"
-          className="flex items-center gap-2 rounded-[999px] border border-[#ece3fb] bg-white/80 px-4 py-2 text-sm font-black text-[#4b3a7a] shadow-[0_6px_16px_rgba(71,46,143,0.06)] transition hover:bg-white"
-        >
-          <span>⚡</span>
-          <span>{xp.toLocaleString()} XP</span>
-        </Link>
-
-        {lastSession && (
-          <span className="flex items-center gap-2 rounded-[999px] border border-[#ece3fb] bg-white/80 px-4 py-2 text-sm font-medium text-[#7b74a0] shadow-[0_6px_16px_rgba(71,46,143,0.05)]">
-            <span className="text-[#9b84c8]">Last session</span>
-            <span className="font-black text-[#4b3a7a]">
-              {new Date(lastSession.session_date).toLocaleDateString('en-GB', {
-                day: 'numeric',
-                month: 'short',
-              })}
-            </span>
-          </span>
-        )}
-
-        <Link
-          href="/subjects"
-          className="ml-auto flex items-center gap-2 rounded-[999px] border border-[#ece3fb] bg-white/80 px-4 py-2 text-sm font-black text-[#7C3AED] shadow-[0_6px_16px_rgba(71,46,143,0.06)] transition hover:bg-white lg:ml-0"
-        >
-          Browse all maths →
-        </Link>
+        <form action={logout}>
+          <button
+            type="submit"
+            className="rounded-[0.95rem] border border-[#e4daf7] bg-white/80 px-4 py-2 text-sm font-black text-[#6a27cb] transition hover:bg-white"
+          >
+            Sign out
+          </button>
+        </form>
       </div>
+
+      <div className="mb-6 grid gap-4 xl:grid-cols-[minmax(0,1fr)_300px]">
+        <div className="rise-card p-6">
+          <div className="mb-4 flex flex-wrap items-center gap-2">
+            <span className="rounded-[999px] bg-[#f3e8ff] px-3 py-1 text-[11px] font-black uppercase tracking-[0.14em] text-[#8f2eff]">
+              {hasStartedLesson ? 'Continue lesson' : 'Start here'}
+            </span>
+            {recommendedTopic ? (
+              <span className="rounded-[999px] bg-[#faf7ff] px-3 py-1 text-[11px] font-black uppercase tracking-[0.14em] text-[#8f2eff]">
+                {recommendedTopic}
+              </span>
+            ) : null}
+          </div>
+
+          {currentLesson ? (
+            <Link href={`/lessons/${currentLesson.lesson.id}`} className="block">
+              <div className="relative overflow-hidden rounded-[1.1rem] border border-[#ece2fb] bg-white p-5">
+                {hasStartedLesson ? (
+                  <>
+                    <div className="pointer-events-none select-none blur-[3px]">
+                      <LessonPreview lesson={currentLesson} />
+                    </div>
+                    <div className="absolute inset-x-0 bottom-0 bg-[linear-gradient(180deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.94)_38%,rgba(255,255,255,1)_100%)] p-5 pt-14">
+                      <div className="rise-btn-primary text-sm">Continue lesson</div>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <LessonPreview lesson={currentLesson} />
+                    <div className="mt-5 rise-btn-primary text-sm">Start lesson</div>
+                  </>
+                )}
+              </div>
+            </Link>
+          ) : (
+            <Link href="/subjects" className="block">
+              <div className="rounded-[1.1rem] border border-dashed border-[#caaef2] bg-white px-5 py-8 text-center">
+                <p className="text-xs font-black uppercase tracking-[0.18em] text-[#8d88a7]">No lesson queued</p>
+                <h2 className="mt-2 text-[2rem] font-black leading-none text-[#1d1830]">Pick a maths topic</h2>
+                <div className="mt-5 inline-flex rounded-[0.95rem] bg-[#1f1737] px-5 py-3 text-sm font-black text-white">
+                  Open maths
+                </div>
+              </div>
+            </Link>
+          )}
+        </div>
+
+        <div className="flex flex-col gap-3">
+          <Link href="/progress?focus=streak" className="block">
+            <div className="rise-card rise-card-interactive p-5">
+              <p className="text-xs font-black uppercase tracking-[0.18em] text-[#a7a0bd]">Daily streak</p>
+              <p className="mt-3 text-[2.4rem] font-black leading-none text-[#1f1833]">🔥 {streak}</p>
+              <p className="mt-2 text-sm font-medium text-[#6f6a84]">Open full progress.</p>
+            </div>
+          </Link>
+
+          <Link href="/progress?focus=xp" className="block">
+            <div className="rise-card rise-card-interactive p-5">
+              <p className="text-xs font-black uppercase tracking-[0.18em] text-[#a7a0bd]">XP total</p>
+              <p className="mt-3 text-[2.4rem] font-black leading-none text-[#1f1833]">⚡ {xp.toLocaleString()}</p>
+              <p className="mt-2 text-sm font-medium text-[#6f6a84]">See the full breakdown.</p>
+            </div>
+          </Link>
+
+          <Link href="/subjects" className="block">
+            <div className="rise-card rise-card-interactive bg-[linear-gradient(180deg,#1d1830_0%,#100d1d_100%)] p-5 text-white">
+              <p className="text-xs font-black uppercase tracking-[0.18em] text-white/45">Choose yourself</p>
+              <p className="mt-3 text-[2rem] font-black leading-none">Pick a different topic.</p>
+              <p className="mt-2 text-sm font-medium text-white/70">Browse maths any time.</p>
+            </div>
+          </Link>
+        </div>
+      </div>
+
+      <section>
+        <div className="mb-3 flex items-center justify-between">
+          <h2 className="text-[2rem] font-black leading-none text-[#1f1c35]">Maths topics</h2>
+          <Link href="/subjects" className="text-sm font-black text-[#8f2eff]">
+            Open maths
+          </Link>
+        </div>
+
+        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
+          {topicHighlights.map((topic) => (
+            <Link key={topic.label} href="/subjects">
+              <div className="rise-card rise-card-interactive h-full p-5">
+                <p className="text-[1.5rem] font-black leading-none text-[#201c37]">{topic.label}</p>
+                <p className="mt-2 text-sm font-medium text-[#7f7b93]">{topic.summary}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
     </div>
   )
 }
 
-function LessonPreview({ lesson, blurred = false }: { lesson: CurrentLesson; blurred?: boolean }) {
+function LessonPreview({ lesson }: { lesson: CurrentLesson }) {
   const summary =
     lesson.lesson.content?.summary?.slice(0, 3) ?? [
       'Build fluency with the core method.',
@@ -345,9 +280,9 @@ function LessonPreview({ lesson, blurred = false }: { lesson: CurrentLesson; blu
     ]
 
   return (
-    <div className={blurred ? 'blur-[4px] opacity-75' : ''}>
-      <div className="mb-4 flex flex-wrap items-center gap-2">
-        <span className="rounded-[999px] bg-[#f5ecff] px-3 py-1 text-[10px] font-black uppercase tracking-[0.14em] text-[#a03af8]">
+    <div className="space-y-4">
+      <div className="flex flex-wrap items-center gap-2">
+        <span className="rounded-[999px] bg-[#f5ecff] px-3 py-1 text-[11px] font-black uppercase tracking-[0.14em] text-[#a03af8]">
           {lesson.lesson.topic?.subject?.name ?? 'Maths'} · {lesson.lesson.topic?.name}
         </span>
         <DifficultyBadge
@@ -356,18 +291,18 @@ function LessonPreview({ lesson, blurred = false }: { lesson: CurrentLesson; blu
         />
       </div>
 
-      <h3 className="text-[2rem] font-black leading-[0.92] text-[#1c1833] xl:text-[2.6rem]">
-        {lesson.lesson.title}
-      </h3>
-      <p className="mt-1.5 text-xs font-medium text-[#7f7899]">
-        {lesson.lesson.type === 'learn' ? 'Learn' : 'Practise'} · +50 XP on completion
-      </p>
+      <div>
+        <h3 className="text-[2rem] font-black leading-[0.95] text-[#1c1833]">{lesson.lesson.title}</h3>
+        <p className="mt-2 text-sm font-medium text-[#6f6a84]">
+          {lesson.lesson.type === 'learn' ? 'Learn' : 'Practise'} · +50 XP on completion
+        </p>
+      </div>
 
-      <div className="mt-4 space-y-2.5">
+      <div className="space-y-2">
         {summary.map((point, index) => (
-          <div key={index} className="flex items-start gap-3 rounded-[0.85rem] bg-[#faf7ff] px-4 py-3">
-            <span className="mt-0.5 text-xs font-black text-[#8b35ef]">•</span>
-            <p className="text-sm font-semibold leading-snug text-[#3d3657]">{point}</p>
+          <div key={index} className="flex items-start gap-3 rounded-[0.95rem] bg-[#faf7ff] px-3 py-3">
+            <span className="mt-0.5 text-sm font-black text-[#8b35ef]">•</span>
+            <p className="text-sm font-semibold text-[#3d3657]">{point}</p>
           </div>
         ))}
       </div>

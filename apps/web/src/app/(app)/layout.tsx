@@ -14,7 +14,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
 
   return (
     <div className="rise-app-shell">
-      <div className="rise-phone lg:grid lg:grid-cols-[72px_minmax(0,1fr)] lg:gap-2">
+      <div className="rise-phone lg:grid lg:grid-cols-[220px_minmax(0,1fr)]">
         <BottomNav />
         <div className="rise-shell-panel">
           <main>{children}</main>

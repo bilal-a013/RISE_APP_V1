@@ -52,11 +52,21 @@
   /* ─────────────────────── SPLASH ─────────────────────── */
 
   .rise-splash {
-    @apply flex min-h-dvh items-center justify-center px-6 py-12;
+    @apply flex min-h-dvh items-center justify-center px-5 py-8 sm:px-8;
   }
 
   .rise-splash-inner {
-    @apply w-full max-w-xs;
+    @apply w-full max-w-[560px];
+  }
+
+  .rise-splash-card {
+    @apply rounded-[1.35rem] border border-white/10 p-6 text-white sm:p-8;
+    background:
+      radial-gradient(circle at top left, rgba(162, 45, 244, 0.22), rgba(162, 45, 244, 0) 34%),
+      linear-gradient(180deg, rgba(24, 20, 46, 0.98) 0%, rgba(13, 12, 25, 0.98) 100%);
+    box-shadow:
+      0 24px 70px rgba(7, 8, 22, 0.42),
+      inset 0 1px 0 rgba(255,255,255,0.06);
   }
 
   .rise-splash-btn-secondary {
@@ -71,43 +81,37 @@
   /* ─────────────────────── APP SHELL ─────────────────────── */
 
   .rise-app-shell {
-    @apply min-h-dvh p-1.5 pb-24 lg:p-2;
+    @apply min-h-dvh pb-24 lg:pb-0;
   }
 
   .rise-phone {
-    @apply mx-auto min-h-[calc(100dvh-1rem)] max-w-[1960px];
+    @apply min-h-dvh w-full;
   }
 
   /* Frosted glass workspace panel */
   .rise-shell-panel {
-    @apply rounded-[1.2rem] border border-white/[0.12];
-    min-height: calc(100dvh - 1rem);
+    @apply border-l border-white/10;
+    min-height: 100dvh;
     background:
       radial-gradient(ellipse at top center, rgba(255,255,255,0.52), rgba(255,255,255,0) 36%),
       linear-gradient(180deg, rgba(250,246,255,0.92) 0%, rgba(242,234,255,0.90) 50%, rgba(255,252,255,0.92) 100%);
     backdrop-filter: blur(28px) saturate(1.6);
     -webkit-backdrop-filter: blur(28px) saturate(1.6);
     box-shadow:
-      0 28px 90px rgba(6, 4, 18, 0.58),
-      0 0 0 5px rgba(255, 255, 255, 0.018),
-      inset 0 1px 0 rgba(255, 255, 255, 0.74);
+      inset 0 1px 0 rgba(255,255,255,0.45);
   }
 
   /* Slim frosted dark sidebar */
   .rise-sidebar {
-    @apply hidden rounded-[1.1rem] border border-white/[0.08] px-2 py-5 text-white lg:flex lg:flex-col;
-    min-height: calc(100dvh - 1rem);
-    position: sticky;
-    top: 0.5rem;
-    align-self: start;
+    @apply hidden border-r border-white/10 px-5 py-6 text-white lg:flex lg:flex-col;
+    min-height: 100dvh;
     background:
       radial-gradient(ellipse at top, rgba(140, 36, 240, 0.24), transparent 44%),
       linear-gradient(180deg, rgba(12, 9, 26, 0.97) 0%, rgba(17, 13, 34, 0.98) 100%);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     box-shadow:
-      0 20px 60px rgba(4, 4, 16, 0.50),
-      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
   }
 
   /* ─────────────────────── AUTH STAGE ─────────────────────── */
@@ -211,7 +215,7 @@
   }
 
   .rise-page-wide {
-    @apply mx-auto max-w-[1720px];
+    @apply mx-auto max-w-none;
   }
 
   /* ─────────────────────── BUTTONS ─────────────────────── */
