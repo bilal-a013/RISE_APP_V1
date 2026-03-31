@@ -25,25 +25,41 @@ const NAV_ITEMS = [
     icon: (active: boolean) => (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
         <rect
-          x="3" y="3" width="8" height="8" rx="2"
+          x="3"
+          y="3"
+          width="8"
+          height="8"
+          rx="2"
           fill={active ? '#7C3AED' : 'none'}
           stroke={active ? '#7C3AED' : '#94A3B8'}
           strokeWidth="2"
         />
         <rect
-          x="13" y="3" width="8" height="8" rx="2"
+          x="13"
+          y="3"
+          width="8"
+          height="8"
+          rx="2"
           fill={active ? '#7C3AED' : 'none'}
           stroke={active ? '#7C3AED' : '#94A3B8'}
           strokeWidth="2"
         />
         <rect
-          x="3" y="13" width="8" height="8" rx="2"
+          x="3"
+          y="13"
+          width="8"
+          height="8"
+          rx="2"
           fill={active ? '#7C3AED' : 'none'}
           stroke={active ? '#7C3AED' : '#94A3B8'}
           strokeWidth="2"
         />
         <rect
-          x="13" y="13" width="8" height="8" rx="2"
+          x="13"
+          y="13"
+          width="8"
+          height="8"
+          rx="2"
           fill={active ? '#7C3AED' : 'none'}
           stroke={active ? '#7C3AED' : '#94A3B8'}
           strokeWidth="2"
@@ -74,31 +90,27 @@ export default function BottomNav() {
   return (
     <>
       <aside className="rise-sidebar">
-        <div className="mb-8 flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-[0.95rem] bg-gradient-to-br from-[#a22df4] to-[#7C3AED] text-xl font-black text-white shadow-[0_16px_30px_rgba(124,58,237,0.35)]">
+        <div className="mb-8 flex justify-center">
+          <div className="flex h-12 w-12 items-center justify-center rounded-[1rem] bg-gradient-to-br from-[#a22df4] to-[#7C3AED] text-xl font-black text-white shadow-[0_16px_30px_rgba(124,58,237,0.35)]">
             R
-          </div>
-          <div>
-            <p className="text-[1.8rem] font-black leading-none">RISE</p>
-            <p className="mt-1 text-xs font-medium uppercase tracking-[0.18em] text-white/45">Maths studio</p>
           </div>
         </div>
 
-        <nav className="space-y-1">
+        <nav className="space-y-2">
           {NAV_ITEMS.map((item) => {
             const active = pathname === item.href || (item.href !== '/home' && pathname.startsWith(item.href))
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex items-center gap-3 rounded-[1.1rem] px-4 py-3 transition-all ${
+                className={`flex flex-col items-center gap-2 rounded-[1.1rem] px-2 py-3 transition-all ${
                   active
                     ? 'bg-white text-[#231b44] shadow-[0_18px_40px_rgba(10,10,24,0.25)]'
                     : 'text-white/70 hover:bg-white/5 hover:text-white'
                 }`}
               >
                 <span className="shrink-0">{item.icon(active)}</span>
-                <span className="text-sm font-black uppercase tracking-[0.12em]">{item.label}</span>
+                <span className="text-[10px] font-black uppercase tracking-[0.14em]">{item.label}</span>
               </Link>
             )
           })}

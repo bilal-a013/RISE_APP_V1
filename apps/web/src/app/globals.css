@@ -46,8 +46,6 @@
 }
 
 @layer components {
-  /* ─── Splash / unauthenticated ─── */
-
   .rise-splash {
     @apply flex min-h-dvh items-center justify-center px-6 py-12;
   }
@@ -65,14 +63,12 @@
     @apply w-full rounded-[0.95rem] px-6 py-3 text-center font-black text-white/50 transition-all hover:text-white/80 active:scale-[0.99];
   }
 
-  /* ─── Authenticated app shell ─── */
-
   .rise-app-shell {
     @apply min-h-dvh p-2 pb-24 lg:p-2;
   }
 
   .rise-phone {
-    @apply mx-auto min-h-[calc(100dvh-1rem)] max-w-[1720px];
+    @apply mx-auto min-h-[calc(100dvh-1rem)] max-w-[1800px];
   }
 
   .rise-shell-panel {
@@ -87,7 +83,7 @@
   }
 
   .rise-sidebar {
-    @apply hidden rounded-[1.2rem] border border-white/10 px-4 py-5 text-white lg:flex lg:flex-col;
+    @apply hidden rounded-[1.2rem] border border-white/10 px-3 py-5 text-white lg:flex lg:flex-col;
     min-height: calc(100dvh - 1rem);
     position: sticky;
     top: 0.5rem;
@@ -99,8 +95,6 @@
       0 20px 60px rgba(6, 8, 22, 0.40),
       inset 0 1px 0 rgba(255, 255, 255, 0.06);
   }
-
-  /* ─── Cards ─── */
 
   .rise-card {
     @apply rounded-[1.25rem] p-5;
@@ -120,10 +114,8 @@
       inset 0 1px 0 rgba(255, 255, 255, 0.85);
   }
 
-  /* ─── Page containers ─── */
-
   .rise-page {
-    @apply w-full px-4 py-5 pb-24 lg:px-7 lg:py-7 lg:pb-10;
+    @apply w-full px-4 py-5 pb-24 lg:px-8 lg:py-8 lg:pb-10;
   }
 
   .rise-page-narrow {
@@ -131,10 +123,8 @@
   }
 
   .rise-page-wide {
-    @apply mx-auto max-w-[1500px];
+    @apply mx-auto max-w-[1650px];
   }
-
-  /* ─── Buttons ─── */
 
   .rise-btn-primary {
     @apply w-full rounded-[0.95rem] px-6 py-3.5 text-center font-black text-white transition-all active:scale-[0.99];
@@ -147,8 +137,6 @@
     background: linear-gradient(180deg, #ffe45c 0%, #ffd317 100%);
     box-shadow: 0 10px 22px rgba(252, 211, 77, 0.34);
   }
-
-  /* ─── Chips & misc ─── */
 
   .rise-chip {
     @apply inline-flex items-center gap-2 rounded-[999px] px-3 py-2 text-xs font-black;
