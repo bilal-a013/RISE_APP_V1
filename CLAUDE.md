@@ -51,8 +51,7 @@ The current product direction is:
 - `apps/web` — Next.js 14 App Router, TypeScript, Tailwind CSS
 - `apps/mobile` — placeholder only, not active yet
 - `packages/shared` — shared TypeScript types and constants
-- `supabase/` — schema, migrations, and seed data if/when present
-- `scripts/` — one-off scripts
+- `supabase/` — not yet initialised; placeholder for future schema and migrations
 
 ## Tech Stack
 - Frontend: Next.js 14 App Router, TypeScript, Tailwind CSS
@@ -61,27 +60,39 @@ The current product direction is:
 - Live AI requirement: not required for the current frontend
 
 ## Active Web Routes
-- `/` — personalised home dashboard
+Routes inside `(app)/` are authenticated and share the app shell layout.
+
+- `/` — splash/entry page; redirects authenticated users to `/home`
 - `/auth/start` — choose `new student` or `tutor code`
 - `/auth/signup` — multi-step onboarding-led signup
 - `/auth/tutor-code` — dummy tutor-code entry
 - `/auth/login` — returning student login
-- `/subjects` — maths hub
+- `/auth/callback` — OAuth callback handler (Next.js route handler)
+- `/home` — personalised home dashboard (`(app)/home`)
+- `/subjects` — maths hub (`(app)/subjects`)
 - `/subjects/[slug]` — maths subject overview
 - `/lessons/[id]` — lesson experience
 - `/progress` — full progress dashboard
 
 ## Key Files To Know
-- `apps/web/src/app/page.tsx` — personalised home dashboard
+- `apps/web/src/app/page.tsx` — splash/entry page
+- `apps/web/src/app/(app)/home/page.tsx` — personalised home dashboard
 - `apps/web/src/app/auth/actions.ts` — auth actions and onboarding metadata handling
+- `apps/web/src/app/auth/callback/route.ts` — OAuth callback handler
 - `apps/web/src/app/auth/start/page.tsx` — start-path chooser
 - `apps/web/src/app/auth/tutor-code/page.tsx` — dummy tutor-code flow
+- `apps/web/src/app/actions/lesson.ts` — lesson completion server action
 - `apps/web/src/components/auth/NewStudentSignupFlow.tsx` — multi-step signup onboarding
-- `apps/web/src/app/subjects/page.tsx` — maths-only browsing hub
-- `apps/web/src/app/progress/page.tsx` — full progress view linked from home cards
-- `apps/web/src/lib/onboarding.ts` — onboarding options, tutor-code preset, recommendation helpers
-- `apps/web/src/app/globals.css` — current design tokens and shell classes
 - `apps/web/src/components/layout/BottomNav.tsx` — desktop/mobile nav shell
+- `apps/web/src/components/lesson/LessonContent.tsx` — lesson renderer
+- `apps/web/src/components/artifacts/GenericMCQ.tsx` — interactive MCQ artifact
+- `apps/web/src/components/ui/DifficultyBadge.tsx` — traffic-light difficulty badge
+- `apps/web/src/app/(app)/subjects/page.tsx` — maths-only browsing hub
+- `apps/web/src/app/(app)/progress/page.tsx` — full progress view linked from home cards
+- `apps/web/src/lib/onboarding.ts` — onboarding options, tutor-code preset, recommendation helpers
+- `apps/web/src/lib/supabase/client.ts` — browser Supabase client
+- `apps/web/src/lib/supabase/server.ts` — server Supabase client
+- `apps/web/src/app/globals.css` — current design tokens and shell classes
 
 ## Data Model Notes
 Current important tables:
