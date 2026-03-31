@@ -1,4 +1,19 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
 # RISE Tutoring App — Claude Context
+
+## Commands
+
+```bash
+npm run dev        # Start web app (from repo root)
+npm run build      # Build web app
+npm run lint       # Lint web app
+npm run typecheck  # TypeScript check (run from apps/web/)
+```
+
+No test suite is configured yet.
 
 ## What This Project Is
 RISE is a premium GCSE self-study platform for UK students aged 13-16. It combines in-person tutoring sessions with an intelligent web/mobile app that picks up exactly where the tutor left off. The core philosophy: zero friction between opening the app and starting work.
@@ -39,7 +54,7 @@ lesson_progress has difficulty_level ('building' | 'getting_there' | 'confident'
 
 ## Key Product Decisions
 1. Students open the app and see their current lesson immediately — zero friction
-2. Every lesson has TWO parts: Learn (type=learn, diffibuilding) and Practise (type=practise, difficulty=getting_there or confident)
+2. Every lesson has TWO parts: Learn (type=learn, difficulty=building) and Practise (type=practise, difficulty=getting_there or confident)
 3. Lesson difficulty auto-sets based on lesson_1_score after completing the Learn lesson
 4. Traffic light indicator on every lesson: 🔴 Building | 🟡 Getting There | 🟢 Confident
 5. In-person tutor sessions are logged (via QR code) and surfaced on the home screen
@@ -73,7 +88,7 @@ lesson_progress has difficulty_level ('building' | 'getting_there' | 'confident'
 - confident: green 🟢 — concise, challenge extension added
 
 ## Interactive Artifact Components (to be built)
-Each is a React component in apps/web/components/artifacts/:
+Each is a React component in `apps/web/src/components/artifacts/`:
 - FOILGrid — drag terms into grid to expand double brackets
 - BalanceScale — drag weights to solve equations
 - FractionBar — visual fraction manipulation
