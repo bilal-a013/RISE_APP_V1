@@ -8,12 +8,13 @@ interface MCQOption {
 }
 
 interface GenericMCQProps {
-  config: { options: MCQOption[] }
-  correctAnswer: string
+  config: { question?: string; options: MCQOption[] }
+  correctAnswer?: string
   onCorrect?: () => void
+  onWrong?: () => void
 }
 
-export default function GenericMCQ({ config, correctAnswer, onCorrect }: GenericMCQProps) {
+export default function GenericMCQ({ config, correctAnswer, onCorrect, onWrong }: GenericMCQProps) {
   const [selected, setSelected] = useState<number | null>(null)
 
   const options = config?.options ?? []
@@ -23,11 +24,16 @@ export default function GenericMCQ({ config, correctAnswer, onCorrect }: Generic
     setSelected(idx)
     if (options[idx]?.correct) {
       onCorrect?.()
+    } else {
+      onWrong?.()
     }
   }
 
   return (
     <div className="space-y-2">
+      {config.question && (
+        <p className="text-sm font-semibold text-secondary-900 mb-3">{config.question}</p>
+      )}
       {options.map((opt, idx) => {
         const isSelected = selected === idx
         const isCorrect = opt.correct
@@ -83,7 +89,11 @@ export default function GenericMCQ({ config, correctAnswer, onCorrect }: Generic
           <p className={`text-sm font-bold ${
             options[selected]?.correct ? 'text-green-700' : 'text-red-700'
           }`}>
-            {options[selected]?.correct ? '✅ Correct!' : `❌ Not quite — the answer is ${correctAnswer}`}
+            {options[selected]?.correct
+              ? '✅ Correct!'
+              : correctAnswer
+              ? `❌ Not quite — the answer is ${correctAnswer}`
+              : '❌ Not quite — try the worked solution below'}
           </p>
         </div>
       )}

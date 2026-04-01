@@ -119,12 +119,15 @@ Important current usage:
 - The future tutor system should eventually become the source of truth for tutor codes and session logging.
 
 ## Current Design Direction
-- Dark outer shell with a lighter main workspace panel
-- Sharper radii than before; less pill-shaped everywhere
-- Narrower display typography using a condensed font for headings and key UI text
-- Main window gets more space; sidebar is shorter and tighter
-- Premium but direct, not over-decorated
-- Maths-first copy throughout
+The app's visual language mirrors the Rise Tutoring Website (Far15M/Rise-Tutoring-Website).
+- **Font:** Outfit (Google Fonts, weights 300–800)
+- **Background:** Fixed pastel gradient on `html` — linear-gradient(135deg, #e2d6ff → #ccece9 → #fcecc8 → #f8d5e4 → #e2d6ff), background-attachment: fixed
+- **Primary:** `#7C3AED` (Tailwind `primary-600`) with full 50–950 scale
+- **Secondary:** `#1E1B4B` for headings; `#6B6394` for body text
+- **Cards:** `.glass-card` (white 65%, blur 20px) and `.glass-card-solid` (white 85%)
+- **Buttons:** `.rise-btn-primary` (purple gradient), `.rise-btn-outline` (transparent + purple border)
+- **Sidebar:** Light glass white, not dark
+- Premium but direct, not over-decorated. Maths-first copy throughout.
 
 ## UI Rules That Matter Right Now
 - Do not reintroduce other visible subjects like geography, English, or science.
@@ -134,18 +137,64 @@ Important current usage:
 - Preserve the slightly blurred in-progress lesson preview behaviour on the home screen unless intentionally redesigning it.
 - Keep copy shorter, clearer, and less generic.
 
-## Lesson Rendering
+## Lesson Architecture (v2)
+
+### Subject scope
+RISE is Edexcel GCSE Maths only. All lesson content and UI copy is maths-specific.
+
+### Lesson pairs
+Every subtopic is split into exactly two lessons:
+1. **Learn** (`type: 'learn'`) — teaches the concept
+2. **Practise** (`type: 'practise'`) — builds fluency with 5 graded questions
+
+### Content format
+All lesson content is typed in `packages/shared/src/types/index.ts` as `AnyLessonContent`.
+
+**v2 Learn lesson** (`LearnLessonContent`):
+- `intro` — topic name + what you will learn
+- `why_it_matters` — 2–3 bullet points
+- `explanation` — body, optional formula, optional key terms
+- `visual` — prebuilt interactive config (no runtime AI)
+- `worked_example` — question + numbered steps + answer
+- `summary` — 3–5 key points
+- `scaffolding` — optional: `simplified_explanation` + `extra_hints` for `building`; `extension_note` for `confident`
+
+**v2 Practise lesson** (`PractiseLessonContent`):
+- `orientation` — one-sentence reminder of what is being practised
+- `worked_example` — model question shown before the student starts
+- `questions` — exactly 5, ordered easier → harder; each has optional `hint` (shown to `building` students)
+- `common_mistakes` — 2–3 entries, each collapsible
+- `summary` — method checklist
+
+**Legacy v1** (`LessonContent`) — kept for backward compatibility with existing Supabase data.
+
+### Type guards
+Use `isLearnContent(c)`, `isPractiseContent(c)`, `isLegacyContent(c)` from `@rise/shared` to narrow content type before rendering.
+
+### Support-level adaptation
+`building` / `getting_there` / `confident` controls scaffolding intensity **not** topic or lesson identity:
+- `building`: shows `simplified_explanation`, `extra_hints`, and per-question `hint` prompts
+- `getting_there`: standard content only
+- `confident`: shows `extension_note`
+No runtime AI. All scaffolding content is prebuilt in the lesson object.
+
+### Tutor banner
+The tutor banner in the lesson page (`/lessons/[id]`) is shown **only** when `student_sessions.topics_covered` contains the current lesson's topic name for the authenticated student. It is never shown based on onboarding mode alone. No fake always-on tutor messaging.
+
+### Mock content fallback
 - Lesson content is read from `lessons.content` in Supabase.
-- If `lessons.content` is null, the app falls back to `apps/web/src/lib/mockLessons.ts`.
-- The same lesson content currently renders for all difficulty levels.
-- Real-time AI lesson rewriting is not part of the current requirement.
+- If null, falls back to `apps/web/src/lib/mockLessons.ts`.
+- Mock content includes full v2 learn/practise pairs for:
+  - Solving Linear Equations (learn + practise)
+  - Expanding Brackets (learn + practise)
+  - Legacy fractions content (v1, backward compat)
 
 ## Difficulty Levels
 - `building`
 - `getting_there`
 - `confident`
 
-These still drive the traffic-light style difficulty system and progress summaries.
+These drive the traffic-light difficulty system, progress summaries, and scaffolding in lessons.
 
 ## Frontend Build Status
 - ✅ Web app runs locally

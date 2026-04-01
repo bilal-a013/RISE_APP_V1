@@ -28,17 +28,40 @@ async function getLessonData(lessonId: string, userId: string | null) {
   if (!lesson) return null
 
   let progress: LessonProgress | null = null
+  let hasSessionForTopic = false
+
   if (userId) {
-    const { data } = await supabase
-      .from('lesson_progress')
-      .select('*')
-      .eq('student_id', userId)
-      .eq('lesson_id', lessonId)
-      .single()
-    progress = data
+    const [progressResult, sessionsResult] = await Promise.all([
+      supabase
+        .from('lesson_progress')
+        .select('*')
+        .eq('student_id', userId)
+        .eq('lesson_id', lessonId)
+        .single(),
+      supabase
+        .from('student_sessions')
+        .select('topics_covered')
+        .eq('student_id', userId),
+    ])
+
+    progress = progressResult.data
+
+    const topicName: string = (lesson as Lesson & { topic: Topic }).topic?.name ?? ''
+    const sessions = sessionsResult.data ?? []
+    hasSessionForTopic = sessions.some(
+      (s) =>
+        Array.isArray(s.topics_covered) &&
+        s.topics_covered.some(
+          (t: string) => typeof t === 'string' && t.toLowerCase() === topicName.toLowerCase()
+        )
+    )
   }
 
-  return { lesson: lesson as Lesson & { topic: Topic & { subject: Subject } }, progress }
+  return {
+    lesson: lesson as Lesson & { topic: Topic & { subject: Subject } },
+    progress,
+    hasSessionForTopic,
+  }
 }
 
 export default async function LessonPage({ params }: PageProps) {
@@ -48,13 +71,8 @@ export default async function LessonPage({ params }: PageProps) {
   const result = await getLessonData(params.id, user?.id ?? null)
   if (!result) notFound()
 
-  const { lesson, progress } = result
+  const { lesson, progress, hasSessionForTopic } = result
   const diffLevel: DifficultyLevel = progress?.difficulty_level ?? 'building'
-  const recommendedTopic =
-    typeof user?.user_metadata?.recommended_topic === 'string'
-      ? user.user_metadata.recommended_topic
-      : ''
-  const onboardingMode = user?.user_metadata?.onboarding_mode === 'tutor_code' ? 'tutor_code' : 'new_student'
 
   // Fall back to mock content when Supabase content is null
   const content = lesson.content ?? getMockContent(lesson.slug)
@@ -79,7 +97,7 @@ export default async function LessonPage({ params }: PageProps) {
                 {lesson.topic?.subject?.name}
               </p>
               <p className="text-sm text-secondary-300">
-                {progress?.completed_at ? 'Completed' : '1 / 8'}
+                {progress?.completed_at ? 'Completed' : 'In progress'}
               </p>
             </div>
             <h1 className="mt-1 text-3xl font-extrabold leading-tight tracking-tight text-secondary-900">{lesson.title}</h1>
@@ -89,25 +107,41 @@ export default async function LessonPage({ params }: PageProps) {
 
       {/* Info bar */}
       <div className="mb-6 grid gap-4 xl:grid-cols-[minmax(0,1.4fr)_minmax(260px,0.6fr)]">
-        <div className="glass-card p-5">
-          <div className="flex items-start gap-3">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary-50 border border-primary-200/40 text-sm font-semibold text-primary-600">
-              {onboardingMode === 'tutor_code' ? 'T' : 'A'}
-            </div>
-            <div>
-              <p className="text-sm leading-relaxed text-primary-700 font-medium">
-                {onboardingMode === 'tutor_code'
-                  ? 'This lesson is part of the tutor-shaped path, so it is designed to keep you moving in the same direction you worked on together.'
-                  : recommendedTopic
-                  ? `RISE thinks ${recommendedTopic.toLowerCase()} is the strongest next move, and this lesson is part of that direction.`
-                  : 'RISE has picked this as a strong next maths step based on your profile and progress so far.'}
-              </p>
-              <p className="mt-2 text-sm text-secondary-400">
-                Work through the explanation, try the interactive question, then self-assess so the next recommendation stays accurate.
-              </p>
+        {/* Tutor banner — only shown when real student_sessions data links this topic */}
+        {hasSessionForTopic ? (
+          <div className="glass-card p-5">
+            <div className="flex items-start gap-3">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary-50 border border-primary-200/40 text-sm font-semibold text-primary-600">
+                T
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-secondary-900 mb-1">Covered in a recent session</p>
+                <p className="text-sm leading-relaxed text-secondary-600">
+                  Your tutor worked through{' '}
+                  <span className="font-medium text-secondary-900">{lesson.topic?.name}</span>{' '}
+                  with you. This lesson reinforces what you covered together.
+                </p>
+              </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <div className="glass-card p-5">
+            <div className="flex items-start gap-3">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary-50 border border-primary-200/40">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <circle cx="9" cy="9" r="7" stroke="#7C3AED" strokeWidth="1.5" />
+                  <path d="M9 6v4M9 12v.5" stroke="#7C3AED" strokeWidth="1.5" strokeLinecap="round" />
+                </svg>
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-secondary-900 mb-1">How this lesson works</p>
+                <p className="text-sm leading-relaxed text-secondary-600">
+                  Work through the content at your own pace. Use the interactive questions to test yourself, then self-assess at the end so your next recommendation stays accurate.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
 
         <div className="glass-card-solid p-5">
           <p className="rise-overline text-[10px] mb-4">Lesson details</p>
