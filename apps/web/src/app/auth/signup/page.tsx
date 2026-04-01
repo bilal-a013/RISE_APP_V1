@@ -21,31 +21,31 @@ export default function SignupPage({ searchParams }: SignupPageProps) {
     searchParams.path === 'tutor-code' ? 'tutor_code' : 'new_student'
 
   return (
-    <div className="rise-auth-stage">
-      {/* Ambient depth orbs */}
+    <div className="rise-auth-stage py-12">
+      {/* Decorative background orbs */}
       <div
         className="rise-auth-orb"
         style={{
-          top: '-140px',
+          top: '-80px',
           right: '-100px',
-          width: '640px',
-          height: '640px',
-          background: 'radial-gradient(circle, rgba(124,58,237,0.20), rgba(90,20,200,0.08) 60%, transparent)',
+          width: '560px',
+          height: '560px',
+          background: 'radial-gradient(circle, rgba(124,58,237,0.10), transparent 70%)',
         }}
       />
       <div
         className="rise-auth-orb"
         style={{
-          bottom: '-100px',
+          bottom: '-80px',
           left: '-80px',
-          width: '440px',
-          height: '440px',
-          background: 'radial-gradient(circle, rgba(60,10,180,0.16), transparent 70%)',
+          width: '400px',
+          height: '400px',
+          background: 'radial-gradient(circle, rgba(200,176,255,0.15), transparent 70%)',
         }}
       />
 
-      {/* Wide glass panel — no left promo card, form fills the space */}
-      <div className="rise-auth-glass w-full max-w-[920px] px-8 py-9 lg:px-10 lg:py-10">
+      {/* Wide glass panel */}
+      <div className="rise-auth-glass w-full max-w-[880px]">
         <NewStudentSignupFlow
           error={searchParams.error}
           message={searchParams.message}

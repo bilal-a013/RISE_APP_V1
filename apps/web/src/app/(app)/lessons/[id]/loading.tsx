@@ -13,18 +13,18 @@ export default function LessonLoading() {
         <div className="h-7 w-24 bg-gray-200 rounded-full animate-pulse" />
       </div>
       {/* Hook skeleton */}
-      <div className="rise-card border-l-4 border-[#7C3AED]/20 mb-4">
-        <div className="h-4 bg-gray-100 rounded-full animate-pulse mb-2" />
-        <div className="h-4 w-3/4 bg-gray-100 rounded-full animate-pulse" />
+      <div className="glass-card border-l-4 border-primary-300/40 p-4 mb-4">
+        <div className="h-4 bg-primary-100/50 rounded-full animate-pulse mb-2" />
+        <div className="h-4 w-3/4 bg-primary-100/40 rounded-full animate-pulse" />
       </div>
       {/* Block skeletons */}
       {Array.from({ length: 2 }).map((_, i) => (
-        <div key={i} className="rise-card mb-4">
-          <div className="h-4 w-32 bg-gray-200 rounded-full animate-pulse mb-3" />
+        <div key={i} className="glass-card-solid p-5 mb-4">
+          <div className="h-4 w-32 bg-primary-100/50 rounded-full animate-pulse mb-3" />
           <div className="space-y-2">
-            <div className="h-3 bg-gray-100 rounded-full animate-pulse" />
-            <div className="h-3 w-4/5 bg-gray-100 rounded-full animate-pulse" />
-            <div className="h-3 w-2/3 bg-gray-100 rounded-full animate-pulse" />
+            <div className="h-3 bg-primary-100/40 rounded-full animate-pulse" />
+            <div className="h-3 w-4/5 bg-primary-100/40 rounded-full animate-pulse" />
+            <div className="h-3 w-2/3 bg-primary-100/40 rounded-full animate-pulse" />
           </div>
         </div>
       ))}

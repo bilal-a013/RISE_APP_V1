@@ -33,13 +33,13 @@ export default function GenericMCQ({ config, correctAnswer, onCorrect }: Generic
         const isCorrect = opt.correct
         const showResult = selected !== null
 
-        let stateClass = 'border-gray-200 bg-white hover:border-[#7C3AED]/40 hover:bg-[#F8F3FF]'
+        let stateClass = 'border-secondary-200/30 bg-white/60 hover:border-primary-300/50 hover:bg-white/80'
         if (showResult && isSelected && isCorrect) {
-          stateClass = 'border-green-400 bg-green-50'
+          stateClass = 'border-green-400/60 bg-green-50/80'
         } else if (showResult && isSelected && !isCorrect) {
-          stateClass = 'border-red-400 bg-red-50'
+          stateClass = 'border-red-400/60 bg-red-50/80'
         } else if (showResult && isCorrect) {
-          stateClass = 'border-green-300 bg-green-50/50'
+          stateClass = 'border-green-300/60 bg-green-50/50'
         }
 
         return (
@@ -47,7 +47,7 @@ export default function GenericMCQ({ config, correctAnswer, onCorrect }: Generic
             key={idx}
             onClick={() => handleSelect(idx)}
             disabled={selected !== null}
-            className={`w-full rounded-[1.4rem] border-2 px-4 py-3 text-left transition-all shadow-[0_10px_24px_rgba(71,46,143,0.05)] ${stateClass}`}
+            className={`w-full rounded-xl border-2 px-4 py-3 text-left transition-all duration-200 ${stateClass}`}
           >
             <div className="flex items-center gap-3">
               <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${
@@ -70,15 +70,15 @@ export default function GenericMCQ({ config, correctAnswer, onCorrect }: Generic
                   </svg>
                 )}
               </div>
-              <span className="text-sm font-semibold text-gray-800">{opt.label}</span>
+              <span className="text-sm font-semibold text-secondary-900">{opt.label}</span>
             </div>
           </button>
         )
       })}
 
       {selected !== null && (
-        <div className={`mt-1 rounded-[1.4rem] px-4 py-3 ${
-          options[selected]?.correct ? 'bg-green-100' : 'bg-red-50'
+        <div className={`mt-1 rounded-xl px-4 py-3 border ${
+          options[selected]?.correct ? 'bg-green-50/80 border-green-200/50' : 'bg-red-50/80 border-red-200/50'
         }`}>
           <p className={`text-sm font-bold ${
             options[selected]?.correct ? 'text-green-700' : 'text-red-700'

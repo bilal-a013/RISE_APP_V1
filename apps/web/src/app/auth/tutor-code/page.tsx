@@ -26,63 +26,67 @@ export default function TutorCodePage({ searchParams }: TutorCodePageProps) {
 
   return (
     <div className="rise-auth-stage">
-      {/* Ambient depth orbs */}
+      {/* Decorative background orbs */}
       <div
         className="rise-auth-orb"
         style={{
-          top: '-120px',
+          top: '-80px',
           right: '-80px',
-          width: '560px',
-          height: '560px',
-          background: 'radial-gradient(circle, rgba(124,58,237,0.22), rgba(90,20,200,0.10) 60%, transparent)',
+          width: '500px',
+          height: '500px',
+          background: 'radial-gradient(circle, rgba(124,58,237,0.12), transparent 70%)',
         }}
       />
       <div
         className="rise-auth-orb"
         style={{
-          bottom: '-80px',
+          bottom: '-60px',
           left: '-60px',
-          width: '380px',
-          height: '380px',
-          background: 'radial-gradient(circle, rgba(60,10,180,0.18), transparent 70%)',
+          width: '360px',
+          height: '360px',
+          background: 'radial-gradient(circle, rgba(200,176,255,0.18), transparent 70%)',
         }}
       />
 
       {/* Glass form panel */}
-      <div className="rise-auth-glass w-full max-w-[620px] px-8 py-9 lg:px-10 lg:py-11">
+      <div className="rise-auth-glass w-full max-w-[560px]">
 
         {/* Brand mark */}
         <div className="mb-8 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-[0.9rem] bg-gradient-to-br from-[#7C3AED] to-[#a855f7] text-lg font-black text-white shadow-[0_14px_28px_rgba(124,58,237,0.32)]">
+            <div
+              className="flex h-11 w-11 items-center justify-center rounded-2xl text-lg font-bold text-white shadow-btn"
+              style={{ background: 'linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%)' }}
+            >
               R
             </div>
             <div>
-              <p className="text-[10px] font-black uppercase tracking-[0.26em] text-[#a39cb8]">RISE</p>
-              <p className="text-base font-black leading-none text-[#1d1830]">Tutor code</p>
+              <p className="rise-overline text-[10px]">RISE</p>
+              <p className="text-base font-semibold leading-none text-secondary-900">Tutor code</p>
             </div>
           </div>
-          <Link href="/" className="text-xs font-black text-[#9993b4] hover:text-[#6d28d9]">
+          <Link href="/" className="text-xs font-medium text-secondary-400 hover:text-primary-600 transition-colors">
             ← Back
           </Link>
         </div>
 
         {/* Heading */}
         <div className="mb-7">
-          <p className="text-[10px] font-black uppercase tracking-[0.24em] text-[#a39cb8]">Check code</p>
-          <h1 className="mt-2 text-[2.4rem] font-black leading-[0.92] text-[#1d1830] lg:text-[3rem]">
-            Do you have a tutor code?
+          <p className="rise-overline mb-2">Check code</p>
+          <h1 className="text-4xl font-extrabold leading-tight tracking-tight text-secondary-900 lg:text-5xl">
+            Do you have a{' '}
+            <span className="rise-gradient-text">tutor code</span>?
           </h1>
-          <p className="mt-3 text-sm font-medium leading-relaxed text-[#6f6a84]">
+          <p className="mt-3 text-sm leading-relaxed text-secondary-400">
             Enter the code from your tutor to unlock a pre-shaped maths path.
-            Use <span className="font-black text-[#7C3AED]">RAYAN-SIMS</span> to see the demo.
+            Use <span className="font-semibold text-primary-600">RAYAN-SIMS</span> to see the demo.
           </p>
         </div>
 
         {/* Form */}
         <form action="/auth/tutor-code" className="space-y-4">
           <div>
-            <label className="mb-1.5 block text-xs font-black uppercase tracking-[0.18em] text-[#6b6388]">
+            <label className="mb-1.5 block rise-overline text-[10px]">
               Tutor code
             </label>
             <input
@@ -102,36 +106,36 @@ export default function TutorCodePage({ searchParams }: TutorCodePageProps) {
 
         {/* Error: code not found */}
         {hasLookup && !preset && (
-          <div className="mt-5 rounded-[1rem] border border-red-200 bg-red-50 px-4 py-3">
-            <p className="text-sm font-semibold text-red-700">
-              That code isn&apos;t in the demo set. Try <span className="font-black">RAYAN-SIMS</span>.
+          <div className="mt-5 rounded-xl border border-red-200 bg-red-50/80 px-4 py-3">
+            <p className="text-sm font-medium text-red-700">
+              That code isn&apos;t in the demo set. Try <span className="font-semibold">RAYAN-SIMS</span>.
             </p>
           </div>
         )}
 
         {/* Success: code accepted */}
         {preset && signupHref && (
-          <div className="mt-5 rounded-[1.1rem] border border-[#ead7ff] bg-[linear-gradient(180deg,#f9f3ff_0%,#fefcff_100%)] p-5">
-            <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#8f2eff]">Code accepted</p>
-            <h2 className="mt-2 text-[1.65rem] font-black leading-none text-[#1d1830]">
+          <div className="mt-5 glass-card p-5 border-primary-200/40">
+            <p className="rise-overline text-[10px] mb-2">Code accepted</p>
+            <h2 className="text-2xl font-bold leading-tight text-secondary-900">
               {preset.studentName}&apos;s path is ready
             </h2>
-            <p className="mt-2 text-sm font-medium leading-relaxed text-[#6f6a84]">
+            <p className="mt-2 text-sm leading-relaxed text-secondary-400">
               {preset.summary}
             </p>
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
-              <div className="rounded-[0.95rem] border border-[#eee7fb] bg-white px-4 py-3">
-                <p className="text-[10px] font-black uppercase tracking-[0.16em] text-[#a7a0bd]">Tutor</p>
-                <p className="mt-1 text-base font-black text-[#1f1a33]">{preset.tutorLabel}</p>
+              <div className="rounded-xl border border-primary-100 bg-white/70 px-4 py-3">
+                <p className="rise-overline text-[10px] mb-1">Tutor</p>
+                <p className="text-base font-semibold text-secondary-900">{preset.tutorLabel}</p>
               </div>
-              <div className="rounded-[0.95rem] border border-[#eee7fb] bg-white px-4 py-3">
-                <p className="text-[10px] font-black uppercase tracking-[0.16em] text-[#a7a0bd]">First focus</p>
-                <p className="mt-1 text-base font-black text-[#1f1a33]">{preset.recommendedTopic}</p>
+              <div className="rounded-xl border border-primary-100 bg-white/70 px-4 py-3">
+                <p className="rise-overline text-[10px] mb-1">First focus</p>
+                <p className="text-base font-semibold text-secondary-900">{preset.recommendedTopic}</p>
               </div>
             </div>
             <Link
               href={signupHref}
-              className="mt-5 inline-flex rounded-[0.95rem] bg-[#1f1737] px-5 py-3 text-sm font-black text-white"
+              className="mt-5 rise-btn-primary inline-flex w-auto px-6 py-3 text-sm"
             >
               Continue with tutor path →
             </Link>
@@ -139,15 +143,15 @@ export default function TutorCodePage({ searchParams }: TutorCodePageProps) {
         )}
 
         {/* Footer links */}
-        <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-[#7b7790]">
+        <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-secondary-400">
           <span>
             No code?{' '}
-            <Link href="/auth/signup" className="font-black text-[#6d28d9]">
+            <Link href="/auth/signup" className="font-semibold text-primary-600 hover:text-primary-700 transition-colors">
               Start as a new student
             </Link>
           </span>
-          <span className="text-[#ccc6da]">·</span>
-          <Link href="/auth/login" className="font-black text-[#6d28d9]">
+          <span className="text-primary-200">·</span>
+          <Link href="/auth/login" className="font-semibold text-primary-600 hover:text-primary-700 transition-colors">
             Sign in
           </Link>
         </div>

@@ -156,64 +156,70 @@ export default async function HomePage() {
 
   return (
     <div className="rise-page">
-      <div className="mb-6 flex flex-col gap-4 border-b border-[#ede6fb] pb-6 md:flex-row md:items-end md:justify-between">
+
+      {/* Page header */}
+      <div className="mb-6 flex flex-col gap-4 border-b border-primary-200/30 pb-6 md:flex-row md:items-end md:justify-between">
         <div>
-          <p className="text-xs font-black uppercase tracking-[0.24em] text-[#a39cb8]">Home</p>
-          <h1 className="mt-2 text-[2.75rem] font-black leading-none text-[#1f1833]">
-            {greetingForHour()}, {userName}
+          <p className="rise-overline mb-2">Home</p>
+          <h1 className="text-4xl font-extrabold leading-tight tracking-tight text-secondary-900 lg:text-5xl">
+            {greetingForHour()},{' '}
+            <span className="rise-gradient-text">{userName}</span>
           </h1>
-          <p className="mt-3 text-base font-medium text-[#6f6a84]">{introCopy}</p>
+          <p className="mt-2 text-sm text-secondary-400">{introCopy}</p>
         </div>
 
         <form action={logout}>
           <button
             type="submit"
-            className="rounded-[0.95rem] border border-[#e4daf7] bg-white/80 px-4 py-2 text-sm font-black text-[#6a27cb] transition hover:bg-white"
+            className="rise-btn-outline rounded-xl px-4 py-2 text-sm"
           >
             Sign out
           </button>
         </form>
       </div>
 
-      <div className="mb-6 grid gap-4 xl:grid-cols-[minmax(0,1fr)_300px]">
-        <div className="rise-card p-6">
+      {/* Main grid: lesson hero + stat cards */}
+      <div className="mb-6 grid gap-4 xl:grid-cols-[minmax(0,1fr)_280px]">
+
+        {/* Current lesson card */}
+        <div className="glass-card-solid p-5">
           <div className="mb-4 flex flex-wrap items-center gap-2">
-            <span className="rounded-[999px] bg-[#f3e8ff] px-3 py-1 text-[11px] font-black uppercase tracking-[0.14em] text-[#8f2eff]">
+            <span className="rise-chip">
               {hasStartedLesson ? 'Continue lesson' : 'Start here'}
             </span>
             {recommendedTopic ? (
-              <span className="rounded-[999px] bg-[#faf7ff] px-3 py-1 text-[11px] font-black uppercase tracking-[0.14em] text-[#8f2eff]">
-                {recommendedTopic}
-              </span>
+              <span className="rise-chip">{recommendedTopic}</span>
             ) : null}
           </div>
 
           {currentLesson ? (
             <Link href={`/lessons/${currentLesson.lesson.id}`} className="block">
-              <div className="relative overflow-hidden rounded-[1.1rem] border border-[#ece2fb] bg-white p-5">
+              <div className="relative overflow-hidden rounded-xl border border-primary-200/30 bg-white/60">
                 {hasStartedLesson ? (
                   <>
-                    <div className="pointer-events-none select-none blur-[3px]">
+                    <div className="pointer-events-none select-none blur-[3px] p-5">
                       <LessonPreview lesson={currentLesson} />
                     </div>
-                    <div className="absolute inset-x-0 bottom-0 bg-[linear-gradient(180deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.94)_38%,rgba(255,255,255,1)_100%)] p-5 pt-14">
+                    <div className="absolute inset-x-0 bottom-0 p-5 pt-14"
+                      style={{ background: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.95) 40%, rgba(255,255,255,1) 100%)' }}
+                    >
                       <div className="rise-btn-primary text-sm">Continue lesson</div>
                     </div>
                   </>
                 ) : (
-                  <>
+                  <div className="p-5">
                     <LessonPreview lesson={currentLesson} />
                     <div className="mt-5 rise-btn-primary text-sm">Start lesson</div>
-                  </>
+                  </div>
                 )}
               </div>
             </Link>
           ) : (
             <Link href="/subjects" className="block">
-              <div className="rounded-[1.1rem] border border-dashed border-[#caaef2] bg-white px-5 py-8 text-center">
-                <p className="text-xs font-black uppercase tracking-[0.18em] text-[#8d88a7]">No lesson queued</p>
-                <h2 className="mt-2 text-[2rem] font-black leading-none text-[#1d1830]">Pick a maths topic</h2>
-                <div className="mt-5 inline-flex rounded-[0.95rem] bg-[#1f1737] px-5 py-3 text-sm font-black text-white">
+              <div className="rounded-xl border border-dashed border-primary-300/50 bg-primary-50/50 px-5 py-10 text-center transition-all hover:bg-primary-50">
+                <p className="rise-overline text-[10px] mb-2">No lesson queued</p>
+                <h2 className="text-3xl font-extrabold tracking-tight text-secondary-900">Pick a maths topic</h2>
+                <div className="mt-5 inline-flex rise-btn-primary w-auto px-6 py-3 text-sm">
                   Open maths
                 </div>
               </div>
@@ -221,47 +227,51 @@ export default async function HomePage() {
           )}
         </div>
 
+        {/* Stat cards column */}
         <div className="flex flex-col gap-3">
           <Link href="/progress?focus=streak" className="block">
-            <div className="rise-card rise-card-interactive p-5">
-              <p className="text-xs font-black uppercase tracking-[0.18em] text-[#a7a0bd]">Daily streak</p>
-              <p className="mt-3 text-[2.4rem] font-black leading-none text-[#1f1833]">🔥 {streak}</p>
-              <p className="mt-2 text-sm font-medium text-[#6f6a84]">Open full progress.</p>
+            <div className="glass-card-solid rise-card-interactive p-5">
+              <p className="rise-overline text-[10px] mb-3">Daily streak</p>
+              <p className="text-5xl font-extrabold leading-none text-secondary-900">🔥 {streak}</p>
+              <p className="mt-2 text-sm text-secondary-400">Open full progress.</p>
             </div>
           </Link>
 
           <Link href="/progress?focus=xp" className="block">
-            <div className="rise-card rise-card-interactive p-5">
-              <p className="text-xs font-black uppercase tracking-[0.18em] text-[#a7a0bd]">XP total</p>
-              <p className="mt-3 text-[2.4rem] font-black leading-none text-[#1f1833]">⚡ {xp.toLocaleString()}</p>
-              <p className="mt-2 text-sm font-medium text-[#6f6a84]">See the full breakdown.</p>
+            <div className="glass-card-solid rise-card-interactive p-5">
+              <p className="rise-overline text-[10px] mb-3">XP total</p>
+              <p className="text-5xl font-extrabold leading-none text-secondary-900">⚡ {xp.toLocaleString()}</p>
+              <p className="mt-2 text-sm text-secondary-400">See the full breakdown.</p>
             </div>
           </Link>
 
           <Link href="/subjects" className="block">
-            <div className="rise-card rise-card-interactive bg-[linear-gradient(180deg,#1d1830_0%,#100d1d_100%)] p-5 text-white">
-              <p className="text-xs font-black uppercase tracking-[0.18em] text-white/45">Choose yourself</p>
-              <p className="mt-3 text-[2rem] font-black leading-none">Pick a different topic.</p>
-              <p className="mt-2 text-sm font-medium text-white/70">Browse maths any time.</p>
+            <div className="rise-card-interactive p-5 rounded-2xl border border-primary-200/40 transition-all duration-200 hover:-translate-y-0.5"
+              style={{ background: 'linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%)' }}
+            >
+              <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/60 mb-3">Choose yourself</p>
+              <p className="text-2xl font-extrabold leading-tight tracking-tight text-white">Pick a different topic.</p>
+              <p className="mt-2 text-sm text-white/70">Browse maths any time.</p>
             </div>
           </Link>
         </div>
       </div>
 
+      {/* Maths topics section */}
       <section>
-        <div className="mb-3 flex items-center justify-between">
-          <h2 className="text-[2rem] font-black leading-none text-[#1f1c35]">Maths topics</h2>
-          <Link href="/subjects" className="text-sm font-black text-[#8f2eff]">
-            Open maths
+        <div className="mb-4 flex items-center justify-between">
+          <h2 className="text-2xl font-extrabold tracking-tight text-secondary-900">Maths topics</h2>
+          <Link href="/subjects" className="text-sm font-semibold text-primary-600 hover:text-primary-700 transition-colors">
+            Open maths →
           </Link>
         </div>
 
         <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
           {topicHighlights.map((topic) => (
             <Link key={topic.label} href="/subjects">
-              <div className="rise-card rise-card-interactive h-full p-5">
-                <p className="text-[1.5rem] font-black leading-none text-[#201c37]">{topic.label}</p>
-                <p className="mt-2 text-sm font-medium text-[#7f7b93]">{topic.summary}</p>
+              <div className="glass-card rise-card-interactive h-full p-5">
+                <p className="text-xl font-bold leading-tight text-secondary-900">{topic.label}</p>
+                <p className="mt-2 text-sm text-secondary-400">{topic.summary}</p>
               </div>
             </Link>
           ))}
@@ -282,7 +292,7 @@ function LessonPreview({ lesson }: { lesson: CurrentLesson }) {
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap items-center gap-2">
-        <span className="rounded-[999px] bg-[#f5ecff] px-3 py-1 text-[11px] font-black uppercase tracking-[0.14em] text-[#a03af8]">
+        <span className="rise-chip">
           {lesson.lesson.topic?.subject?.name ?? 'Maths'} · {lesson.lesson.topic?.name}
         </span>
         <DifficultyBadge
@@ -292,17 +302,19 @@ function LessonPreview({ lesson }: { lesson: CurrentLesson }) {
       </div>
 
       <div>
-        <h3 className="text-[2rem] font-black leading-[0.95] text-[#1c1833]">{lesson.lesson.title}</h3>
-        <p className="mt-2 text-sm font-medium text-[#6f6a84]">
+        <h3 className="text-3xl font-extrabold leading-tight tracking-tight text-secondary-900">
+          {lesson.lesson.title}
+        </h3>
+        <p className="mt-1 text-sm text-secondary-400">
           {lesson.lesson.type === 'learn' ? 'Learn' : 'Practise'} · +50 XP on completion
         </p>
       </div>
 
       <div className="space-y-2">
         {summary.map((point, index) => (
-          <div key={index} className="flex items-start gap-3 rounded-[0.95rem] bg-[#faf7ff] px-3 py-3">
-            <span className="mt-0.5 text-sm font-black text-[#8b35ef]">•</span>
-            <p className="text-sm font-semibold text-[#3d3657]">{point}</p>
+          <div key={index} className="flex items-start gap-3 rounded-xl bg-primary-50/60 px-3 py-2.5 border border-primary-200/20">
+            <span className="mt-0.5 text-sm font-semibold text-primary-600">•</span>
+            <p className="text-sm text-secondary-700">{point}</p>
           </div>
         ))}
       </div>
