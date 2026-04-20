@@ -17,19 +17,19 @@
   ],
   "explanation": {
     "body": "This lesson develops the key process for percentages. Work through each stage in order, show clear line-by-line working, and check whether your final answer is sensible in context.",
-    "formula": "percentage change = (change/original) × 100%",
+    "formula": "percentage = (part/whole) × 100%",
     "key_terms": [
       {
-        "term": "Percentage",
-        "definition": "A value out of 100."
+        "term": "Method",
+        "definition": "The step-by-step routine used in percentages."
       },
       {
-        "term": "Multiplier",
-        "definition": "A factor used for percentage change."
+        "term": "Accuracy",
+        "definition": "Checking each stage to reduce avoidable errors."
       },
       {
-        "term": "Original value",
-        "definition": "The starting amount."
+        "term": "Reasonableness",
+        "definition": "A quick check that the answer makes mathematical sense."
       }
     ]
   },
@@ -38,37 +38,37 @@
     "data": {
       "steps": [
         {
-          "label": "Question",
-          "working": "Find 15% of 80"
+          "label": "10%",
+          "working": "8"
         },
         {
-          "label": "Convert",
-          "working": "15% = 0.15"
+          "label": "5%",
+          "working": "4"
         },
         {
-          "label": "Multiply",
-          "working": "0.15×80=12"
-        },
-        {
-          "label": "Answer",
-          "working": "12"
+          "label": "15%",
+          "working": "8 + 4 = 12"
         }
       ]
     }
   },
   "worked_example": {
-    "question": "A £50 item is reduced by 20%. Find the sale price.",
+    "question": "Find 15% of 80",
     "steps": [
       {
-        "label": "Reduction",
-        "working": "20% of 50 = 10"
+        "label": "10%",
+        "working": "8"
       },
       {
-        "label": "Subtract",
-        "working": "50 - 10 = 40"
+        "label": "5%",
+        "working": "4"
+      },
+      {
+        "label": "15%",
+        "working": "8 + 4 = 12"
       }
     ],
-    "answer": "£40"
+    "answer": "12"
   },
   "summary": [
     "Identify the key rule before calculating.",

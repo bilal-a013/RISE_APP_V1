@@ -20,16 +20,16 @@
     "formula": "a × 10^n where 1 ≤ a < 10",
     "key_terms": [
       {
-        "term": "Coefficient",
-        "definition": "The number a in standard form."
+        "term": "Method",
+        "definition": "The step-by-step routine used in standard form."
       },
       {
-        "term": "Power of ten",
-        "definition": "The exponent n in standard form."
+        "term": "Accuracy",
+        "definition": "Checking each stage to reduce avoidable errors."
       },
       {
-        "term": "Integer exponent",
-        "definition": "A whole-number exponent."
+        "term": "Reasonableness",
+        "definition": "A quick check that the answer makes mathematical sense."
       }
     ]
   },
@@ -38,41 +38,37 @@
     "data": {
       "steps": [
         {
-          "label": "Number",
-          "working": "4,700,000"
-        },
-        {
           "label": "Move decimal",
           "working": "4.7"
         },
         {
-          "label": "Count moves",
-          "working": "6 places"
+          "label": "Count places",
+          "working": "6 places left"
         },
         {
-          "label": "Standard form",
+          "label": "Write with power",
           "working": "4.7 × 10⁶"
         }
       ]
     }
   },
   "worked_example": {
-    "question": "Write 0.00052 in standard form",
+    "question": "Write 4,700,000 in standard form",
     "steps": [
       {
         "label": "Move decimal",
-        "working": "5.2"
+        "working": "4.7"
       },
       {
         "label": "Count places",
-        "working": "4 places to the right"
+        "working": "6 places left"
       },
       {
-        "label": "Exponent",
-        "working": "5.2 × 10^-4"
+        "label": "Write with power",
+        "working": "4.7 × 10⁶"
       }
     ],
-    "answer": "5.2 × 10^-4"
+    "answer": "4.7 × 10⁶"
   },
   "summary": [
     "Identify the key rule before calculating.",

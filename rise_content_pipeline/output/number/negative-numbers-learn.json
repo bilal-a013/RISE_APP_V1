@@ -17,19 +17,19 @@
   ],
   "explanation": {
     "body": "This lesson develops the key process for negative numbers. Work through each stage in order, show clear line-by-line working, and check whether your final answer is sensible in context.",
-    "formula": "+ × + = +, - × - = +, + × - = -, - × + = -",
+    "formula": "Same signs add, different signs subtract",
     "key_terms": [
       {
-        "term": "Integer",
-        "definition": "A whole number that may be positive, zero, or negative."
+        "term": "Method",
+        "definition": "The step-by-step routine used in negative numbers."
       },
       {
-        "term": "Sign rule",
-        "definition": "A rule for signs in multiplication and division."
+        "term": "Accuracy",
+        "definition": "Checking each stage to reduce avoidable errors."
       },
       {
-        "term": "Difference",
-        "definition": "The result of subtraction."
+        "term": "Reasonableness",
+        "definition": "A quick check that the answer makes mathematical sense."
       }
     ]
   },
@@ -38,37 +38,37 @@
     "data": {
       "steps": [
         {
-          "label": "Expression",
-          "working": "-4 + 9 - 6"
+          "label": "Compare magnitudes",
+          "working": "12 is larger"
         },
         {
-          "label": "First step",
-          "working": "-4 + 9 = 5"
+          "label": "Subtract",
+          "working": "12 - 7 = 5"
         },
         {
-          "label": "Second step",
-          "working": "5 - 6 = -1"
-        },
-        {
-          "label": "Answer",
-          "working": "-1"
+          "label": "Use larger sign",
+          "working": "+"
         }
       ]
     }
   },
   "worked_example": {
-    "question": "Calculate (-3) × 5 + 8",
+    "question": "Calculate -7 + 12",
     "steps": [
       {
-        "label": "Multiplication",
-        "working": "(-3) × 5 = -15"
+        "label": "Compare magnitudes",
+        "working": "12 is larger"
       },
       {
-        "label": "Addition",
-        "working": "-15 + 8 = -7"
+        "label": "Subtract",
+        "working": "12 - 7 = 5"
+      },
+      {
+        "label": "Use larger sign",
+        "working": "+"
       }
     ],
-    "answer": "-7"
+    "answer": "5"
   },
   "summary": [
     "Identify the key rule before calculating.",

@@ -12,7 +12,7 @@
       },
       {
         "label": "Count places",
-        "working": "4 places to the right"
+        "working": "4 places right"
       },
       {
         "label": "Exponent",
@@ -25,9 +25,9 @@
     {
       "number": 1,
       "difficulty": "easy",
-      "question": "Write 8,900,000 in standard form",
+      "question": "Write 8,900,000 in standard form.",
       "marks": 1,
-      "hint": "Move decimal after first non-zero digit.",
+      "hint": "Place decimal after first non-zero digit.",
       "solution": {
         "steps": [
           "8.9 × 10⁶"
@@ -38,7 +38,7 @@
     {
       "number": 2,
       "difficulty": "easy",
-      "question": "Write 6.4 × 10^-3 as an ordinary decimal",
+      "question": "Write 6.4 × 10^-3 as an ordinary decimal.",
       "marks": 1,
       "hint": "Move decimal left 3 places.",
       "solution": {
@@ -51,14 +51,14 @@
     {
       "number": 3,
       "difficulty": "medium",
-      "question": "Calculate (2 × 10⁴) × (3 × 10²)",
+      "question": "Calculate (2 × 10⁴) × (3 × 10²).",
       "marks": 2,
-      "hint": "Multiply coefficients, add powers.",
+      "hint": "Multiply coefficients and add powers.",
       "solution": {
         "steps": [
-          "2 × 3 = 6",
-          "10^(4+2) = 10⁶",
-          "Answer = 6 × 10⁶"
+          "2×3=6",
+          "10^(4+2)=10⁶",
+          "6×10⁶"
         ],
         "final_answer": "6 × 10⁶"
       }
@@ -66,14 +66,14 @@
     {
       "number": 4,
       "difficulty": "medium",
-      "question": "Calculate (9 × 10⁷) ÷ (3 × 10²)",
+      "question": "Calculate (9 × 10⁷) ÷ (3 × 10²).",
       "marks": 2,
-      "hint": "Divide coefficients, subtract powers.",
+      "hint": "Divide coefficients and subtract powers.",
       "solution": {
         "steps": [
-          "9 ÷ 3 = 3",
-          "10^(7-2) = 10⁵",
-          "Answer = 3 × 10⁵"
+          "9÷3=3",
+          "10^(7-2)=10⁵",
+          "3×10⁵"
         ],
         "final_answer": "3 × 10⁵"
       }
@@ -81,12 +81,12 @@
     {
       "number": 5,
       "difficulty": "hard",
-      "question": "Write 0.00000091 in standard form",
+      "question": "The distance to a star is 0.00000091 light years in a model. Write in standard form.",
       "marks": 3,
-      "hint": "Coefficient must be between 1 and 10.",
+      "hint": "Need coefficient between 1 and 10.",
       "solution": {
         "steps": [
-          "0.00000091 = 9.1 × 10^-7"
+          "9.1 × 10^-7"
         ],
         "final_answer": "9.1 × 10^-7"
       }
@@ -94,21 +94,21 @@
   ],
   "common_mistakes": [
     {
-      "mistake": "Using a coefficient outside the range 1 to less than 10.",
-      "correction": "Rewrite so coefficient is at least 1 and less than 10."
+      "mistake": "Skipping key steps in method.",
+      "correction": "Write each stage clearly before moving on."
     },
     {
-      "mistake": "Using a positive exponent for numbers less than 1.",
-      "correction": "Numbers below 1 must have negative powers of 10."
+      "mistake": "Using incorrect notation or order of operations.",
+      "correction": "Apply the topic rule first, then simplify carefully."
     },
     {
-      "mistake": "Counting decimal shifts incorrectly.",
-      "correction": "Count each place moved carefully to set the exponent."
+      "mistake": "Not checking if the final answer is reasonable.",
+      "correction": "Do a quick estimate or inverse check at the end."
     }
   ],
   "summary": [
-    "Write numbers as a × 10^n with 1 ≤ a < 10.",
-    "Positive exponent for large numbers, negative for small numbers.",
-    "Decimal-shift count gives the exponent size."
+    "Use the correct topic rule first.",
+    "Keep working clear and ordered.",
+    "Check signs, units, and rounding where relevant."
   ]
 }

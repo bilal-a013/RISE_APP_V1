@@ -4,108 +4,106 @@
   "lesson_type": "practise",
   "orientation": "Practise decimals using the same structure from the learn lesson.",
   "worked_example": {
-    "question": "Calculate 2.4 × 0.3",
+    "question": "Calculate 6.2 - 1.37",
     "steps": [
       {
-        "label": "Ignore decimals",
-        "working": "24×3=72"
+        "label": "Write as 6.20 - 1.37",
+        "working": ""
       },
       {
-        "label": "Place decimals",
-        "working": "Two decimal places total -> 0.72"
+        "label": "Subtract",
+        "working": "4.83"
       }
     ],
-    "answer": "0.72"
+    "answer": "4.83"
   },
   "questions": [
     {
       "number": 1,
       "difficulty": "easy",
-      "question": "Round 4.673 to 1 decimal place",
+      "question": "Calculate 0.7 + 2.58",
       "marks": 1,
-      "hint": "Check the hundredths digit.",
+      "hint": "Line up decimal points.",
       "solution": {
         "steps": [
-          "Hundredths digit is 7 so round tenths up",
-          "Answer = 4.7"
+          "0.70 + 2.58 = 3.28"
         ],
-        "final_answer": "4.7"
+        "final_answer": "3.28"
       }
     },
     {
       "number": 2,
       "difficulty": "easy",
-      "question": "Calculate 0.9 + 1.25",
+      "question": "Calculate 9.4 - 3.86",
       "marks": 1,
-      "hint": "Align decimal points.",
+      "hint": "Write 9.4 as 9.40 first.",
       "solution": {
         "steps": [
-          "0.90 + 1.25 = 2.15"
+          "9.40 - 3.86 = 5.54"
         ],
-        "final_answer": "2.15"
+        "final_answer": "5.54"
       }
     },
     {
       "number": 3,
       "difficulty": "medium",
-      "question": "Calculate 7.2 × 0.04",
+      "question": "Calculate 2.4 × 0.3",
       "marks": 2,
-      "hint": "Multiply as whole numbers then place decimal.",
+      "hint": "Multiply as integers then place decimal.",
       "solution": {
         "steps": [
-          "72 × 4 = 288",
-          "Total decimal places = 3",
-          "Answer = 0.288"
+          "24 × 3 = 72",
+          "Two decimal places total",
+          "0.72"
         ],
-        "final_answer": "0.288"
+        "final_answer": "0.72"
       }
     },
     {
       "number": 4,
       "difficulty": "medium",
-      "question": "Calculate 3.6 ÷ 0.6",
+      "question": "Calculate 8.4 ÷ 0.2",
       "marks": 2,
-      "hint": "Scale both numbers by 10 first.",
+      "hint": "Multiply both numbers by 10.",
       "solution": {
         "steps": [
-          "3.6 ÷ 0.6 = 36 ÷ 6",
-          "= 6"
+          "84 ÷ 2 = 42"
         ],
-        "final_answer": "6"
+        "final_answer": "42"
       }
     },
     {
       "number": 5,
       "difficulty": "hard",
-      "question": "A bottle holds 1.75 L. How much do 12 bottles hold?",
+      "question": "A shop reduces £15.99 by £2.75 then adds £1.20 delivery. Find final cost.",
       "marks": 3,
-      "hint": "Multiply 1.75 by 12.",
+      "hint": "Do subtraction then addition carefully.",
       "solution": {
         "steps": [
-          "1.75 × 12 = 1.75×10 + 1.75×2",
-          "= 17.5 + 3.5 = 21"
+          "15.99 - 2.75 = 13.24",
+          "13.24 + 1.20 = 14.44"
         ],
-        "final_answer": "21 L"
+        "final_answer": "£14.44"
       }
     }
   ],
   "common_mistakes": [
     {
-      "mistake": "Misaligning decimal points in addition/subtraction.",
-      "correction": "Write numbers in columns with decimal points directly aligned."
+      "mistake": "Skipping key steps in method.",
+      "correction": "Write each stage clearly before moving on."
     },
     {
-      "mistake": "Placing the decimal point incorrectly after multiplication.",
-      "correction": "Count total decimal places in the factors before placing the decimal."
+      "mistake": "Using incorrect notation or order of operations.",
+      "correction": "Apply the topic rule first, then simplify carefully."
     },
     {
-      "mistake": "Dividing decimals without scaling.",
-      "correction": "Multiply both numbers by the same power of 10 first."
+      "mistake": "Not checking if the final answer is reasonable.",
+      "correction": "Do a quick estimate or inverse check at the end."
     }
   ],
   "summary": [
-    "Align decimal points for + and -.",
-    "Track decimal places in multiplication.",
-    "Scale numbers equally for decimal division."
+    "Use the correct topic rule first.",
+    "Keep working clear and ordered.",
+    "Check signs, units, and rounding where relevant."
   ]
 }

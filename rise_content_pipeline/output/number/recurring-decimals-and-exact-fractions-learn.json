@@ -17,19 +17,19 @@
   ],
   "explanation": {
     "body": "This lesson develops the key process for recurring decimals and exact fractions. Work through each stage in order, show clear line-by-line working, and check whether your final answer is sensible in context.",
-    "formula": "if x = 0.333..., then 10x - x = 3",
+    "formula": "0.̅a or 0.̅ab can be converted using algebraic subtraction",
     "key_terms": [
       {
-        "term": "Recurring decimal",
-        "definition": "A decimal with repeating digits."
+        "term": "Method",
+        "definition": "The step-by-step routine used in recurring decimals and exact fractions."
       },
       {
-        "term": "Exact fraction",
-        "definition": "A non-rounded fraction equivalent."
+        "term": "Accuracy",
+        "definition": "Checking each stage to reduce avoidable errors."
       },
       {
-        "term": "Repeating block",
-        "definition": "The repeated digit sequence."
+        "term": "Reasonableness",
+        "definition": "A quick check that the answer makes mathematical sense."
       }
     ]
   },
@@ -38,41 +38,37 @@
     "data": {
       "steps": [
         {
-          "label": "Let",
-          "working": "x=0.333..."
+          "label": "Let x",
+          "working": "x = 0.333..."
         },
         {
-          "label": "Multiply",
-          "working": "10x=3.333..."
+          "label": "Multiply by 10",
+          "working": "10x = 3.333..."
         },
         {
           "label": "Subtract",
-          "working": "9x=3"
-        },
-        {
-          "label": "Solve",
-          "working": "x=1/3"
+          "working": "9x = 3, so x = 1/3"
         }
       ]
     }
   },
   "worked_example": {
-    "question": "Convert 0.777... to a fraction",
+    "question": "Convert 0.̅3 to a fraction",
     "steps": [
       {
-        "label": "x=0.777...",
-        "working": "10x=7.777..."
+        "label": "Let x",
+        "working": "x = 0.333..."
+      },
+      {
+        "label": "Multiply by 10",
+        "working": "10x = 3.333..."
       },
       {
         "label": "Subtract",
-        "working": "9x=7"
-      },
-      {
-        "label": "Solve",
-        "working": "x=7/9"
+        "working": "9x = 3, so x = 1/3"
       }
     ],
-    "answer": "7/9"
+    "answer": "1/3"
   },
   "summary": [
     "Identify the key rule before calculating.",

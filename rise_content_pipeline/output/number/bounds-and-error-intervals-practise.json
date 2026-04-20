@@ -4,106 +4,108 @@
   "lesson_type": "practise",
   "orientation": "Practise bounds and error intervals using the same structure from the learn lesson.",
   "worked_example": {
-    "question": "A mass is 3.2 kg correct to nearest 0.1 kg. Write the interval.",
+    "question": "A mass is 3.2 kg correct to 1 decimal place. State the bounds.",
     "steps": [
       {
         "label": "Half unit",
         "working": "0.05"
       },
       {
-        "label": "Lower and upper",
-        "working": "3.15 and 3.25"
+        "label": "Bounds",
+        "working": "3.15 ≤ mass < 3.25"
       }
     ],
-    "answer": "3.15 ≤ m < 3.25"
+    "answer": "3.15 ≤ mass < 3.25"
   },
   "questions": [
     {
       "number": 1,
       "difficulty": "easy",
-      "question": "A length is 7 cm to nearest cm. Give bounds.",
+      "question": "A value is 50 cm correct to nearest cm. Give bounds.",
       "marks": 1,
-      "hint": "Use half of 1 cm.",
+      "hint": "Use ±0.5 around 50.",
       "solution": {
         "steps": [
-          "Lower = 6.5, upper = 7.5",
-          "6.5 ≤ L < 7.5"
+          "Lower = 49.5",
+          "Upper = 50.5"
         ],
-        "final_answer": "6.5 ≤ L < 7.5"
+        "final_answer": "49.5 ≤ value < 50.5"
       }
     },
     {
       "number": 2,
       "difficulty": "easy",
-      "question": "A value is 2.4 to nearest 0.1. Give bounds.",
+      "question": "A time is 12.4 s correct to 1 dp. Give bounds.",
       "marks": 1,
-      "hint": "Use half of 0.1.",
+      "hint": "Use ±0.05 around 12.4.",
       "solution": {
         "steps": [
-          "Lower = 2.35, upper = 2.45",
-          "2.35 ≤ x < 2.45"
+          "Lower = 12.35",
+          "Upper = 12.45"
         ],
-        "final_answer": "2.35 ≤ x < 2.45"
+        "final_answer": "12.35 ≤ time < 12.45"
       }
     },
     {
       "number": 3,
       "difficulty": "medium",
-      "question": "A mass is 18.2 g to nearest 0.1 g. Find the upper bound.",
+      "question": "A side is 8 cm correct to nearest cm. What is the maximum possible side?",
       "marks": 2,
-      "hint": "Add 0.05.",
+      "hint": "Upper bound is excluded endpoint.",
       "solution": {
         "steps": [
-          "Upper bound = 18.25"
+          "Bounds are 7.5 ≤ side < 8.5",
+          "Maximum possible is just below 8.5"
         ],
-        "final_answer": "18.25"
+        "final_answer": "Maximum possible value is just under 8.5 cm"
       }
     },
     {
       "number": 4,
       "difficulty": "medium",
-      "question": "A time is 52 s to nearest second. Find the lower bound.",
+      "question": "A speed is 24 m/s correct to nearest m/s. What is the minimum possible speed?",
       "marks": 2,
-      "hint": "Subtract 0.5.",
+      "hint": "Use lower bound.",
       "solution": {
         "steps": [
-          "Lower bound = 51.5"
+          "Lower bound = 23.5"
         ],
-        "final_answer": "51.5"
+        "final_answer": "23.5 m/s"
       }
     },
     {
       "number": 5,
       "difficulty": "hard",
-      "question": "A rectangle has length 8.4 cm and width 3.1 cm, both to nearest 0.1 cm. Find the upper bound for area.",
+      "question": "A rectangle has length 10 cm and width 6 cm, both correct to nearest cm. Find upper bound for area.",
       "marks": 3,
-      "hint": "Use upper bound for each dimension.",
+      "hint": "Use upper bounds for both dimensions.",
       "solution": {
         "steps": [
-          "Upper length = 8.45 and upper width = 3.15",
-          "Upper area = 8.45 × 3.15 = 26.6175"
+          "Length upper bound = 10.5",
+          "Width upper bound = 6.5",
+          "Area upper bound = 10.5 × 6.5 = 68.25"
         ],
-        "final_answer": "26.6175 cm²"
+        "final_answer": "68.25 cm²"
       }
     }
   ],
   "common_mistakes": [
     {
-      "mistake": "Using the full rounding unit instead of half.",
-      "correction": "Bounds are half a rounding unit either side of the rounded value."
+      "mistake": "Skipping key steps in method.",
+      "correction": "Write each stage clearly before moving on."
     },
     {
-      "mistake": "Including the upper bound with ≤.",
-      "correction": "Upper bound is excluded, so use < on the upper inequality."
+      "mistake": "Using incorrect notation or order of operations.",
+      "correction": "Apply the topic rule first, then simplify carefully."
     },
     {
-      "mistake": "Adding instead of subtracting for lower bound.",
-      "correction": "Lower bound is found by subtracting half the unit."
+      "mistake": "Not checking if the final answer is reasonable.",
+      "correction": "Do a quick estimate or inverse check at the end."
     }
   ],
   "summary": [
-    "Find half of the rounding unit.",
-    "Lower bound is inclusive and upper bound is exclusive.",
-    "Write intervals using correct inequality symbols."
+    "Use the correct topic rule first.",
+    "Keep working clear and ordered.",
+    "Check signs, units, and rounding where relevant."
   ]
 }

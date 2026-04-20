@@ -5,7 +5,7 @@
   "intro": {
     "topic_name": "Prime Factorisation, HCF and LCM",
     "what_you_will_learn": [
-      "Core methods for prime factorisation, HCF and LCM",
+      "Core methods for prime factorisation, hcf and lcm",
       "How to apply the method in exam-style calculations",
       "How to avoid common procedural mistakes"
     ]
@@ -16,20 +16,20 @@
     "This skill supports connected topics later in the course."
   ],
   "explanation": {
-    "body": "This lesson develops the key process for prime factorisation, HCF and LCM. Work through each stage in order, show clear line-by-line working, and check whether your final answer is sensible in context.",
-    "formula": "HCF uses lowest shared powers; LCM uses highest powers",
+    "body": "This lesson develops the key process for prime factorisation, hcf and lcm. Work through each stage in order, show clear line-by-line working, and check whether your final answer is sensible in context.",
+    "formula": "HCF uses lowest powers, LCM uses highest powers",
     "key_terms": [
       {
-        "term": "Prime factorisation",
-        "definition": "Writing a number as a product of primes."
+        "term": "Method",
+        "definition": "The step-by-step routine used in prime factorisation, hcf and lcm."
       },
       {
-        "term": "HCF",
-        "definition": "Highest common factor."
+        "term": "Accuracy",
+        "definition": "Checking each stage to reduce avoidable errors."
       },
       {
-        "term": "LCM",
-        "definition": "Lowest common multiple."
+        "term": "Reasonableness",
+        "definition": "A quick check that the answer makes mathematical sense."
       }
     ]
   },
@@ -38,30 +38,26 @@
     "data": {
       "steps": [
         {
-          "label": "Numbers",
-          "working": "24 and 36"
-        },
-        {
-          "label": "Prime forms",
-          "working": "24=2³×3, 36=2²×3²"
+          "label": "Prime factors",
+          "working": "12=2²×3, 18=2×3²"
         },
         {
           "label": "HCF",
-          "working": "2²×3 = 12"
+          "working": "2×3=6"
         },
         {
           "label": "LCM",
-          "working": "2³×3² = 72"
+          "working": "2²×3²=36"
         }
       ]
     }
   },
   "worked_example": {
-    "question": "Find HCF and LCM of 18 and 30",
+    "question": "Find HCF and LCM of 12 and 18 by prime factors",
     "steps": [
       {
         "label": "Prime factors",
-        "working": "18=2×3², 30=2×3×5"
+        "working": "12=2²×3, 18=2×3²"
       },
       {
         "label": "HCF",
@@ -69,10 +65,10 @@
       },
       {
         "label": "LCM",
-        "working": "2×3²×5=90"
+        "working": "2²×3²=36"
       }
     ],
-    "answer": "HCF = 6, LCM = 90"
+    "answer": "HCF = 6, LCM = 36"
   },
   "summary": [
     "Identify the key rule before calculating.",
@@ -81,7 +77,7 @@
     "Sense-check the final result."
   ],
   "scaffolding": {
-    "simplified_explanation": "Think of prime factorisation, HCF and LCM as a fixed routine: identify, apply, then check.",
+    "simplified_explanation": "Think of prime factorisation, hcf and lcm as a fixed routine: identify, apply, then check.",
     "extra_hints": [
       "Underline the operation or value you need to handle first.",
       "Rewrite each step on a fresh line to reduce slips."

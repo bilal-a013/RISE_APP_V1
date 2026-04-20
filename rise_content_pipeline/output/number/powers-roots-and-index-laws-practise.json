@@ -4,29 +4,29 @@
   "lesson_type": "practise",
   "orientation": "Practise powers, roots and index laws using the same structure from the learn lesson.",
   "worked_example": {
-    "question": "Simplify 3⁵ ÷ 3²",
+    "question": "Simplify y⁷ ÷ y²",
     "steps": [
       {
-        "label": "Subtract indices",
-        "working": "3^(5-2)=3³"
+        "label": "Same base rule",
+        "working": "Subtract powers: 7 - 2"
       },
       {
-        "label": "Evaluate",
-        "working": "3³=27"
+        "label": "Result",
+        "working": "y⁵"
       }
     ],
-    "answer": "27"
+    "answer": "y⁵"
   },
   "questions": [
     {
       "number": 1,
       "difficulty": "easy",
-      "question": "Evaluate 4²",
+      "question": "Calculate 2⁴.",
       "marks": 1,
-      "hint": "Square the number.",
+      "hint": "Multiply 2 by itself four times.",
       "solution": {
         "steps": [
-          "4 × 4 = 16"
+          "16"
         ],
         "final_answer": "16"
       }
@@ -34,12 +34,12 @@
     {
       "number": 2,
       "difficulty": "easy",
-      "question": "Evaluate √81",
+      "question": "Find √81.",
       "marks": 1,
-      "hint": "Find number whose square is 81.",
+      "hint": "Number that squares to 81.",
       "solution": {
         "steps": [
-          "9² = 81, so √81 = 9"
+          "9"
         ],
         "final_answer": "9"
       }
@@ -47,62 +47,63 @@
     {
       "number": 3,
       "difficulty": "medium",
-      "question": "Simplify 7⁶ ÷ 7⁴",
+      "question": "Simplify a³ × a⁴.",
       "marks": 2,
-      "hint": "Subtract indices with same base.",
+      "hint": "Add indices.",
       "solution": {
         "steps": [
-          "7^(6-4) = 7²",
-          "= 49"
+          "a⁷"
         ],
-        "final_answer": "49"
+        "final_answer": "a⁷"
       }
     },
     {
       "number": 4,
       "difficulty": "medium",
-      "question": "Simplify (2³)⁴",
+      "question": "Simplify b⁶ ÷ b².",
       "marks": 2,
-      "hint": "Multiply indices.",
+      "hint": "Subtract indices.",
       "solution": {
         "steps": [
-          "2^(3×4) = 2¹²"
+          "b⁴"
         ],
-        "final_answer": "2¹²"
+        "final_answer": "b⁴"
       }
     },
     {
       "number": 5,
       "difficulty": "hard",
-      "question": "Evaluate 3⁴ × 3² ÷ 3³",
+      "question": "Simplify (3x²y)².",
       "marks": 3,
-      "hint": "Combine index laws in one expression.",
+      "hint": "Square coefficient and each variable power.",
       "solution": {
         "steps": [
-          "3^(4+2-3) = 3³",
-          "3³ = 27"
+          "3²=9",
+          "(x²)²=x⁴",
+          "(y)²=y²",
+          "9x⁴y²"
         ],
-        "final_answer": "27"
+        "final_answer": "9x⁴y²"
       }
     }
   ],
   "common_mistakes": [
     {
-      "mistake": "Applying index laws to different bases.",
-      "correction": "Only combine indices when bases are the same."
+      "mistake": "Skipping key steps in method.",
+      "correction": "Write each stage clearly before moving on."
     },
     {
-      "mistake": "Adding indices when dividing powers.",
-      "correction": "Division of powers with same base means subtract indices."
+      "mistake": "Using incorrect notation or order of operations.",
+      "correction": "Apply the topic rule first, then simplify carefully."
     },
     {
-      "mistake": "Confusing roots and powers.",
-      "correction": "Roots are inverse operations of powers."
+      "mistake": "Not checking if the final answer is reasonable.",
+      "correction": "Do a quick estimate or inverse check at the end."
     }
   ],
   "summary": [
-    "Match bases before using index laws.",
-    "Multiply powers: add indices; divide powers: subtract indices.",
-    "Roots undo powers."
+    "Use the correct topic rule first.",
+    "Keep working clear and ordered.",
+    "Check signs, units, and rounding where relevant."
   ]
 }

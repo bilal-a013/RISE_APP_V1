@@ -17,19 +17,19 @@
   ],
   "explanation": {
     "body": "This lesson develops the key process for fractions. Work through each stage in order, show clear line-by-line working, and check whether your final answer is sensible in context.",
-    "formula": "a/b ÷ c/d = a/b × d/c",
+    "formula": "a/b ± c/d = (ad ± bc)/bd",
     "key_terms": [
       {
-        "term": "Equivalent fractions",
-        "definition": "Fractions that have the same value."
+        "term": "Method",
+        "definition": "The step-by-step routine used in fractions."
       },
       {
-        "term": "Reciprocal",
-        "definition": "The flipped fraction used in division."
+        "term": "Accuracy",
+        "definition": "Checking each stage to reduce avoidable errors."
       },
       {
-        "term": "Improper fraction",
-        "definition": "A fraction with numerator at least denominator."
+        "term": "Reasonableness",
+        "definition": "A quick check that the answer makes mathematical sense."
       }
     ]
   },
@@ -38,37 +38,37 @@
     "data": {
       "steps": [
         {
-          "label": "Expression",
-          "working": "2/3 + 1/6"
+          "label": "Common denominator",
+          "working": "12"
         },
         {
-          "label": "Common denominator",
-          "working": "2/3 = 4/6"
+          "label": "Convert",
+          "working": "1/4=3/12, 1/6=2/12"
         },
         {
           "label": "Add",
-          "working": "4/6 + 1/6 = 5/6"
-        },
-        {
-          "label": "Answer",
-          "working": "5/6"
+          "working": "5/12"
         }
       ]
     }
   },
   "worked_example": {
-    "question": "Calculate 3/4 × 8/9",
+    "question": "Add 1/4 + 1/6",
     "steps": [
       {
-        "label": "Multiply",
-        "working": "(3×8)/(4×9)=24/36"
+        "label": "Common denominator",
+        "working": "12"
       },
       {
-        "label": "Simplify",
-        "working": "24/36 = 2/3"
+        "label": "Convert",
+        "working": "1/4=3/12, 1/6=2/12"
+      },
+      {
+        "label": "Add",
+        "working": "5/12"
       }
     ],
-    "answer": "2/3"
+    "answer": "5/12"
   },
   "summary": [
     "Identify the key rule before calculating.",

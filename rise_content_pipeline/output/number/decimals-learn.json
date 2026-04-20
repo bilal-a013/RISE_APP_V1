@@ -17,19 +17,19 @@
   ],
   "explanation": {
     "body": "This lesson develops the key process for decimals. Work through each stage in order, show clear line-by-line working, and check whether your final answer is sensible in context.",
-    "formula": "0.1 = 1/10, 0.01 = 1/100",
+    "formula": "Place value aligns decimal operations",
     "key_terms": [
       {
-        "term": "Tenths",
-        "definition": "First place after the decimal point."
+        "term": "Method",
+        "definition": "The step-by-step routine used in decimals."
       },
       {
-        "term": "Hundredths",
-        "definition": "Second place after the decimal point."
+        "term": "Accuracy",
+        "definition": "Checking each stage to reduce avoidable errors."
       },
       {
-        "term": "Place value",
-        "definition": "The value of digits by position."
+        "term": "Reasonableness",
+        "definition": "A quick check that the answer makes mathematical sense."
       }
     ]
   },
@@ -38,37 +38,29 @@
     "data": {
       "steps": [
         {
-          "label": "Calculation",
-          "working": "3.45 + 0.8"
+          "label": "Align decimals",
+          "working": "3.75 + 0.48"
         },
         {
-          "label": "Align",
-          "working": "3.45 + 0.80"
-        },
-        {
-          "label": "Add",
-          "working": "4.25"
-        },
-        {
-          "label": "Answer",
-          "working": "4.25"
+          "label": "Add columns",
+          "working": "4.23"
         }
       ]
     }
   },
   "worked_example": {
-    "question": "Calculate 2.4 × 0.3",
+    "question": "Calculate 3.75 + 0.48",
     "steps": [
       {
-        "label": "Ignore decimals",
-        "working": "24×3=72"
+        "label": "Align decimals",
+        "working": "3.75 + 0.48"
       },
       {
-        "label": "Place decimals",
-        "working": "Two decimal places total -> 0.72"
+        "label": "Add columns",
+        "working": "4.23"
       }
     ],
-    "answer": "0.72"
+    "answer": "4.23"
   },
   "summary": [
     "Identify the key rule before calculating.",

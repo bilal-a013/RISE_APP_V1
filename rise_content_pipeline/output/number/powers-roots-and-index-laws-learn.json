@@ -17,19 +17,19 @@
   ],
   "explanation": {
     "body": "This lesson develops the key process for powers, roots and index laws. Work through each stage in order, show clear line-by-line working, and check whether your final answer is sensible in context.",
-    "formula": "a^m × a^n = a^(m+n),  a^m ÷ a^n = a^(m-n)",
+    "formula": "a^m × a^n = a^(m+n), a^m ÷ a^n = a^(m-n)",
     "key_terms": [
       {
-        "term": "Base",
-        "definition": "The repeated number in a power."
+        "term": "Method",
+        "definition": "The step-by-step routine used in powers, roots and index laws."
       },
       {
-        "term": "Index",
-        "definition": "The small raised exponent."
+        "term": "Accuracy",
+        "definition": "Checking each stage to reduce avoidable errors."
       },
       {
-        "term": "Root",
-        "definition": "Inverse operation of powers."
+        "term": "Reasonableness",
+        "definition": "A quick check that the answer makes mathematical sense."
       }
     ]
   },
@@ -38,37 +38,29 @@
     "data": {
       "steps": [
         {
-          "label": "Expression",
-          "working": "2³ × 2⁴"
+          "label": "Same base rule",
+          "working": "Add powers: 3 + 5"
         },
         {
-          "label": "Add indices",
-          "working": "2^(3+4)"
-        },
-        {
-          "label": "Simplify",
-          "working": "2⁷"
-        },
-        {
-          "label": "Value",
-          "working": "128"
+          "label": "Result",
+          "working": "x⁸"
         }
       ]
     }
   },
   "worked_example": {
-    "question": "Simplify 3⁵ ÷ 3²",
+    "question": "Simplify x³ × x⁵",
     "steps": [
       {
-        "label": "Subtract indices",
-        "working": "3^(5-2)=3³"
+        "label": "Same base rule",
+        "working": "Add powers: 3 + 5"
       },
       {
-        "label": "Evaluate",
-        "working": "3³=27"
+        "label": "Result",
+        "working": "x⁸"
       }
     ],
-    "answer": "27"
+    "answer": "x⁸"
   },
   "summary": [
     "Identify the key rule before calculating.",
