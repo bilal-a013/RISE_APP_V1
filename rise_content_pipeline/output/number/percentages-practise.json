@@ -21,76 +21,69 @@
     {
       "number": 1,
       "difficulty": "easy",
-      "question": "[Percentages] Complete the straightforward calculation for this subtopic.",
+      "question": "Convert 0.62 to a percentage",
       "marks": 1,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Multiply by 100.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "0.62 × 100 = 62%"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "62%"
       }
     },
     {
       "number": 2,
       "difficulty": "easy",
-      "question": "[Percentages] Complete the second straightforward calculation.",
+      "question": "Find 10% of 460",
       "marks": 1,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "10% means divide by 10.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "460 ÷ 10 = 46"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "46"
       }
     },
     {
       "number": 3,
       "difficulty": "medium",
-      "question": "[Percentages] Apply the method in a two-step calculation.",
+      "question": "A value rises from 80 to 92. Find the percentage increase.",
       "marks": 2,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Use change/original × 100%.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "Change = 12",
+          "12/80 = 0.15",
+          "0.15 × 100 = 15%"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "15%"
       }
     },
     {
       "number": 4,
       "difficulty": "medium",
-      "question": "[Percentages] Apply the method with extra structure.",
+      "question": "Calculate 12.5% of 64",
       "marks": 2,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "12.5% is one eighth.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "64 ÷ 8 = 8"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "8"
       }
     },
     {
       "number": 5,
       "difficulty": "hard",
-      "question": "[Percentages] Solve the extended GCSE-style question.",
+      "question": "After a 25% increase, a price is £90. Find the original price.",
       "marks": 3,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Use reverse multiplier 1.25.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "Original × 1.25 = 90",
+          "Original = 90 ÷ 1.25 = 72"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "£72"
       }
     }
   ],

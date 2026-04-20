@@ -21,76 +21,71 @@
     {
       "number": 1,
       "difficulty": "easy",
-      "question": "[Fractions] Complete the straightforward calculation for this subtopic.",
+      "question": "Simplify 18/24",
       "marks": 1,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Divide numerator and denominator by the HCF.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "HCF of 18 and 24 is 6",
+          "18/24 = 3/4"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "3/4"
       }
     },
     {
       "number": 2,
       "difficulty": "easy",
-      "question": "[Fractions] Complete the second straightforward calculation.",
+      "question": "Calculate 3/5 + 1/5",
       "marks": 1,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Same denominator, so add numerators.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "(3 + 1)/5 = 4/5"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "4/5"
       }
     },
     {
       "number": 3,
       "difficulty": "medium",
-      "question": "[Fractions] Apply the method in a two-step calculation.",
+      "question": "Calculate 7/10 - 1/4",
       "marks": 2,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Use a common denominator of 20.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "7/10 = 14/20 and 1/4 = 5/20",
+          "14/20 - 5/20 = 9/20"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "9/20"
       }
     },
     {
       "number": 4,
       "difficulty": "medium",
-      "question": "[Fractions] Apply the method with extra structure.",
+      "question": "Calculate 2/3 × 9/10",
       "marks": 2,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Cancel factors before multiplying.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "Cancel 9 and 3 to get 3 and 1",
+          "(2 × 3)/(1 × 10) = 6/10 = 3/5"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "3/5"
       }
     },
     {
       "number": 5,
       "difficulty": "hard",
-      "question": "[Fractions] Solve the extended GCSE-style question.",
+      "question": "Calculate 1 1/2 ÷ 3/5",
       "marks": 3,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Convert mixed number first.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "1 1/2 = 3/2",
+          "3/2 ÷ 3/5 = 3/2 × 5/3",
+          "= 5/2"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "5/2"
       }
     }
   ],

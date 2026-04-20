@@ -21,76 +21,69 @@
     {
       "number": 1,
       "difficulty": "easy",
-      "question": "[Bounds and Error Intervals] Complete the straightforward calculation for this subtopic.",
+      "question": "A length is 7 cm to nearest cm. Give bounds.",
       "marks": 1,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Use half of 1 cm.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "Lower = 6.5, upper = 7.5",
+          "6.5 ≤ L < 7.5"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "6.5 ≤ L < 7.5"
       }
     },
     {
       "number": 2,
       "difficulty": "easy",
-      "question": "[Bounds and Error Intervals] Complete the second straightforward calculation.",
+      "question": "A value is 2.4 to nearest 0.1. Give bounds.",
       "marks": 1,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Use half of 0.1.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "Lower = 2.35, upper = 2.45",
+          "2.35 ≤ x < 2.45"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "2.35 ≤ x < 2.45"
       }
     },
     {
       "number": 3,
       "difficulty": "medium",
-      "question": "[Bounds and Error Intervals] Apply the method in a two-step calculation.",
+      "question": "A mass is 18.2 g to nearest 0.1 g. Find the upper bound.",
       "marks": 2,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Add 0.05.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "Upper bound = 18.25"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "18.25"
       }
     },
     {
       "number": 4,
       "difficulty": "medium",
-      "question": "[Bounds and Error Intervals] Apply the method with extra structure.",
+      "question": "A time is 52 s to nearest second. Find the lower bound.",
       "marks": 2,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Subtract 0.5.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "Lower bound = 51.5"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "51.5"
       }
     },
     {
       "number": 5,
       "difficulty": "hard",
-      "question": "[Bounds and Error Intervals] Solve the extended GCSE-style question.",
+      "question": "A rectangle has length 8.4 cm and width 3.1 cm, both to nearest 0.1 cm. Find the upper bound for area.",
       "marks": 3,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Use upper bound for each dimension.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "Upper length = 8.45 and upper width = 3.15",
+          "Upper area = 8.45 × 3.15 = 26.6175"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "26.6175 cm²"
       }
     }
   ],

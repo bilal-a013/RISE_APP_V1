@@ -25,76 +25,74 @@
     {
       "number": 1,
       "difficulty": "easy",
-      "question": "[Order of Operations (BIDMAS)] Complete the straightforward calculation for this subtopic.",
+      "question": "Calculate 7 + 2 × 5",
       "marks": 1,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Multiply before adding.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "2 × 5 = 10",
+          "7 + 10 = 17"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "17"
       }
     },
     {
       "number": 2,
       "difficulty": "easy",
-      "question": "[Order of Operations (BIDMAS)] Complete the second straightforward calculation.",
+      "question": "Calculate (4 + 6) ÷ 2",
       "marks": 1,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Work inside the brackets first.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "4 + 6 = 10",
+          "10 ÷ 2 = 5"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "5"
       }
     },
     {
       "number": 3,
       "difficulty": "medium",
-      "question": "[Order of Operations (BIDMAS)] Apply the method in a two-step calculation.",
+      "question": "Calculate 3 × (8 - 2) + 5",
       "marks": 2,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Brackets, then multiplication, then addition.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "8 - 2 = 6",
+          "3 × 6 = 18",
+          "18 + 5 = 23"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "23"
       }
     },
     {
       "number": 4,
       "difficulty": "medium",
-      "question": "[Order of Operations (BIDMAS)] Apply the method with extra structure.",
+      "question": "Calculate 20 ÷ (2 × 2) + 7",
       "marks": 2,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Complete bracket multiplication first.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "2 × 2 = 4",
+          "20 ÷ 4 = 5",
+          "5 + 7 = 12"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "12"
       }
     },
     {
       "number": 5,
       "difficulty": "hard",
-      "question": "[Order of Operations (BIDMAS)] Solve the extended GCSE-style question.",
+      "question": "Calculate (5² - 5) ÷ (2 × 5)",
       "marks": 3,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Resolve each bracket separately.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "5² = 25 so 25 - 5 = 20",
+          "2 × 5 = 10",
+          "20 ÷ 10 = 2"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "2"
       }
     }
   ],

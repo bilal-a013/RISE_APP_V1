@@ -21,76 +21,68 @@
     {
       "number": 1,
       "difficulty": "easy",
-      "question": "[Powers, Roots and Index Laws] Complete the straightforward calculation for this subtopic.",
+      "question": "Evaluate 4²",
       "marks": 1,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Square the number.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "4 × 4 = 16"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "16"
       }
     },
     {
       "number": 2,
       "difficulty": "easy",
-      "question": "[Powers, Roots and Index Laws] Complete the second straightforward calculation.",
+      "question": "Evaluate √81",
       "marks": 1,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Find number whose square is 81.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "9² = 81, so √81 = 9"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "9"
       }
     },
     {
       "number": 3,
       "difficulty": "medium",
-      "question": "[Powers, Roots and Index Laws] Apply the method in a two-step calculation.",
+      "question": "Simplify 7⁶ ÷ 7⁴",
       "marks": 2,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Subtract indices with same base.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "7^(6-4) = 7²",
+          "= 49"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "49"
       }
     },
     {
       "number": 4,
       "difficulty": "medium",
-      "question": "[Powers, Roots and Index Laws] Apply the method with extra structure.",
+      "question": "Simplify (2³)⁴",
       "marks": 2,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Multiply indices.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "2^(3×4) = 2¹²"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "2¹²"
       }
     },
     {
       "number": 5,
       "difficulty": "hard",
-      "question": "[Powers, Roots and Index Laws] Solve the extended GCSE-style question.",
+      "question": "Evaluate 3⁴ × 3² ÷ 3³",
       "marks": 3,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Combine index laws in one expression.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "3^(4+2-3) = 3³",
+          "3³ = 27"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "27"
       }
     }
   ],

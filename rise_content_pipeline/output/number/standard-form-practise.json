@@ -25,76 +25,70 @@
     {
       "number": 1,
       "difficulty": "easy",
-      "question": "[Standard Form] Complete the straightforward calculation for this subtopic.",
+      "question": "Write 8,900,000 in standard form",
       "marks": 1,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Move decimal after first non-zero digit.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "8.9 × 10⁶"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "8.9 × 10⁶"
       }
     },
     {
       "number": 2,
       "difficulty": "easy",
-      "question": "[Standard Form] Complete the second straightforward calculation.",
+      "question": "Write 6.4 × 10^-3 as an ordinary decimal",
       "marks": 1,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Move decimal left 3 places.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "0.0064"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "0.0064"
       }
     },
     {
       "number": 3,
       "difficulty": "medium",
-      "question": "[Standard Form] Apply the method in a two-step calculation.",
+      "question": "Calculate (2 × 10⁴) × (3 × 10²)",
       "marks": 2,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Multiply coefficients, add powers.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "2 × 3 = 6",
+          "10^(4+2) = 10⁶",
+          "Answer = 6 × 10⁶"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "6 × 10⁶"
       }
     },
     {
       "number": 4,
       "difficulty": "medium",
-      "question": "[Standard Form] Apply the method with extra structure.",
+      "question": "Calculate (9 × 10⁷) ÷ (3 × 10²)",
       "marks": 2,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Divide coefficients, subtract powers.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "9 ÷ 3 = 3",
+          "10^(7-2) = 10⁵",
+          "Answer = 3 × 10⁵"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "3 × 10⁵"
       }
     },
     {
       "number": 5,
       "difficulty": "hard",
-      "question": "[Standard Form] Solve the extended GCSE-style question.",
+      "question": "Write 0.00000091 in standard form",
       "marks": 3,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Coefficient must be between 1 and 10.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "0.00000091 = 9.1 × 10^-7"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "9.1 × 10^-7"
       }
     }
   ],
