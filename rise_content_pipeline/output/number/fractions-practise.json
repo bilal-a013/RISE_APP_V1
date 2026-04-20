@@ -91,21 +91,21 @@
   ],
   "common_mistakes": [
     {
-      "mistake": "Skipping method steps and jumping to an answer.",
-      "correction": "Write each operation line by line so the method is visible."
+      "mistake": "Adding fractions without a common denominator.",
+      "correction": "Find equivalent fractions with a shared denominator first."
     },
     {
-      "mistake": "Using the wrong rule for the operation shown.",
-      "correction": "Identify the operation type first, then apply the matching rule."
+      "mistake": "Not simplifying the final fraction.",
+      "correction": "Always reduce using common factors at the end."
     },
     {
-      "mistake": "Not checking if the result is sensible.",
-      "correction": "Estimate or reverse-check to confirm the final answer."
+      "mistake": "Dividing fractions without flipping the second fraction.",
+      "correction": "Division by a fraction means multiply by its reciprocal."
     }
   ],
   "summary": [
-    "Choose the correct rule first.",
-    "Apply it in clear, ordered steps.",
-    "Check the final answer before finishing."
+    "Use common denominators for add/subtract.",
+    "Multiply straight across then simplify.",
+    "Divide by multiplying by the reciprocal."
   ]
 }

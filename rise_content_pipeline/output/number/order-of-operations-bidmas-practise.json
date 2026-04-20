@@ -98,21 +98,21 @@
   ],
   "common_mistakes": [
     {
-      "mistake": "Skipping method steps and jumping to an answer.",
-      "correction": "Write each operation line by line so the method is visible."
+      "mistake": "Working strictly left to right regardless of operation type.",
+      "correction": "Apply BIDMAS first, then use left-to-right only within equal-priority operations."
     },
     {
-      "mistake": "Using the wrong rule for the operation shown.",
-      "correction": "Identify the operation type first, then apply the matching rule."
+      "mistake": "Ignoring calculations inside brackets.",
+      "correction": "Complete every bracketed section before operations outside brackets."
     },
     {
-      "mistake": "Not checking if the result is sensible.",
-      "correction": "Estimate or reverse-check to confirm the final answer."
+      "mistake": "Doing addition before multiplication.",
+      "correction": "Multiplication and division come before addition and subtraction."
     }
   ],
   "summary": [
-    "Choose the correct rule first.",
-    "Apply it in clear, ordered steps.",
-    "Check the final answer before finishing."
+    "Brackets then indices always come first.",
+    "Division/multiplication are done left to right.",
+    "Addition/subtraction are final and left to right."
   ]
 }

@@ -91,21 +91,21 @@
   ],
   "common_mistakes": [
     {
-      "mistake": "Skipping method steps and jumping to an answer.",
-      "correction": "Write each operation line by line so the method is visible."
+      "mistake": "Misaligning decimal points in addition/subtraction.",
+      "correction": "Write numbers in columns with decimal points directly aligned."
     },
     {
-      "mistake": "Using the wrong rule for the operation shown.",
-      "correction": "Identify the operation type first, then apply the matching rule."
+      "mistake": "Placing the decimal point incorrectly after multiplication.",
+      "correction": "Count total decimal places in the factors before placing the decimal."
     },
     {
-      "mistake": "Not checking if the result is sensible.",
-      "correction": "Estimate or reverse-check to confirm the final answer."
+      "mistake": "Dividing decimals without scaling.",
+      "correction": "Multiply both numbers by the same power of 10 first."
     }
   ],
   "summary": [
-    "Choose the correct rule first.",
-    "Apply it in clear, ordered steps.",
-    "Check the final answer before finishing."
+    "Align decimal points for + and -.",
+    "Track decimal places in multiplication.",
+    "Scale numbers equally for decimal division."
   ]
 }

@@ -87,21 +87,21 @@
   ],
   "common_mistakes": [
     {
-      "mistake": "Skipping method steps and jumping to an answer.",
-      "correction": "Write each operation line by line so the method is visible."
+      "mistake": "Forgetting that a negative times a negative is positive.",
+      "correction": "Use sign rules: same signs multiply/divide to positive."
     },
     {
-      "mistake": "Using the wrong rule for the operation shown.",
-      "correction": "Identify the operation type first, then apply the matching rule."
+      "mistake": "Treating subtraction of a negative as subtraction.",
+      "correction": "Subtracting a negative is the same as adding a positive."
     },
     {
-      "mistake": "Not checking if the result is sensible.",
-      "correction": "Estimate or reverse-check to confirm the final answer."
+      "mistake": "Ignoring BIDMAS when negatives appear.",
+      "correction": "Apply operation priority before combining signs."
     }
   ],
   "summary": [
-    "Choose the correct rule first.",
-    "Apply it in clear, ordered steps.",
-    "Check the final answer before finishing."
+    "Use sign rules consistently.",
+    "Subtraction of a negative becomes addition.",
+    "Apply BIDMAS even with signed numbers."
   ]
 }
