@@ -1,0 +1,87 @@
+{
+  "topic": "Number",
+  "subtopic": "Rounding and Estimation",
+  "lesson_type": "learn",
+  "intro": {
+    "topic_name": "Rounding and Estimation",
+    "what_you_will_learn": [
+      "Core methods for rounding and estimation",
+      "How to apply the method in exam-style calculations",
+      "How to avoid common procedural mistakes"
+    ]
+  },
+  "why_it_matters": [
+    "Rounding and Estimation appears frequently in Edexcel GCSE Maths assessment.",
+    "Fluent method use improves both calculator and non-calculator accuracy.",
+    "This skill supports connected topics later in the course."
+  ],
+  "explanation": {
+    "body": "This lesson develops the key process for rounding and estimation. Work through each stage in order, show clear line-by-line working, and check whether your final answer is sensible in context.",
+    "formula": "estimate ≈ rounded values used in the same operation",
+    "key_terms": [
+      {
+        "term": "Decimal place",
+        "definition": "A place after the decimal point."
+      },
+      {
+        "term": "Significant figures",
+        "definition": "Digits starting from the first non-zero digit."
+      },
+      {
+        "term": "Estimate",
+        "definition": "An approximate value."
+      }
+    ]
+  },
+  "visual": {
+    "type": "step_through",
+    "data": {
+      "steps": [
+        {
+          "label": "Number",
+          "working": "38.746"
+        },
+        {
+          "label": "2 dp",
+          "working": "38.75"
+        },
+        {
+          "label": "1 sf",
+          "working": "40"
+        },
+        {
+          "label": "Estimate use",
+          "working": "40 helps quick checking"
+        }
+      ]
+    }
+  },
+  "worked_example": {
+    "question": "Estimate 19.8 × 3.1",
+    "steps": [
+      {
+        "label": "Round",
+        "working": "19.8≈20 and 3.1≈3"
+      },
+      {
+        "label": "Multiply",
+        "working": "20×3=60"
+      }
+    ],
+    "answer": "Approximately 60"
+  },
+  "summary": [
+    "Identify the key rule before calculating.",
+    "Work methodically in clear steps.",
+    "Use the correct notation and units where needed.",
+    "Sense-check the final result."
+  ],
+  "scaffolding": {
+    "simplified_explanation": "Think of rounding and estimation as a fixed routine: identify, apply, then check.",
+    "extra_hints": [
+      "Underline the operation or value you need to handle first.",
+      "Rewrite each step on a fresh line to reduce slips."
+    ],
+    "extension_note": "Try creating your own harder examples and justify each line of reasoning."
+  }
+}

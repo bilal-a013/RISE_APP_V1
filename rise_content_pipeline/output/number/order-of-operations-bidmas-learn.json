@@ -1,0 +1,91 @@
+{
+  "topic": "Number",
+  "subtopic": "Order of Operations (BIDMAS)",
+  "lesson_type": "learn",
+  "intro": {
+    "topic_name": "Order of Operations (BIDMAS)",
+    "what_you_will_learn": [
+      "Core methods for order of operations (bidmas)",
+      "How to apply the method in exam-style calculations",
+      "How to avoid common procedural mistakes"
+    ]
+  },
+  "why_it_matters": [
+    "Order of Operations (BIDMAS) appears frequently in Edexcel GCSE Maths assessment.",
+    "Fluent method use improves both calculator and non-calculator accuracy.",
+    "This skill supports connected topics later in the course."
+  ],
+  "explanation": {
+    "body": "This lesson develops the key process for order of operations (bidmas). Work through each stage in order, show clear line-by-line working, and check whether your final answer is sensible in context.",
+    "formula": "B I D M A S",
+    "key_terms": [
+      {
+        "term": "Brackets",
+        "definition": "Complete operations inside brackets first."
+      },
+      {
+        "term": "Indices",
+        "definition": "Powers and roots are done after brackets."
+      },
+      {
+        "term": "Left to right",
+        "definition": "Equal-priority operations are solved from left to right."
+      }
+    ]
+  },
+  "visual": {
+    "type": "step_through",
+    "data": {
+      "steps": [
+        {
+          "label": "Original",
+          "working": "10 - 2² + (5 + 1)"
+        },
+        {
+          "label": "Brackets",
+          "working": "10 - 2² + 6"
+        },
+        {
+          "label": "Indices",
+          "working": "10 - 4 + 6"
+        },
+        {
+          "label": "Left to right",
+          "working": "12"
+        }
+      ]
+    }
+  },
+  "worked_example": {
+    "question": "Calculate 5 + 3 × (4 + 2)",
+    "steps": [
+      {
+        "label": "Brackets",
+        "working": "4 + 2 = 6"
+      },
+      {
+        "label": "Multiplication",
+        "working": "3 × 6 = 18"
+      },
+      {
+        "label": "Addition",
+        "working": "5 + 18 = 23"
+      }
+    ],
+    "answer": "23"
+  },
+  "summary": [
+    "Identify the key rule before calculating.",
+    "Work methodically in clear steps.",
+    "Use the correct notation and units where needed.",
+    "Sense-check the final result."
+  ],
+  "scaffolding": {
+    "simplified_explanation": "Think of order of operations (bidmas) as a fixed routine: identify, apply, then check.",
+    "extra_hints": [
+      "Underline the operation or value you need to handle first.",
+      "Rewrite each step on a fresh line to reduce slips."
+    ],
+    "extension_note": "Try creating your own harder examples and justify each line of reasoning."
+  }
+}

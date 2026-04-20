@@ -1,0 +1,91 @@
+{
+  "topic": "Number",
+  "subtopic": "Standard Form",
+  "lesson_type": "learn",
+  "intro": {
+    "topic_name": "Standard Form",
+    "what_you_will_learn": [
+      "Core methods for standard form",
+      "How to apply the method in exam-style calculations",
+      "How to avoid common procedural mistakes"
+    ]
+  },
+  "why_it_matters": [
+    "Standard Form appears frequently in Edexcel GCSE Maths assessment.",
+    "Fluent method use improves both calculator and non-calculator accuracy.",
+    "This skill supports connected topics later in the course."
+  ],
+  "explanation": {
+    "body": "This lesson develops the key process for standard form. Work through each stage in order, show clear line-by-line working, and check whether your final answer is sensible in context.",
+    "formula": "a × 10^n where 1 ≤ a < 10",
+    "key_terms": [
+      {
+        "term": "Coefficient",
+        "definition": "The number a in standard form."
+      },
+      {
+        "term": "Power of ten",
+        "definition": "The exponent n in standard form."
+      },
+      {
+        "term": "Integer exponent",
+        "definition": "A whole-number exponent."
+      }
+    ]
+  },
+  "visual": {
+    "type": "step_through",
+    "data": {
+      "steps": [
+        {
+          "label": "Number",
+          "working": "4,700,000"
+        },
+        {
+          "label": "Move decimal",
+          "working": "4.7"
+        },
+        {
+          "label": "Count moves",
+          "working": "6 places"
+        },
+        {
+          "label": "Standard form",
+          "working": "4.7 × 10⁶"
+        }
+      ]
+    }
+  },
+  "worked_example": {
+    "question": "Write 0.00052 in standard form",
+    "steps": [
+      {
+        "label": "Move decimal",
+        "working": "5.2"
+      },
+      {
+        "label": "Count places",
+        "working": "4 places to the right"
+      },
+      {
+        "label": "Exponent",
+        "working": "5.2 × 10^-4"
+      }
+    ],
+    "answer": "5.2 × 10^-4"
+  },
+  "summary": [
+    "Identify the key rule before calculating.",
+    "Work methodically in clear steps.",
+    "Use the correct notation and units where needed.",
+    "Sense-check the final result."
+  ],
+  "scaffolding": {
+    "simplified_explanation": "Think of standard form as a fixed routine: identify, apply, then check.",
+    "extra_hints": [
+      "Underline the operation or value you need to handle first.",
+      "Rewrite each step on a fresh line to reduce slips."
+    ],
+    "extension_note": "Try creating your own harder examples and justify each line of reasoning."
+  }
+}

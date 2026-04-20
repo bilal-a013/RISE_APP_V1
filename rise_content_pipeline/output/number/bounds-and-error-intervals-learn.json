@@ -1,0 +1,87 @@
+{
+  "topic": "Number",
+  "subtopic": "Bounds and Error Intervals",
+  "lesson_type": "learn",
+  "intro": {
+    "topic_name": "Bounds and Error Intervals",
+    "what_you_will_learn": [
+      "Core methods for bounds and error intervals",
+      "How to apply the method in exam-style calculations",
+      "How to avoid common procedural mistakes"
+    ]
+  },
+  "why_it_matters": [
+    "Bounds and Error Intervals appears frequently in Edexcel GCSE Maths assessment.",
+    "Fluent method use improves both calculator and non-calculator accuracy.",
+    "This skill supports connected topics later in the course."
+  ],
+  "explanation": {
+    "body": "This lesson develops the key process for bounds and error intervals. Work through each stage in order, show clear line-by-line working, and check whether your final answer is sensible in context.",
+    "formula": "a - u/2 ≤ x < a + u/2",
+    "key_terms": [
+      {
+        "term": "Lower bound",
+        "definition": "Smallest possible value."
+      },
+      {
+        "term": "Upper bound",
+        "definition": "Greatest possible value, not included."
+      },
+      {
+        "term": "Error interval",
+        "definition": "The full range of possible values."
+      }
+    ]
+  },
+  "visual": {
+    "type": "step_through",
+    "data": {
+      "steps": [
+        {
+          "label": "Rounded value",
+          "working": "12.4 cm (nearest 0.1)"
+        },
+        {
+          "label": "Half unit",
+          "working": "0.05"
+        },
+        {
+          "label": "Bounds",
+          "working": "12.35 and 12.45"
+        },
+        {
+          "label": "Interval",
+          "working": "12.35 ≤ L < 12.45"
+        }
+      ]
+    }
+  },
+  "worked_example": {
+    "question": "A mass is 3.2 kg correct to nearest 0.1 kg. Write the interval.",
+    "steps": [
+      {
+        "label": "Half unit",
+        "working": "0.05"
+      },
+      {
+        "label": "Lower and upper",
+        "working": "3.15 and 3.25"
+      }
+    ],
+    "answer": "3.15 ≤ m < 3.25"
+  },
+  "summary": [
+    "Identify the key rule before calculating.",
+    "Work methodically in clear steps.",
+    "Use the correct notation and units where needed.",
+    "Sense-check the final result."
+  ],
+  "scaffolding": {
+    "simplified_explanation": "Think of bounds and error intervals as a fixed routine: identify, apply, then check.",
+    "extra_hints": [
+      "Underline the operation or value you need to handle first.",
+      "Rewrite each step on a fresh line to reduce slips."
+    ],
+    "extension_note": "Try creating your own harder examples and justify each line of reasoning."
+  }
+}

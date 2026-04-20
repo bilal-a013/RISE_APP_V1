@@ -1,0 +1,87 @@
+{
+  "topic": "Number",
+  "subtopic": "Powers, Roots and Index Laws",
+  "lesson_type": "learn",
+  "intro": {
+    "topic_name": "Powers, Roots and Index Laws",
+    "what_you_will_learn": [
+      "Core methods for powers, roots and index laws",
+      "How to apply the method in exam-style calculations",
+      "How to avoid common procedural mistakes"
+    ]
+  },
+  "why_it_matters": [
+    "Powers, Roots and Index Laws appears frequently in Edexcel GCSE Maths assessment.",
+    "Fluent method use improves both calculator and non-calculator accuracy.",
+    "This skill supports connected topics later in the course."
+  ],
+  "explanation": {
+    "body": "This lesson develops the key process for powers, roots and index laws. Work through each stage in order, show clear line-by-line working, and check whether your final answer is sensible in context.",
+    "formula": "a^m × a^n = a^(m+n),  a^m ÷ a^n = a^(m-n)",
+    "key_terms": [
+      {
+        "term": "Base",
+        "definition": "The repeated number in a power."
+      },
+      {
+        "term": "Index",
+        "definition": "The small raised exponent."
+      },
+      {
+        "term": "Root",
+        "definition": "Inverse operation of powers."
+      }
+    ]
+  },
+  "visual": {
+    "type": "step_through",
+    "data": {
+      "steps": [
+        {
+          "label": "Expression",
+          "working": "2³ × 2⁴"
+        },
+        {
+          "label": "Add indices",
+          "working": "2^(3+4)"
+        },
+        {
+          "label": "Simplify",
+          "working": "2⁷"
+        },
+        {
+          "label": "Value",
+          "working": "128"
+        }
+      ]
+    }
+  },
+  "worked_example": {
+    "question": "Simplify 3⁵ ÷ 3²",
+    "steps": [
+      {
+        "label": "Subtract indices",
+        "working": "3^(5-2)=3³"
+      },
+      {
+        "label": "Evaluate",
+        "working": "3³=27"
+      }
+    ],
+    "answer": "27"
+  },
+  "summary": [
+    "Identify the key rule before calculating.",
+    "Work methodically in clear steps.",
+    "Use the correct notation and units where needed.",
+    "Sense-check the final result."
+  ],
+  "scaffolding": {
+    "simplified_explanation": "Think of powers, roots and index laws as a fixed routine: identify, apply, then check.",
+    "extra_hints": [
+      "Underline the operation or value you need to handle first.",
+      "Rewrite each step on a fresh line to reduce slips."
+    ],
+    "extension_note": "Try creating your own harder examples and justify each line of reasoning."
+  }
+}

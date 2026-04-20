@@ -1,0 +1,87 @@
+{
+  "topic": "Number",
+  "subtopic": "Factors, Multiples and Prime Numbers",
+  "lesson_type": "learn",
+  "intro": {
+    "topic_name": "Factors, Multiples and Prime Numbers",
+    "what_you_will_learn": [
+      "Core methods for factors, multiples and prime numbers",
+      "How to apply the method in exam-style calculations",
+      "How to avoid common procedural mistakes"
+    ]
+  },
+  "why_it_matters": [
+    "Factors, Multiples and Prime Numbers appears frequently in Edexcel GCSE Maths assessment.",
+    "Fluent method use improves both calculator and non-calculator accuracy.",
+    "This skill supports connected topics later in the course."
+  ],
+  "explanation": {
+    "body": "This lesson develops the key process for factors, multiples and prime numbers. Work through each stage in order, show clear line-by-line working, and check whether your final answer is sensible in context.",
+    "formula": "number = factor × factor",
+    "key_terms": [
+      {
+        "term": "Factor",
+        "definition": "A number that divides exactly into another number."
+      },
+      {
+        "term": "Multiple",
+        "definition": "A value produced by multiplying by whole numbers."
+      },
+      {
+        "term": "Prime",
+        "definition": "A number greater than 1 with exactly two factors."
+      }
+    ]
+  },
+  "visual": {
+    "type": "step_through",
+    "data": {
+      "steps": [
+        {
+          "label": "Number",
+          "working": "24"
+        },
+        {
+          "label": "Factors",
+          "working": "1,2,3,4,6,8,12,24"
+        },
+        {
+          "label": "Multiples of 6",
+          "working": "6,12,18,24"
+        },
+        {
+          "label": "Prime check",
+          "working": "24 is not prime"
+        }
+      ]
+    }
+  },
+  "worked_example": {
+    "question": "List all factors of 18",
+    "steps": [
+      {
+        "label": "Factor pairs",
+        "working": "1×18, 2×9, 3×6"
+      },
+      {
+        "label": "Factors",
+        "working": "1,2,3,6,9,18"
+      }
+    ],
+    "answer": "1, 2, 3, 6, 9, 18"
+  },
+  "summary": [
+    "Identify the key rule before calculating.",
+    "Work methodically in clear steps.",
+    "Use the correct notation and units where needed.",
+    "Sense-check the final result."
+  ],
+  "scaffolding": {
+    "simplified_explanation": "Think of factors, multiples and prime numbers as a fixed routine: identify, apply, then check.",
+    "extra_hints": [
+      "Underline the operation or value you need to handle first.",
+      "Rewrite each step on a fresh line to reduce slips."
+    ],
+    "extension_note": "Try creating your own harder examples and justify each line of reasoning."
+  }
+}

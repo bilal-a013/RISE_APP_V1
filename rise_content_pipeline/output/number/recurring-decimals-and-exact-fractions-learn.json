@@ -1,0 +1,91 @@
+{
+  "topic": "Number",
+  "subtopic": "Recurring Decimals and Exact Fractions",
+  "lesson_type": "learn",
+  "intro": {
+    "topic_name": "Recurring Decimals and Exact Fractions",
+    "what_you_will_learn": [
+      "Core methods for recurring decimals and exact fractions",
+      "How to apply the method in exam-style calculations",
+      "How to avoid common procedural mistakes"
+    ]
+  },
+  "why_it_matters": [
+    "Recurring Decimals and Exact Fractions appears frequently in Edexcel GCSE Maths assessment.",
+    "Fluent method use improves both calculator and non-calculator accuracy.",
+    "This skill supports connected topics later in the course."
+  ],
+  "explanation": {
+    "body": "This lesson develops the key process for recurring decimals and exact fractions. Work through each stage in order, show clear line-by-line working, and check whether your final answer is sensible in context.",
+    "formula": "if x = 0.333..., then 10x - x = 3",
+    "key_terms": [
+      {
+        "term": "Recurring decimal",
+        "definition": "A decimal with repeating digits."
+      },
+      {
+        "term": "Exact fraction",
+        "definition": "A non-rounded fraction equivalent."
+      },
+      {
+        "term": "Repeating block",
+        "definition": "The repeated digit sequence."
+      }
+    ]
+  },
+  "visual": {
+    "type": "step_through",
+    "data": {
+      "steps": [
+        {
+          "label": "Let",
+          "working": "x=0.333..."
+        },
+        {
+          "label": "Multiply",
+          "working": "10x=3.333..."
+        },
+        {
+          "label": "Subtract",
+          "working": "9x=3"
+        },
+        {
+          "label": "Solve",
+          "working": "x=1/3"
+        }
+      ]
+    }
+  },
+  "worked_example": {
+    "question": "Convert 0.777... to a fraction",
+    "steps": [
+      {
+        "label": "x=0.777...",
+        "working": "10x=7.777..."
+      },
+      {
+        "label": "Subtract",
+        "working": "9x=7"
+      },
+      {
+        "label": "Solve",
+        "working": "x=7/9"
+      }
+    ],
+    "answer": "7/9"
+  },
+  "summary": [
+    "Identify the key rule before calculating.",
+    "Work methodically in clear steps.",
+    "Use the correct notation and units where needed.",
+    "Sense-check the final result."
+  ],
+  "scaffolding": {
+    "simplified_explanation": "Think of recurring decimals and exact fractions as a fixed routine: identify, apply, then check.",
+    "extra_hints": [
+      "Underline the operation or value you need to handle first.",
+      "Rewrite each step on a fresh line to reduce slips."
+    ],
+    "extension_note": "Try creating your own harder examples and justify each line of reasoning."
+  }
+}
