@@ -1,0 +1,87 @@
+{
+  "topic": "Number",
+  "subtopic": "Decimals",
+  "lesson_type": "learn",
+  "intro": {
+    "topic_name": "Decimals",
+    "what_you_will_learn": [
+      "Core methods for decimals",
+      "How to apply the method in exam-style calculations",
+      "How to avoid common procedural mistakes"
+    ]
+  },
+  "why_it_matters": [
+    "Decimals appears frequently in Edexcel GCSE Maths assessment.",
+    "Fluent method use improves both calculator and non-calculator accuracy.",
+    "This skill supports connected topics later in the course."
+  ],
+  "explanation": {
+    "body": "This lesson develops the key process for decimals. Work through each stage in order, show clear line-by-line working, and check whether your final answer is sensible in context.",
+    "formula": "0.1 = 1/10, 0.01 = 1/100",
+    "key_terms": [
+      {
+        "term": "Tenths",
+        "definition": "First place after the decimal point."
+      },
+      {
+        "term": "Hundredths",
+        "definition": "Second place after the decimal point."
+      },
+      {
+        "term": "Place value",
+        "definition": "The value of digits by position."
+      }
+    ]
+  },
+  "visual": {
+    "type": "step_through",
+    "data": {
+      "steps": [
+        {
+          "label": "Calculation",
+          "working": "3.45 + 0.8"
+        },
+        {
+          "label": "Align",
+          "working": "3.45 + 0.80"
+        },
+        {
+          "label": "Add",
+          "working": "4.25"
+        },
+        {
+          "label": "Answer",
+          "working": "4.25"
+        }
+      ]
+    }
+  },
+  "worked_example": {
+    "question": "Calculate 2.4 × 0.3",
+    "steps": [
+      {
+        "label": "Ignore decimals",
+        "working": "24×3=72"
+      },
+      {
+        "label": "Place decimals",
+        "working": "Two decimal places total -> 0.72"
+      }
+    ],
+    "answer": "0.72"
+  },
+  "summary": [
+    "Identify the key rule before calculating.",
+    "Work methodically in clear steps.",
+    "Use the correct notation and units where needed.",
+    "Sense-check the final result."
+  ],
+  "scaffolding": {
+    "simplified_explanation": "Think of decimals as a fixed routine: identify, apply, then check.",
+    "extra_hints": [
+      "Underline the operation or value you need to handle first.",
+      "Rewrite each step on a fresh line to reduce slips."
+    ],
+    "extension_note": "Try creating your own harder examples and justify each line of reasoning."
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "topic": "Number",
+  "subtopic": "Percentages",
+  "lesson_type": "learn",
+  "intro": {
+    "topic_name": "Percentages",
+    "what_you_will_learn": [
+      "Core methods for percentages",
+      "How to apply the method in exam-style calculations",
+      "How to avoid common procedural mistakes"
+    ]
+  },
+  "why_it_matters": [
+    "Percentages appears frequently in Edexcel GCSE Maths assessment.",
+    "Fluent method use improves both calculator and non-calculator accuracy.",
+    "This skill supports connected topics later in the course."
+  ],
+  "explanation": {
+    "body": "This lesson develops the key process for percentages. Work through each stage in order, show clear line-by-line working, and check whether your final answer is sensible in context.",
+    "formula": "percentage change = (change/original) × 100%",
+    "key_terms": [
+      {
+        "term": "Percentage",
+        "definition": "A value out of 100."
+      },
+      {
+        "term": "Multiplier",
+        "definition": "A factor used for percentage change."
+      },
+      {
+        "term": "Original value",
+        "definition": "The starting amount."
+      }
+    ]
+  },
+  "visual": {
+    "type": "step_through",
+    "data": {
+      "steps": [
+        {
+          "label": "Question",
+          "working": "Find 15% of 80"
+        },
+        {
+          "label": "Convert",
+          "working": "15% = 0.15"
+        },
+        {
+          "label": "Multiply",
+          "working": "0.15×80=12"
+        },
+        {
+          "label": "Answer",
+          "working": "12"
+        }
+      ]
+    }
+  },
+  "worked_example": {
+    "question": "A £50 item is reduced by 20%. Find the sale price.",
+    "steps": [
+      {
+        "label": "Reduction",
+        "working": "20% of 50 = 10"
+      },
+      {
+        "label": "Subtract",
+        "working": "50 - 10 = 40"
+      }
+    ],
+    "answer": "£40"
+  },
+  "summary": [
+    "Identify the key rule before calculating.",
+    "Work methodically in clear steps.",
+    "Use the correct notation and units where needed.",
+    "Sense-check the final result."
+  ],
+  "scaffolding": {
+    "simplified_explanation": "Think of percentages as a fixed routine: identify, apply, then check.",
+    "extra_hints": [
+      "Underline the operation or value you need to handle first.",
+      "Rewrite each step on a fresh line to reduce slips."
+    ],
+    "extension_note": "Try creating your own harder examples and justify each line of reasoning."
+  }
+}

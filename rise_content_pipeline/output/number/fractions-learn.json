@@ -1,0 +1,87 @@
+{
+  "topic": "Number",
+  "subtopic": "Fractions",
+  "lesson_type": "learn",
+  "intro": {
+    "topic_name": "Fractions",
+    "what_you_will_learn": [
+      "Core methods for fractions",
+      "How to apply the method in exam-style calculations",
+      "How to avoid common procedural mistakes"
+    ]
+  },
+  "why_it_matters": [
+    "Fractions appears frequently in Edexcel GCSE Maths assessment.",
+    "Fluent method use improves both calculator and non-calculator accuracy.",
+    "This skill supports connected topics later in the course."
+  ],
+  "explanation": {
+    "body": "This lesson develops the key process for fractions. Work through each stage in order, show clear line-by-line working, and check whether your final answer is sensible in context.",
+    "formula": "a/b ÷ c/d = a/b × d/c",
+    "key_terms": [
+      {
+        "term": "Equivalent fractions",
+        "definition": "Fractions that have the same value."
+      },
+      {
+        "term": "Reciprocal",
+        "definition": "The flipped fraction used in division."
+      },
+      {
+        "term": "Improper fraction",
+        "definition": "A fraction with numerator at least denominator."
+      }
+    ]
+  },
+  "visual": {
+    "type": "step_through",
+    "data": {
+      "steps": [
+        {
+          "label": "Expression",
+          "working": "2/3 + 1/6"
+        },
+        {
+          "label": "Common denominator",
+          "working": "2/3 = 4/6"
+        },
+        {
+          "label": "Add",
+          "working": "4/6 + 1/6 = 5/6"
+        },
+        {
+          "label": "Answer",
+          "working": "5/6"
+        }
+      ]
+    }
+  },
+  "worked_example": {
+    "question": "Calculate 3/4 × 8/9",
+    "steps": [
+      {
+        "label": "Multiply",
+        "working": "(3×8)/(4×9)=24/36"
+      },
+      {
+        "label": "Simplify",
+        "working": "24/36 = 2/3"
+      }
+    ],
+    "answer": "2/3"
+  },
+  "summary": [
+    "Identify the key rule before calculating.",
+    "Work methodically in clear steps.",
+    "Use the correct notation and units where needed.",
+    "Sense-check the final result."
+  ],
+  "scaffolding": {
+    "simplified_explanation": "Think of fractions as a fixed routine: identify, apply, then check.",
+    "extra_hints": [
+      "Underline the operation or value you need to handle first.",
+      "Rewrite each step on a fresh line to reduce slips."
+    ],
+    "extension_note": "Try creating your own harder examples and justify each line of reasoning."
+  }
+}

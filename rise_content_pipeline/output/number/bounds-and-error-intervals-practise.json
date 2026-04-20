@@ -1,0 +1,116 @@
+{
+  "topic": "Number",
+  "subtopic": "Bounds and Error Intervals",
+  "lesson_type": "practise",
+  "orientation": "Practise bounds and error intervals using the same structure from the learn lesson.",
+  "worked_example": {
+    "question": "A mass is 3.2 kg correct to nearest 0.1 kg. Write the interval.",
+    "steps": [
+      {
+        "label": "Half unit",
+        "working": "0.05"
+      },
+      {
+        "label": "Lower and upper",
+        "working": "3.15 and 3.25"
+      }
+    ],
+    "answer": "3.15 ≤ m < 3.25"
+  },
+  "questions": [
+    {
+      "number": 1,
+      "difficulty": "easy",
+      "question": "[Bounds and Error Intervals] Complete the straightforward calculation for this subtopic.",
+      "marks": 1,
+      "hint": "Follow the lesson method step by step.",
+      "solution": {
+        "steps": [
+          "Identify the relevant rule from the lesson.",
+          "Apply the rule carefully to each part of the question.",
+          "Write the final result clearly."
+        ],
+        "final_answer": "See full worked steps above."
+      }
+    },
+    {
+      "number": 2,
+      "difficulty": "easy",
+      "question": "[Bounds and Error Intervals] Complete the second straightforward calculation.",
+      "marks": 1,
+      "hint": "Follow the lesson method step by step.",
+      "solution": {
+        "steps": [
+          "Identify the relevant rule from the lesson.",
+          "Apply the rule carefully to each part of the question.",
+          "Write the final result clearly."
+        ],
+        "final_answer": "See full worked steps above."
+      }
+    },
+    {
+      "number": 3,
+      "difficulty": "medium",
+      "question": "[Bounds and Error Intervals] Apply the method in a two-step calculation.",
+      "marks": 2,
+      "hint": "Follow the lesson method step by step.",
+      "solution": {
+        "steps": [
+          "Identify the relevant rule from the lesson.",
+          "Apply the rule carefully to each part of the question.",
+          "Write the final result clearly."
+        ],
+        "final_answer": "See full worked steps above."
+      }
+    },
+    {
+      "number": 4,
+      "difficulty": "medium",
+      "question": "[Bounds and Error Intervals] Apply the method with extra structure.",
+      "marks": 2,
+      "hint": "Follow the lesson method step by step.",
+      "solution": {
+        "steps": [
+          "Identify the relevant rule from the lesson.",
+          "Apply the rule carefully to each part of the question.",
+          "Write the final result clearly."
+        ],
+        "final_answer": "See full worked steps above."
+      }
+    },
+    {
+      "number": 5,
+      "difficulty": "hard",
+      "question": "[Bounds and Error Intervals] Solve the extended GCSE-style question.",
+      "marks": 3,
+      "hint": "Follow the lesson method step by step.",
+      "solution": {
+        "steps": [
+          "Identify the relevant rule from the lesson.",
+          "Apply the rule carefully to each part of the question.",
+          "Write the final result clearly."
+        ],
+        "final_answer": "See full worked steps above."
+      }
+    }
+  ],
+  "common_mistakes": [
+    {
+      "mistake": "Skipping method steps and jumping to an answer.",
+      "correction": "Write each operation line by line so the method is visible."
+    },
+    {
+      "mistake": "Using the wrong rule for the operation shown.",
+      "correction": "Identify the operation type first, then apply the matching rule."
+    },
+    {
+      "mistake": "Not checking if the result is sensible.",
+      "correction": "Estimate or reverse-check to confirm the final answer."
+    }
+  ],
+  "summary": [
+    "Choose the correct rule first.",
+    "Apply it in clear, ordered steps.",
+    "Check the final answer before finishing."
+  ]
+}
