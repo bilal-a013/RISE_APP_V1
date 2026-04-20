@@ -114,6 +114,49 @@ export interface LessonContent {
 // Support-level adaptation: difficulty level controls scaffolding intensity,
 // not which lesson the student is in or what the topic objective is.
 
+// ─── Lesson Visual (v2) ───────────────────────────────────────────────────────
+// Discriminated union describing the visual/interactive element shown inside
+// a Learn lesson. Each variant carries the minimum data its renderer needs.
+
+/** A step-by-step card the student walks through with Prev/Next. */
+export interface StepThroughVisual {
+  type: 'step_through'
+  data: {
+    steps: string[]
+  }
+}
+
+/** A slider for each variable that plugs into a live formula display. */
+export interface SliderFormulaVisual {
+  type: 'slider_formula'
+  data: {
+    /** Human-readable formula, e.g. "part / whole × 100". */
+    formula: string
+    variables: Array<{
+      name: string
+      label: string
+      min: number
+      max: number
+      default: number
+    }>
+  }
+}
+
+/** A prebuilt maths diagram (number line, fraction bar, angle, etc.). */
+export interface VisualDiagramVisual {
+  type: 'visual_diagram'
+  data: {
+    /** Identifier for which diagram to render, e.g. 'number_line'. */
+    diagram_type: string
+    config: Record<string, unknown>
+  }
+}
+
+export type LessonVisual =
+  | StepThroughVisual
+  | SliderFormulaVisual
+  | VisualDiagramVisual
+
 /** Scaffolding shown conditionally based on support level. */
 export interface LearnScaffolding {
   /** Shown only to 'building' students — simpler explanation of the concept. */
@@ -172,12 +215,7 @@ export interface LearnLessonContent {
     formula?: string
     key_terms?: Array<{ term: string; definition: string }>
   }
-  visual: {
-    interactive_type: InteractiveType
-    config: Record<string, unknown>
-    /** Instructional caption shown below the visual. */
-    caption?: string
-  }
+  visual: LessonVisual
   worked_example: {
     question: string
     steps: string[]

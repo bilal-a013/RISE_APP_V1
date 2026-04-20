@@ -16,6 +16,7 @@ import {
   isPractiseContent,
 } from '@rise/shared'
 import GenericMCQ from '@/components/artifacts/GenericMCQ'
+import LessonVisual from '@/components/lesson/LessonVisual'
 import { completelesson } from '@/app/actions/lesson'
 
 interface LessonContentProps {
@@ -218,26 +219,13 @@ function LearnRenderer({
         </div>
       )}
 
-      {/* 4. Visual / Interactive */}
+      {/* 4. Visual */}
       <div className="glass-card-solid border border-amber-200/50 bg-amber-50/30 p-5">
         <div className="mb-3 flex items-center gap-2">
           <span className="text-base">🖥️</span>
-          <h3 className="text-base font-bold text-secondary-900">Check your understanding</h3>
+          <h3 className="text-base font-bold text-secondary-900">See it in action</h3>
         </div>
-        {visual.interactive_type === 'generic_mcq' ? (
-          <GenericMCQ
-            config={visual.config as { question?: string; options: { label: string; correct: boolean }[] }}
-            onCorrect={() => {}}
-          />
-        ) : (
-          <div className="rounded-xl border border-primary-100 bg-white/60 p-4 text-center">
-            <p className="text-xs text-secondary-300">Interactive: {visual.interactive_type}</p>
-            <p className="text-xs text-secondary-300 mt-1">(Component coming soon)</p>
-          </div>
-        )}
-        {visual.caption && (
-          <p className="mt-3 text-xs text-secondary-400 italic">{visual.caption}</p>
-        )}
+        <LessonVisual visual={visual} />
       </div>
 
       {/* 5. Worked example */}

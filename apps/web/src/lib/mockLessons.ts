@@ -41,18 +41,15 @@ const linearEquationsLearn: LearnLessonContent = {
     ],
   },
   visual: {
-    interactive_type: 'generic_mcq',
-    config: {
-      question: 'Which first step correctly starts solving  4x − 3 = 13?',
-      options: [
-        { label: 'Divide both sides by 4', correct: false },
-        { label: 'Add 3 to both sides', correct: true },
-        { label: 'Subtract 13 from both sides', correct: false },
-        { label: 'Multiply both sides by 4', correct: false },
+    type: 'step_through',
+    data: {
+      steps: [
+        'Start with the equation: 4x − 3 = 13.',
+        'Undo the −3 first — add 3 to both sides: 4x = 16.',
+        'Undo the ×4 — divide both sides by 4: x = 4.',
+        'Check by substituting back: 4(4) − 3 = 13 ✓',
       ],
     },
-    caption:
-      'Always undo addition or subtraction before tackling the coefficient.',
   },
   worked_example: {
     question: 'Solve: 4x − 3 = 13',
@@ -260,18 +257,15 @@ const expandingBracketsLearn: LearnLessonContent = {
     ],
   },
   visual: {
-    interactive_type: 'generic_mcq',
-    config: {
-      question: 'What is the correct expansion of  5(2x − 3)?',
-      options: [
-        { label: '10x − 3', correct: false },
-        { label: '10x − 15', correct: true },
-        { label: '7x − 8', correct: false },
-        { label: '10x + 15', correct: false },
+    type: 'step_through',
+    data: {
+      steps: [
+        'Expression to expand: 5(2x − 3).',
+        'Multiply 5 by the first term: 5 × 2x = 10x.',
+        'Multiply 5 by the second term — keep the sign: 5 × (−3) = −15.',
+        'Combine the two results: 10x − 15.',
       ],
     },
-    caption:
-      'Multiply 5 by each term inside the bracket — including the sign.',
   },
   worked_example: {
     question: 'Expand and simplify: 3(2x + 4) + 2x',
