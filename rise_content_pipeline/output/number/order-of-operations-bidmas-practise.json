@@ -2,7 +2,7 @@
   "topic": "Number",
   "subtopic": "Order of Operations (BIDMAS)",
   "lesson_type": "practise",
-  "orientation": "Practise order of operations (bidmas) using the same structure from the learn lesson.",
+  "orientation": "Practise order of operations (BIDMAS) using the same structure from the learn lesson.",
   "worked_example": {
     "question": "Calculate 5 + 3 × (4 + 2)",
     "steps": [
