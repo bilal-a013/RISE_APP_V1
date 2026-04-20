@@ -95,21 +95,21 @@
   ],
   "common_mistakes": [
     {
-      "mistake": "Skipping method steps and jumping to an answer.",
-      "correction": "Write each operation line by line so the method is visible."
+      "mistake": "Using highest powers for HCF.",
+      "correction": "HCF uses common prime factors at the lowest powers."
     },
     {
-      "mistake": "Using the wrong rule for the operation shown.",
-      "correction": "Identify the operation type first, then apply the matching rule."
+      "mistake": "Missing a prime factor in LCM.",
+      "correction": "LCM must include all primes appearing in either number at highest powers."
     },
     {
-      "mistake": "Not checking if the result is sensible.",
-      "correction": "Estimate or reverse-check to confirm the final answer."
+      "mistake": "Stopping factor trees before reaching primes.",
+      "correction": "Continue factorising until every branch is prime."
     }
   ],
   "summary": [
-    "Choose the correct rule first.",
-    "Apply it in clear, ordered steps.",
-    "Check the final answer before finishing."
+    "Prime-factorise numbers first.",
+    "HCF uses shared lowest powers.",
+    "LCM uses all highest powers."
   ]
 }

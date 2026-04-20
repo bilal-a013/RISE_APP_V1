@@ -89,21 +89,21 @@
   ],
   "common_mistakes": [
     {
-      "mistake": "Skipping method steps and jumping to an answer.",
-      "correction": "Write each operation line by line so the method is visible."
+      "mistake": "Using the wrong base value for percentage change.",
+      "correction": "Percentage change is always based on the original value."
     },
     {
-      "mistake": "Using the wrong rule for the operation shown.",
-      "correction": "Identify the operation type first, then apply the matching rule."
+      "mistake": "Forgetting to convert a percentage before multiplying.",
+      "correction": "Convert percent to decimal or fraction first."
     },
     {
-      "mistake": "Not checking if the result is sensible.",
-      "correction": "Estimate or reverse-check to confirm the final answer."
+      "mistake": "Using subtraction for reverse percentages.",
+      "correction": "Reverse percentages require dividing by the multiplier."
     }
   ],
   "summary": [
-    "Choose the correct rule first.",
-    "Apply it in clear, ordered steps.",
-    "Check the final answer before finishing."
+    "Convert between percent, decimal, and fraction accurately.",
+    "Use change/original × 100% for percentage change.",
+    "Use multipliers for percentage increase/decrease and reverse questions."
   ]
 }

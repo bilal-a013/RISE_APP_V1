@@ -94,21 +94,21 @@
   ],
   "common_mistakes": [
     {
-      "mistake": "Skipping method steps and jumping to an answer.",
-      "correction": "Write each operation line by line so the method is visible."
+      "mistake": "Using a coefficient outside the range 1 to less than 10.",
+      "correction": "Rewrite so coefficient is at least 1 and less than 10."
     },
     {
-      "mistake": "Using the wrong rule for the operation shown.",
-      "correction": "Identify the operation type first, then apply the matching rule."
+      "mistake": "Using a positive exponent for numbers less than 1.",
+      "correction": "Numbers below 1 must have negative powers of 10."
     },
     {
-      "mistake": "Not checking if the result is sensible.",
-      "correction": "Estimate or reverse-check to confirm the final answer."
+      "mistake": "Counting decimal shifts incorrectly.",
+      "correction": "Count each place moved carefully to set the exponent."
     }
   ],
   "summary": [
-    "Choose the correct rule first.",
-    "Apply it in clear, ordered steps.",
-    "Check the final answer before finishing."
+    "Write numbers as a × 10^n with 1 ≤ a < 10.",
+    "Positive exponent for large numbers, negative for small numbers.",
+    "Decimal-shift count gives the exponent size."
   ]
 }

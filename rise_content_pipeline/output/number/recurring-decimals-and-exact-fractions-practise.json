@@ -101,21 +101,21 @@
   ],
   "common_mistakes": [
     {
-      "mistake": "Skipping method steps and jumping to an answer.",
-      "correction": "Write each operation line by line so the method is visible."
+      "mistake": "Using the wrong power of 10 for the recurring block length.",
+      "correction": "Use 10 for one recurring digit, 100 for two, and so on."
     },
     {
-      "mistake": "Using the wrong rule for the operation shown.",
-      "correction": "Identify the operation type first, then apply the matching rule."
+      "mistake": "Not aligning recurring parts before subtraction.",
+      "correction": "Write equations so recurring tails match before subtracting."
     },
     {
-      "mistake": "Not checking if the result is sensible.",
-      "correction": "Estimate or reverse-check to confirm the final answer."
+      "mistake": "Leaving fraction answers unsimplified.",
+      "correction": "Reduce the resulting fraction to lowest terms."
     }
   ],
   "summary": [
-    "Choose the correct rule first.",
-    "Apply it in clear, ordered steps.",
-    "Check the final answer before finishing."
+    "Set the recurring decimal equal to x.",
+    "Use powers of 10 to align repeating parts.",
+    "Subtract, solve for x, then simplify."
   ]
 }

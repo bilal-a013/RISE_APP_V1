@@ -88,21 +88,21 @@
   ],
   "common_mistakes": [
     {
-      "mistake": "Skipping method steps and jumping to an answer.",
-      "correction": "Write each operation line by line so the method is visible."
+      "mistake": "Applying index laws to different bases.",
+      "correction": "Only combine indices when bases are the same."
     },
     {
-      "mistake": "Using the wrong rule for the operation shown.",
-      "correction": "Identify the operation type first, then apply the matching rule."
+      "mistake": "Adding indices when dividing powers.",
+      "correction": "Division of powers with same base means subtract indices."
     },
     {
-      "mistake": "Not checking if the result is sensible.",
-      "correction": "Estimate or reverse-check to confirm the final answer."
+      "mistake": "Confusing roots and powers.",
+      "correction": "Roots are inverse operations of powers."
     }
   ],
   "summary": [
-    "Choose the correct rule first.",
-    "Apply it in clear, ordered steps.",
-    "Check the final answer before finishing."
+    "Match bases before using index laws.",
+    "Multiply powers: add indices; divide powers: subtract indices.",
+    "Roots undo powers."
   ]
 }

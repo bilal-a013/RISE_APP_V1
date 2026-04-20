@@ -89,21 +89,21 @@
   ],
   "common_mistakes": [
     {
-      "mistake": "Skipping method steps and jumping to an answer.",
-      "correction": "Write each operation line by line so the method is visible."
+      "mistake": "Using the full rounding unit instead of half.",
+      "correction": "Bounds are half a rounding unit either side of the rounded value."
     },
     {
-      "mistake": "Using the wrong rule for the operation shown.",
-      "correction": "Identify the operation type first, then apply the matching rule."
+      "mistake": "Including the upper bound with ≤.",
+      "correction": "Upper bound is excluded, so use < on the upper inequality."
     },
     {
-      "mistake": "Not checking if the result is sensible.",
-      "correction": "Estimate or reverse-check to confirm the final answer."
+      "mistake": "Adding instead of subtracting for lower bound.",
+      "correction": "Lower bound is found by subtracting half the unit."
     }
   ],
   "summary": [
-    "Choose the correct rule first.",
-    "Apply it in clear, ordered steps.",
-    "Check the final answer before finishing."
+    "Find half of the rounding unit.",
+    "Lower bound is inclusive and upper bound is exclusive.",
+    "Write intervals using correct inequality symbols."
   ]
 }
