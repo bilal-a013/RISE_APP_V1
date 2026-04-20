@@ -4,42 +4,42 @@
   "lesson_type": "practise",
   "orientation": "Practise negative numbers using the same structure from the learn lesson.",
   "worked_example": {
-    "question": "Calculate (-3) × 5 + 8",
+    "question": "Calculate -4 - 9",
     "steps": [
       {
-        "label": "Multiplication",
-        "working": "(-3) × 5 = -15"
+        "label": "Rewrite",
+        "working": "-4 + (-9)"
       },
       {
-        "label": "Addition",
-        "working": "-15 + 8 = -7"
+        "label": "Add negatives",
+        "working": "-13"
       }
     ],
-    "answer": "-7"
+    "answer": "-13"
   },
   "questions": [
     {
       "number": 1,
       "difficulty": "easy",
-      "question": "Calculate -9 + 5",
+      "question": "Calculate -3 + 8.",
       "marks": 1,
-      "hint": "Move 5 right from -9 on a number line.",
+      "hint": "Move 8 right from -3 on number line.",
       "solution": {
         "steps": [
-          "-9 + 5 = -4"
+          "5"
         ],
-        "final_answer": "-4"
+        "final_answer": "5"
       }
     },
     {
       "number": 2,
       "difficulty": "easy",
-      "question": "Calculate 7 - 12",
+      "question": "Calculate 6 - 11.",
       "marks": 1,
-      "hint": "Subtracting 12 moves left 12 places.",
+      "hint": "Subtracting larger gives negative.",
       "solution": {
         "steps": [
-          "7 - 12 = -5"
+          "-5"
         ],
         "final_answer": "-5"
       }
@@ -47,61 +47,62 @@
     {
       "number": 3,
       "difficulty": "medium",
-      "question": "Calculate (-4) × (-6)",
+      "question": "Calculate -7 - (-2).",
       "marks": 2,
-      "hint": "Same signs in multiplication give positive.",
+      "hint": "Subtracting negative means add positive.",
       "solution": {
         "steps": [
-          "(-4) × (-6) = 24"
+          "-7 + 2 = -5"
         ],
-        "final_answer": "24"
+        "final_answer": "-5"
       }
     },
     {
       "number": 4,
       "difficulty": "medium",
-      "question": "Calculate 18 ÷ (-3)",
+      "question": "Calculate (-4) × (-6).",
       "marks": 2,
-      "hint": "Different signs in division give negative.",
+      "hint": "Negative × negative = positive.",
       "solution": {
         "steps": [
-          "18 ÷ (-3) = -6"
+          "24"
         ],
-        "final_answer": "-6"
+        "final_answer": "24"
       }
     },
     {
       "number": 5,
       "difficulty": "hard",
-      "question": "Calculate -3 + 5 × (-4)",
+      "question": "Evaluate -3² + 5(-2).",
       "marks": 3,
-      "hint": "Use BIDMAS: multiply before adding.",
+      "hint": "Square before sign unless bracketed.",
       "solution": {
         "steps": [
-          "5 × (-4) = -20",
-          "-3 + (-20) = -23"
+          "-3² = -9",
+          "5(-2) = -10",
+          "-9 + -10 = -19"
         ],
-        "final_answer": "-23"
+        "final_answer": "-19"
       }
     }
   ],
   "common_mistakes": [
     {
-      "mistake": "Forgetting that a negative times a negative is positive.",
-      "correction": "Use sign rules: same signs multiply/divide to positive."
+      "mistake": "Skipping key steps in method.",
+      "correction": "Write each stage clearly before moving on."
     },
     {
-      "mistake": "Treating subtraction of a negative as subtraction.",
-      "correction": "Subtracting a negative is the same as adding a positive."
+      "mistake": "Using incorrect notation or order of operations.",
+      "correction": "Apply the topic rule first, then simplify carefully."
     },
     {
-      "mistake": "Ignoring BIDMAS when negatives appear.",
-      "correction": "Apply operation priority before combining signs."
+      "mistake": "Not checking if the final answer is reasonable.",
+      "correction": "Do a quick estimate or inverse check at the end."
     }
   ],
   "summary": [
-    "Use sign rules consistently.",
-    "Subtraction of a negative becomes addition.",
-    "Apply BIDMAS even with signed numbers."
+    "Use the correct topic rule first.",
+    "Keep working clear and ordered.",
+    "Check signs, units, and rounding where relevant."
   ]
 }

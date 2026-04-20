@@ -4,109 +4,107 @@
   "lesson_type": "practise",
   "orientation": "Practise factors, multiples and prime numbers using the same structure from the learn lesson.",
   "worked_example": {
-    "question": "List all factors of 18",
+    "question": "State whether 29 is prime",
     "steps": [
       {
-        "label": "Factor pairs",
-        "working": "1×18, 2×9, 3×6"
+        "label": "Test small primes",
+        "working": "Not divisible by 2,3,5"
       },
       {
-        "label": "Factors",
-        "working": "1,2,3,6,9,18"
+        "label": "Conclusion",
+        "working": "29 is prime"
       }
     ],
-    "answer": "1, 2, 3, 6, 9, 18"
+    "answer": "29 is prime"
   },
   "questions": [
     {
       "number": 1,
       "difficulty": "easy",
-      "question": "List all factors of 12",
+      "question": "Write the first five multiples of 7.",
       "marks": 1,
-      "hint": "Use factor pairs.",
+      "hint": "Start at 7 and add 7.",
       "solution": {
         "steps": [
-          "1×12, 2×6, 3×4",
-          "Factors: 1, 2, 3, 4, 6, 12"
+          "7, 14, 21, 28, 35"
         ],
-        "final_answer": "1, 2, 3, 4, 6, 12"
+        "final_answer": "7, 14, 21, 28, 35"
       }
     },
     {
       "number": 2,
       "difficulty": "easy",
-      "question": "Write the first four multiples of 9",
+      "question": "List all factors of 18.",
       "marks": 1,
-      "hint": "Multiply 9 by 1, 2, 3, 4.",
+      "hint": "Use factor pairs.",
       "solution": {
         "steps": [
-          "9, 18, 27, 36"
+          "1, 2, 3, 6, 9, 18"
         ],
-        "final_answer": "9, 18, 27, 36"
+        "final_answer": "1, 2, 3, 6, 9, 18"
       }
     },
     {
       "number": 3,
       "difficulty": "medium",
-      "question": "State whether 29 is prime",
+      "question": "Is 51 prime? Give a reason.",
       "marks": 2,
-      "hint": "Check divisibility by primes below √29.",
+      "hint": "Check divisibility by 3.",
       "solution": {
         "steps": [
-          "29 is not divisible by 2, 3, or 5",
-          "So it has factors 1 and 29 only",
-          "29 is prime"
+          "5+1=6 so divisible by 3",
+          "51 = 3×17"
         ],
-        "final_answer": "29 is prime"
+        "final_answer": "No, 51 is not prime"
       }
     },
     {
       "number": 4,
       "difficulty": "medium",
-      "question": "Find a common multiple of 4 and 6 less than 30",
+      "question": "Find the highest common factor of 20 and 30 using factors.",
       "marks": 2,
-      "hint": "List small multiples and compare.",
+      "hint": "Compare factor lists.",
       "solution": {
         "steps": [
-          "Multiples of 4: 4, 8, 12, 16, 20, 24, 28",
-          "Multiples of 6: 6, 12, 18, 24",
-          "Common multiple less than 30: 12 (or 24)"
+          "Factors of 20: 1,2,4,5,10,20",
+          "Factors of 30: 1,2,3,5,6,10,15,30",
+          "HCF = 10"
         ],
-        "final_answer": "12"
+        "final_answer": "10"
       }
     },
     {
       "number": 5,
       "difficulty": "hard",
-      "question": "How many prime numbers are between 20 and 40?",
+      "question": "Find two numbers less than 30 with exactly six factors each.",
       "marks": 3,
-      "hint": "Test each odd number carefully.",
+      "hint": "Use factor counting by prime powers.",
       "solution": {
         "steps": [
-          "Primes are 23, 29, 31, 37",
-          "Count = 4"
+          "12 has factors 1,2,3,4,6,12",
+          "18 has factors 1,2,3,6,9,18"
         ],
-        "final_answer": "4"
+        "final_answer": "12 and 18"
       }
     }
   ],
   "common_mistakes": [
     {
-      "mistake": "Calling 1 a prime number.",
-      "correction": "Prime numbers must have exactly two factors, so 1 is not prime."
+      "mistake": "Skipping key steps in method.",
+      "correction": "Write each stage clearly before moving on."
     },
     {
-      "mistake": "Missing factor pairs.",
-      "correction": "List factor pairs systematically so no factors are skipped."
+      "mistake": "Using incorrect notation or order of operations.",
+      "correction": "Apply the topic rule first, then simplify carefully."
     },
     {
-      "mistake": "Confusing factors with multiples.",
-      "correction": "Factors divide into a number; multiples are generated from a number."
+      "mistake": "Not checking if the final answer is reasonable.",
+      "correction": "Do a quick estimate or inverse check at the end."
     }
   ],
   "summary": [
-    "Use factor pairs to find all factors.",
-    "Multiples come from repeated multiplication.",
-    "Primes are numbers >1 with exactly two factors."
+    "Use the correct topic rule first.",
+    "Keep working clear and ordered.",
+    "Check signs, units, and rounding where relevant."
   ]
 }

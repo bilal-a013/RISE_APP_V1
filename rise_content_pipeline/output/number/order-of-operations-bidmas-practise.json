@@ -2,50 +2,50 @@
   "topic": "Number",
   "subtopic": "Order of Operations (BIDMAS)",
   "lesson_type": "practise",
-  "orientation": "Practise order of operations (BIDMAS) using the same structure from the learn lesson.",
+  "orientation": "Practise order of operations (bidmas) using the same structure from the learn lesson.",
   "worked_example": {
-    "question": "Calculate 5 + 3 × (4 + 2)",
+    "question": "Evaluate (8 - 3)² ÷ 5",
     "steps": [
       {
         "label": "Brackets",
-        "working": "4 + 2 = 6"
+        "working": "8-3=5"
       },
       {
-        "label": "Multiplication",
-        "working": "3 × 6 = 18"
+        "label": "Indices",
+        "working": "5²=25"
       },
       {
-        "label": "Addition",
-        "working": "5 + 18 = 23"
+        "label": "Divide",
+        "working": "25÷5=5"
       }
     ],
-    "answer": "23"
+    "answer": "5"
   },
   "questions": [
     {
       "number": 1,
       "difficulty": "easy",
-      "question": "Calculate 7 + 2 × 5",
+      "question": "Evaluate 9 - 2 × 3.",
       "marks": 1,
-      "hint": "Multiply before adding.",
+      "hint": "Multiply before subtracting.",
       "solution": {
         "steps": [
-          "2 × 5 = 10",
-          "7 + 10 = 17"
+          "2×3=6",
+          "9-6=3"
         ],
-        "final_answer": "17"
+        "final_answer": "3"
       }
     },
     {
       "number": 2,
       "difficulty": "easy",
-      "question": "Calculate (4 + 6) ÷ 2",
+      "question": "Evaluate (4 + 6) ÷ 2.",
       "marks": 1,
-      "hint": "Work inside the brackets first.",
+      "hint": "Do bracket first.",
       "solution": {
         "steps": [
-          "4 + 6 = 10",
-          "10 ÷ 2 = 5"
+          "4+6=10",
+          "10÷2=5"
         ],
         "final_answer": "5"
       }
@@ -53,66 +53,67 @@
     {
       "number": 3,
       "difficulty": "medium",
-      "question": "Calculate 3 × (8 - 2) + 5",
+      "question": "Evaluate 2 + 3² × 2.",
       "marks": 2,
-      "hint": "Brackets, then multiplication, then addition.",
+      "hint": "Indices before multiplication.",
       "solution": {
         "steps": [
-          "8 - 2 = 6",
-          "3 × 6 = 18",
-          "18 + 5 = 23"
+          "3²=9",
+          "9×2=18",
+          "2+18=20"
         ],
-        "final_answer": "23"
+        "final_answer": "20"
       }
     },
     {
       "number": 4,
       "difficulty": "medium",
-      "question": "Calculate 20 ÷ (2 × 2) + 7",
+      "question": "Evaluate 18 ÷ 3 × 2 + 1.",
       "marks": 2,
-      "hint": "Complete bracket multiplication first.",
+      "hint": "Division and multiplication left to right.",
       "solution": {
         "steps": [
-          "2 × 2 = 4",
-          "20 ÷ 4 = 5",
-          "5 + 7 = 12"
+          "18÷3=6",
+          "6×2=12",
+          "12+1=13"
         ],
-        "final_answer": "12"
+        "final_answer": "13"
       }
     },
     {
       "number": 5,
       "difficulty": "hard",
-      "question": "Calculate (5² - 5) ÷ (2 × 5)",
+      "question": "Evaluate 5 + (12 - 4)² ÷ 8.",
       "marks": 3,
-      "hint": "Resolve each bracket separately.",
+      "hint": "Apply BIDMAS carefully in stages.",
       "solution": {
         "steps": [
-          "5² = 25 so 25 - 5 = 20",
-          "2 × 5 = 10",
-          "20 ÷ 10 = 2"
+          "12-4=8",
+          "8²=64",
+          "64÷8=8",
+          "5+8=13"
         ],
-        "final_answer": "2"
+        "final_answer": "13"
       }
     }
   ],
   "common_mistakes": [
     {
-      "mistake": "Working strictly left to right regardless of operation type.",
-      "correction": "Apply BIDMAS first, then use left-to-right only within equal-priority operations."
+      "mistake": "Skipping key steps in method.",
+      "correction": "Write each stage clearly before moving on."
     },
     {
-      "mistake": "Ignoring calculations inside brackets.",
-      "correction": "Complete every bracketed section before operations outside brackets."
+      "mistake": "Using incorrect notation or order of operations.",
+      "correction": "Apply the topic rule first, then simplify carefully."
     },
     {
-      "mistake": "Doing addition before multiplication.",
-      "correction": "Multiplication and division come before addition and subtraction."
+      "mistake": "Not checking if the final answer is reasonable.",
+      "correction": "Do a quick estimate or inverse check at the end."
     }
   ],
   "summary": [
-    "Brackets then indices always come first.",
-    "Division/multiplication are done left to right.",
-    "Addition/subtraction are final and left to right."
+    "Use the correct topic rule first.",
+    "Keep working clear and ordered.",
+    "Check signs, units, and rounding where relevant."
   ]
 }

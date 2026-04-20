@@ -4,106 +4,107 @@
   "lesson_type": "practise",
   "orientation": "Practise percentages using the same structure from the learn lesson.",
   "worked_example": {
-    "question": "A £50 item is reduced by 20%. Find the sale price.",
+    "question": "Increase 120 by 10%",
     "steps": [
       {
-        "label": "Reduction",
-        "working": "20% of 50 = 10"
+        "label": "10% of 120",
+        "working": "12"
       },
       {
-        "label": "Subtract",
-        "working": "50 - 10 = 40"
+        "label": "Add increase",
+        "working": "120 + 12 = 132"
       }
     ],
-    "answer": "£40"
+    "answer": "132"
   },
   "questions": [
     {
       "number": 1,
       "difficulty": "easy",
-      "question": "Convert 0.62 to a percentage",
+      "question": "Find 25% of 60.",
       "marks": 1,
-      "hint": "Multiply by 100.",
+      "hint": "25% is one quarter.",
       "solution": {
         "steps": [
-          "0.62 × 100 = 62%"
+          "60 ÷ 4 = 15"
         ],
-        "final_answer": "62%"
+        "final_answer": "15"
       }
     },
     {
       "number": 2,
       "difficulty": "easy",
-      "question": "Find 10% of 460",
+      "question": "Write 0.35 as a percentage.",
       "marks": 1,
-      "hint": "10% means divide by 10.",
+      "hint": "Multiply by 100.",
       "solution": {
         "steps": [
-          "460 ÷ 10 = 46"
+          "35%"
         ],
-        "final_answer": "46"
+        "final_answer": "35%"
       }
     },
     {
       "number": 3,
       "difficulty": "medium",
-      "question": "A value rises from 80 to 92. Find the percentage increase.",
+      "question": "A £50 item is reduced by 20%. Find new price.",
       "marks": 2,
-      "hint": "Use change/original × 100%.",
+      "hint": "Find 20% then subtract.",
       "solution": {
         "steps": [
-          "Change = 12",
-          "12/80 = 0.15",
-          "0.15 × 100 = 15%"
+          "20% of 50 = 10",
+          "50 - 10 = 40"
         ],
-        "final_answer": "15%"
+        "final_answer": "£40"
       }
     },
     {
       "number": 4,
       "difficulty": "medium",
-      "question": "Calculate 12.5% of 64",
+      "question": "Increase 240 by 15%.",
       "marks": 2,
-      "hint": "12.5% is one eighth.",
+      "hint": "Find 10% and 5% then add.",
       "solution": {
         "steps": [
-          "64 ÷ 8 = 8"
+          "10%=24, 5%=12",
+          "Increase=36",
+          "240+36=276"
         ],
-        "final_answer": "8"
+        "final_answer": "276"
       }
     },
     {
       "number": 5,
       "difficulty": "hard",
-      "question": "After a 25% increase, a price is £90. Find the original price.",
+      "question": "After a 12% increase, a value is 89.6. Find the original value.",
       "marks": 3,
-      "hint": "Use reverse multiplier 1.25.",
+      "hint": "Use multiplier 1.12.",
       "solution": {
         "steps": [
-          "Original × 1.25 = 90",
-          "Original = 90 ÷ 1.25 = 72"
+          "Original = 89.6 ÷ 1.12",
+          "Original = 80"
         ],
-        "final_answer": "£72"
+        "final_answer": "80"
       }
     }
   ],
   "common_mistakes": [
     {
-      "mistake": "Using the wrong base value for percentage change.",
-      "correction": "Percentage change is always based on the original value."
+      "mistake": "Skipping key steps in method.",
+      "correction": "Write each stage clearly before moving on."
     },
     {
-      "mistake": "Forgetting to convert a percentage before multiplying.",
-      "correction": "Convert percent to decimal or fraction first."
+      "mistake": "Using incorrect notation or order of operations.",
+      "correction": "Apply the topic rule first, then simplify carefully."
     },
     {
-      "mistake": "Using subtraction for reverse percentages.",
-      "correction": "Reverse percentages require dividing by the multiplier."
+      "mistake": "Not checking if the final answer is reasonable.",
+      "correction": "Do a quick estimate or inverse check at the end."
     }
   ],
   "summary": [
-    "Convert between percent, decimal, and fraction accurately.",
-    "Use change/original × 100% for percentage change.",
-    "Use multipliers for percentage increase/decrease and reverse questions."
+    "Use the correct topic rule first.",
+    "Keep working clear and ordered.",
+    "Check signs, units, and rounding where relevant."
   ]
 }

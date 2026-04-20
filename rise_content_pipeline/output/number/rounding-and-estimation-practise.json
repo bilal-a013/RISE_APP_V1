@@ -7,105 +7,102 @@
     "question": "Estimate 19.8 × 3.1",
     "steps": [
       {
-        "label": "Round",
-        "working": "19.8≈20 and 3.1≈3"
+        "label": "Round numbers",
+        "working": "20 × 3"
       },
       {
         "label": "Multiply",
-        "working": "20×3=60"
+        "working": "60"
       }
     ],
-    "answer": "Approximately 60"
+    "answer": "60"
   },
   "questions": [
     {
       "number": 1,
       "difficulty": "easy",
-      "question": "Round 54.286 to 1 decimal place",
+      "question": "Round 348 to nearest 10.",
       "marks": 1,
-      "hint": "Check hundredths digit.",
+      "hint": "Look at ones digit.",
       "solution": {
         "steps": [
-          "Hundredths is 8, so 54.2 rounds up to 54.3"
+          "350"
         ],
-        "final_answer": "54.3"
+        "final_answer": "350"
       }
     },
     {
       "number": 2,
       "difficulty": "easy",
-      "question": "Round 6,492 to 2 significant figures",
+      "question": "Round 5.67 to 1 decimal place.",
       "marks": 1,
-      "hint": "Keep first two significant digits.",
+      "hint": "Look at hundredths digit.",
       "solution": {
         "steps": [
-          "First two significant digits are 6 and 4, next digit is 9",
-          "Round to 6500"
+          "5.7"
         ],
-        "final_answer": "6500"
+        "final_answer": "5.7"
       }
     },
     {
       "number": 3,
       "difficulty": "medium",
-      "question": "Estimate 398 ÷ 19",
+      "question": "Estimate 48 ÷ 9.8.",
       "marks": 2,
-      "hint": "Round to compatible numbers.",
+      "hint": "Round to friendly numbers.",
       "solution": {
         "steps": [
-          "398 ≈ 400 and 19 ≈ 20",
-          "400 ÷ 20 = 20"
+          "48 ≈ 50, 9.8 ≈ 10",
+          "50 ÷ 10 = 5"
         ],
-        "final_answer": "Approximately 20"
+        "final_answer": "5"
       }
     },
     {
       "number": 4,
       "difficulty": "medium",
-      "question": "Estimate 0.49 × 201",
+      "question": "Round 0.0849 to 2 significant figures.",
       "marks": 2,
-      "hint": "Use 0.5 and 200 for quick estimate.",
+      "hint": "First two significant digits are 8 and 4.",
       "solution": {
         "steps": [
-          "0.49 ≈ 0.5 and 201 ≈ 200",
-          "0.5 × 200 = 100"
+          "Third significant digit is 9 so round up",
+          "0.085"
         ],
-        "final_answer": "Approximately 100"
+        "final_answer": "0.085"
       }
     },
     {
       "number": 5,
       "difficulty": "hard",
-      "question": "A calculator gives 63.214 for 7.9 × 8.01. Is this sensible?",
+      "question": "A calculator gives 127.493 for an answer to a money question. Give a sensible rounded answer and explain.",
       "marks": 3,
-      "hint": "Estimate first then compare.",
+      "hint": "Money is usually to 2 decimal places.",
       "solution": {
         "steps": [
-          "7.9 ≈ 8 and 8.01 ≈ 8",
-          "Estimated product ≈ 64",
-          "63.214 is close to 64, so sensible"
+          "Round to 2 dp: 127.49"
         ],
-        "final_answer": "Yes, sensible"
+        "final_answer": "£127.49"
       }
     }
   ],
   "common_mistakes": [
     {
-      "mistake": "Rounding from the wrong digit.",
-      "correction": "Check the digit immediately after the required place value."
+      "mistake": "Skipping key steps in method.",
+      "correction": "Write each stage clearly before moving on."
     },
     {
-      "mistake": "Over-rounding in exact calculations.",
-      "correction": "Only round when instructed or when explicitly estimating."
+      "mistake": "Using incorrect notation or order of operations.",
+      "correction": "Apply the topic rule first, then simplify carefully."
     },
     {
-      "mistake": "Choosing awkward values for estimates.",
-      "correction": "Use nearby compatible numbers for quick sensible estimates."
+      "mistake": "Not checking if the final answer is reasonable.",
+      "correction": "Do a quick estimate or inverse check at the end."
     }
   ],
   "summary": [
-    "Identify the required place value or significant figures first.",
-    "Use the next digit to round up or down.",
-    "Estimate with compatible numbers to check reasonableness."
+    "Use the correct topic rule first.",
+    "Keep working clear and ordered.",
+    "Check signs, units, and rounding where relevant."
   ]
 }

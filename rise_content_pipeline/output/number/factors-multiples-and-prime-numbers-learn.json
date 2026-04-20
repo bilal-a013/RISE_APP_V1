@@ -17,19 +17,19 @@
   ],
   "explanation": {
     "body": "This lesson develops the key process for factors, multiples and prime numbers. Work through each stage in order, show clear line-by-line working, and check whether your final answer is sensible in context.",
-    "formula": "number = factor × factor",
+    "formula": "Prime numbers have exactly two factors",
     "key_terms": [
       {
-        "term": "Factor",
-        "definition": "A number that divides exactly into another number."
+        "term": "Method",
+        "definition": "The step-by-step routine used in factors, multiples and prime numbers."
       },
       {
-        "term": "Multiple",
-        "definition": "A value produced by multiplying by whole numbers."
+        "term": "Accuracy",
+        "definition": "Checking each stage to reduce avoidable errors."
       },
       {
-        "term": "Prime",
-        "definition": "A number greater than 1 with exactly two factors."
+        "term": "Reasonableness",
+        "definition": "A quick check that the answer makes mathematical sense."
       }
     ]
   },
@@ -38,37 +38,29 @@
     "data": {
       "steps": [
         {
-          "label": "Number",
-          "working": "24"
+          "label": "Factor pairs",
+          "working": "1×24, 2×12, 3×8, 4×6"
         },
         {
-          "label": "Factors",
+          "label": "Collect factors",
           "working": "1,2,3,4,6,8,12,24"
-        },
-        {
-          "label": "Multiples of 6",
-          "working": "6,12,18,24"
-        },
-        {
-          "label": "Prime check",
-          "working": "24 is not prime"
         }
       ]
     }
   },
   "worked_example": {
-    "question": "List all factors of 18",
+    "question": "List the factors of 24",
     "steps": [
       {
         "label": "Factor pairs",
-        "working": "1×18, 2×9, 3×6"
+        "working": "1×24, 2×12, 3×8, 4×6"
       },
       {
-        "label": "Factors",
-        "working": "1,2,3,6,9,18"
+        "label": "Collect factors",
+        "working": "1,2,3,4,6,8,12,24"
       }
     ],
-    "answer": "1, 2, 3, 6, 9, 18"
+    "answer": "1, 2, 3, 4, 6, 8, 12, 24"
   },
   "summary": [
     "Identify the key rule before calculating.",

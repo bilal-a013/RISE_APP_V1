@@ -17,19 +17,19 @@
   ],
   "explanation": {
     "body": "This lesson develops the key process for bounds and error intervals. Work through each stage in order, show clear line-by-line working, and check whether your final answer is sensible in context.",
-    "formula": "a - u/2 ≤ x < a + u/2",
+    "formula": "Lower bound ≤ true value < upper bound",
     "key_terms": [
       {
-        "term": "Lower bound",
-        "definition": "Smallest possible value."
+        "term": "Method",
+        "definition": "The step-by-step routine used in bounds and error intervals."
       },
       {
-        "term": "Upper bound",
-        "definition": "Greatest possible value, not included."
+        "term": "Accuracy",
+        "definition": "Checking each stage to reduce avoidable errors."
       },
       {
-        "term": "Error interval",
-        "definition": "The full range of possible values."
+        "term": "Reasonableness",
+        "definition": "A quick check that the answer makes mathematical sense."
       }
     ]
   },
@@ -38,37 +38,37 @@
     "data": {
       "steps": [
         {
-          "label": "Rounded value",
-          "working": "12.4 cm (nearest 0.1)"
-        },
-        {
           "label": "Half unit",
           "working": "0.05"
         },
         {
-          "label": "Bounds",
-          "working": "12.35 and 12.45"
+          "label": "Lower bound",
+          "working": "6.4 - 0.05 = 6.35"
         },
         {
-          "label": "Interval",
-          "working": "12.35 ≤ L < 12.45"
+          "label": "Upper bound",
+          "working": "6.4 + 0.05 = 6.45"
         }
       ]
     }
   },
   "worked_example": {
-    "question": "A mass is 3.2 kg correct to nearest 0.1 kg. Write the interval.",
+    "question": "A length is 6.4 cm correct to 1 decimal place. Find the error interval.",
     "steps": [
       {
         "label": "Half unit",
         "working": "0.05"
       },
       {
-        "label": "Lower and upper",
-        "working": "3.15 and 3.25"
+        "label": "Lower bound",
+        "working": "6.4 - 0.05 = 6.35"
+      },
+      {
+        "label": "Upper bound",
+        "working": "6.4 + 0.05 = 6.45"
       }
     ],
-    "answer": "3.15 ≤ m < 3.25"
+    "answer": "6.35 ≤ length < 6.45"
   },
   "summary": [
     "Identify the key rule before calculating.",

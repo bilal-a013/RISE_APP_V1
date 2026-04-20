@@ -4,30 +4,29 @@
   "lesson_type": "practise",
   "orientation": "Practise fractions using the same structure from the learn lesson.",
   "worked_example": {
-    "question": "Calculate 3/4 × 8/9",
+    "question": "Simplify 18/24",
     "steps": [
       {
-        "label": "Multiply",
-        "working": "(3×8)/(4×9)=24/36"
+        "label": "HCF of 18 and 24",
+        "working": "6"
       },
       {
-        "label": "Simplify",
-        "working": "24/36 = 2/3"
+        "label": "Divide numerator and denominator by 6",
+        "working": "3/4"
       }
     ],
-    "answer": "2/3"
+    "answer": "3/4"
   },
   "questions": [
     {
       "number": 1,
       "difficulty": "easy",
-      "question": "Simplify 18/24",
+      "question": "Simplify 15/20.",
       "marks": 1,
-      "hint": "Divide numerator and denominator by the HCF.",
+      "hint": "Divide by HCF 5.",
       "solution": {
         "steps": [
-          "HCF of 18 and 24 is 6",
-          "18/24 = 3/4"
+          "15/20 = 3/4"
         ],
         "final_answer": "3/4"
       }
@@ -35,77 +34,75 @@
     {
       "number": 2,
       "difficulty": "easy",
-      "question": "Calculate 3/5 + 1/5",
+      "question": "Find 1/3 of 24.",
       "marks": 1,
-      "hint": "Same denominator, so add numerators.",
+      "hint": "Divide by 3.",
       "solution": {
         "steps": [
-          "(3 + 1)/5 = 4/5"
+          "24 ÷ 3 = 8"
         ],
-        "final_answer": "4/5"
+        "final_answer": "8"
       }
     },
     {
       "number": 3,
       "difficulty": "medium",
-      "question": "Calculate 7/10 - 1/4",
+      "question": "Calculate 2/5 + 1/10.",
       "marks": 2,
-      "hint": "Use a common denominator of 20.",
+      "hint": "Use denominator 10.",
       "solution": {
         "steps": [
-          "7/10 = 14/20 and 1/4 = 5/20",
-          "14/20 - 5/20 = 9/20"
+          "2/5 = 4/10",
+          "4/10 + 1/10 = 5/10 = 1/2"
         ],
-        "final_answer": "9/20"
+        "final_answer": "1/2"
       }
     },
     {
       "number": 4,
       "difficulty": "medium",
-      "question": "Calculate 2/3 × 9/10",
+      "question": "Calculate 7/8 - 1/4.",
       "marks": 2,
-      "hint": "Cancel factors before multiplying.",
+      "hint": "Write 1/4 as 2/8.",
       "solution": {
         "steps": [
-          "Cancel 9 and 3 to get 3 and 1",
-          "(2 × 3)/(1 × 10) = 6/10 = 3/5"
+          "7/8 - 2/8 = 5/8"
         ],
-        "final_answer": "3/5"
+        "final_answer": "5/8"
       }
     },
     {
       "number": 5,
       "difficulty": "hard",
-      "question": "Calculate 1 1/2 ÷ 3/5",
+      "question": "A recipe uses 3/4 cup of milk. You make half the recipe and then add 1/8 cup extra. How much milk?",
       "marks": 3,
-      "hint": "Convert mixed number first.",
+      "hint": "Find half first then add.",
       "solution": {
         "steps": [
-          "1 1/2 = 3/2",
-          "3/2 ÷ 3/5 = 3/2 × 5/3",
-          "= 5/2"
+          "Half of 3/4 is 3/8",
+          "3/8 + 1/8 = 4/8 = 1/2"
         ],
-        "final_answer": "5/2"
+        "final_answer": "1/2 cup"
       }
     }
   ],
   "common_mistakes": [
     {
-      "mistake": "Adding fractions without a common denominator.",
-      "correction": "Find equivalent fractions with a shared denominator first."
+      "mistake": "Skipping key steps in method.",
+      "correction": "Write each stage clearly before moving on."
     },
     {
-      "mistake": "Not simplifying the final fraction.",
-      "correction": "Always reduce using common factors at the end."
+      "mistake": "Using incorrect notation or order of operations.",
+      "correction": "Apply the topic rule first, then simplify carefully."
     },
     {
-      "mistake": "Dividing fractions without flipping the second fraction.",
-      "correction": "Division by a fraction means multiply by its reciprocal."
+      "mistake": "Not checking if the final answer is reasonable.",
+      "correction": "Do a quick estimate or inverse check at the end."
     }
   ],
   "summary": [
-    "Use common denominators for add/subtract.",
-    "Multiply straight across then simplify.",
-    "Divide by multiplying by the reciprocal."
+    "Use the correct topic rule first.",
+    "Keep working clear and ordered.",
+    "Check signs, units, and rounding where relevant."
   ]
 }
