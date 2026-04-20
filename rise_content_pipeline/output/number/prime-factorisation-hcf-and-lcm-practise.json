@@ -25,76 +25,71 @@
     {
       "number": 1,
       "difficulty": "easy",
-      "question": "[Prime Factorisation, HCF and LCM] Complete the straightforward calculation for this subtopic.",
+      "question": "Write 48 as a product of primes",
       "marks": 1,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Use a factor tree until all branches are prime.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "48 = 2 × 24 = 2 × 2 × 12 = 2 × 2 × 2 × 6 = 2⁴ × 3"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "2⁴ × 3"
       }
     },
     {
       "number": 2,
       "difficulty": "easy",
-      "question": "[Prime Factorisation, HCF and LCM] Complete the second straightforward calculation.",
+      "question": "Find the HCF of 12 and 18",
       "marks": 1,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Use prime factors or factor lists.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "12 = 2² × 3 and 18 = 2 × 3²",
+          "HCF = 2 × 3 = 6"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "6"
       }
     },
     {
       "number": 3,
       "difficulty": "medium",
-      "question": "[Prime Factorisation, HCF and LCM] Apply the method in a two-step calculation.",
+      "question": "Find the LCM of 8 and 14",
       "marks": 2,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Use highest prime powers.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "8 = 2³ and 14 = 2 × 7",
+          "LCM = 2³ × 7 = 56"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "56"
       }
     },
     {
       "number": 4,
       "difficulty": "medium",
-      "question": "[Prime Factorisation, HCF and LCM] Apply the method with extra structure.",
+      "question": "Find HCF and LCM of 45 and 60",
       "marks": 2,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Prime-factorise both numbers.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "45 = 3² × 5 and 60 = 2² × 3 × 5",
+          "HCF = 3 × 5 = 15",
+          "LCM = 2² × 3² × 5 = 180"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "HCF 15, LCM 180"
       }
     },
     {
       "number": 5,
       "difficulty": "hard",
-      "question": "[Prime Factorisation, HCF and LCM] Solve the extended GCSE-style question.",
+      "question": "Two numbers have HCF 6 and LCM 180. One number is 30. Find the other.",
       "marks": 3,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Use HCF × LCM = product of the two numbers.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "Product = 6 × 180 = 1080",
+          "Other number = 1080 ÷ 30 = 36"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "36"
       }
     }
   ],

@@ -21,76 +21,72 @@
     {
       "number": 1,
       "difficulty": "easy",
-      "question": "[Factors, Multiples and Prime Numbers] Complete the straightforward calculation for this subtopic.",
+      "question": "List all factors of 12",
       "marks": 1,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Use factor pairs.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "1×12, 2×6, 3×4",
+          "Factors: 1, 2, 3, 4, 6, 12"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "1, 2, 3, 4, 6, 12"
       }
     },
     {
       "number": 2,
       "difficulty": "easy",
-      "question": "[Factors, Multiples and Prime Numbers] Complete the second straightforward calculation.",
+      "question": "Write the first four multiples of 9",
       "marks": 1,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Multiply 9 by 1, 2, 3, 4.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "9, 18, 27, 36"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "9, 18, 27, 36"
       }
     },
     {
       "number": 3,
       "difficulty": "medium",
-      "question": "[Factors, Multiples and Prime Numbers] Apply the method in a two-step calculation.",
+      "question": "State whether 29 is prime",
       "marks": 2,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Check divisibility by primes below √29.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "29 is not divisible by 2, 3, or 5",
+          "So it has factors 1 and 29 only",
+          "29 is prime"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "29 is prime"
       }
     },
     {
       "number": 4,
       "difficulty": "medium",
-      "question": "[Factors, Multiples and Prime Numbers] Apply the method with extra structure.",
+      "question": "Find a common multiple of 4 and 6 less than 30",
       "marks": 2,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "List small multiples and compare.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "Multiples of 4: 4, 8, 12, 16, 20, 24, 28",
+          "Multiples of 6: 6, 12, 18, 24",
+          "Common multiple less than 30: 12 (or 24)"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "12"
       }
     },
     {
       "number": 5,
       "difficulty": "hard",
-      "question": "[Factors, Multiples and Prime Numbers] Solve the extended GCSE-style question.",
+      "question": "How many prime numbers are between 20 and 40?",
       "marks": 3,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Test each odd number carefully.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "Primes are 23, 29, 31, 37",
+          "Count = 4"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "4"
       }
     }
   ],

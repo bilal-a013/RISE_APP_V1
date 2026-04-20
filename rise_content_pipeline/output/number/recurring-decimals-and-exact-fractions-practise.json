@@ -25,76 +25,77 @@
     {
       "number": 1,
       "difficulty": "easy",
-      "question": "[Recurring Decimals and Exact Fractions] Complete the straightforward calculation for this subtopic.",
+      "question": "Convert 0.555... to a fraction",
       "marks": 1,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Use x and 10x.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "x = 0.555...",
+          "10x - x = 5",
+          "9x = 5 so x = 5/9"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "5/9"
       }
     },
     {
       "number": 2,
       "difficulty": "easy",
-      "question": "[Recurring Decimals and Exact Fractions] Complete the second straightforward calculation.",
+      "question": "Convert 0.333... to a fraction",
       "marks": 1,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Use the same single-digit recurring method.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "x = 0.333...",
+          "10x - x = 3",
+          "9x = 3 so x = 1/3"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "1/3"
       }
     },
     {
       "number": 3,
       "difficulty": "medium",
-      "question": "[Recurring Decimals and Exact Fractions] Apply the method in a two-step calculation.",
+      "question": "Convert 0.121212... to a fraction",
       "marks": 2,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Use x and 100x for two recurring digits.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "x = 0.121212...",
+          "100x - x = 12",
+          "99x = 12 so x = 12/99 = 4/33"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "4/33"
       }
     },
     {
       "number": 4,
       "difficulty": "medium",
-      "question": "[Recurring Decimals and Exact Fractions] Apply the method with extra structure.",
+      "question": "Convert 0.4666... to a fraction",
       "marks": 2,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Use 10x and 100x to remove the recurring part.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "x = 0.4666...",
+          "10x = 4.666..., 100x = 46.666...",
+          "100x - 10x = 42",
+          "90x = 42 so x = 7/15"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "7/15"
       }
     },
     {
       "number": 5,
       "difficulty": "hard",
-      "question": "[Recurring Decimals and Exact Fractions] Solve the extended GCSE-style question.",
+      "question": "Show that 0.818181... = 9/11",
       "marks": 3,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Use two-digit recurring method and simplify.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "x = 0.818181...",
+          "100x - x = 81",
+          "99x = 81 so x = 81/99 = 9/11"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "9/11"
       }
     }
   ],

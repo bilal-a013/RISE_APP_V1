@@ -21,76 +21,71 @@
     {
       "number": 1,
       "difficulty": "easy",
-      "question": "[Decimals] Complete the straightforward calculation for this subtopic.",
+      "question": "Round 4.673 to 1 decimal place",
       "marks": 1,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Check the hundredths digit.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "Hundredths digit is 7 so round tenths up",
+          "Answer = 4.7"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "4.7"
       }
     },
     {
       "number": 2,
       "difficulty": "easy",
-      "question": "[Decimals] Complete the second straightforward calculation.",
+      "question": "Calculate 0.9 + 1.25",
       "marks": 1,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Align decimal points.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "0.90 + 1.25 = 2.15"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "2.15"
       }
     },
     {
       "number": 3,
       "difficulty": "medium",
-      "question": "[Decimals] Apply the method in a two-step calculation.",
+      "question": "Calculate 7.2 × 0.04",
       "marks": 2,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Multiply as whole numbers then place decimal.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "72 × 4 = 288",
+          "Total decimal places = 3",
+          "Answer = 0.288"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "0.288"
       }
     },
     {
       "number": 4,
       "difficulty": "medium",
-      "question": "[Decimals] Apply the method with extra structure.",
+      "question": "Calculate 3.6 ÷ 0.6",
       "marks": 2,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Scale both numbers by 10 first.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "3.6 ÷ 0.6 = 36 ÷ 6",
+          "= 6"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "6"
       }
     },
     {
       "number": 5,
       "difficulty": "hard",
-      "question": "[Decimals] Solve the extended GCSE-style question.",
+      "question": "A bottle holds 1.75 L. How much do 12 bottles hold?",
       "marks": 3,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Multiply 1.75 by 12.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "1.75 × 12 = 1.75×10 + 1.75×2",
+          "= 17.5 + 3.5 = 21"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "21 L"
       }
     }
   ],

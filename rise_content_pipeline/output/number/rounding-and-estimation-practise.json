@@ -21,76 +21,71 @@
     {
       "number": 1,
       "difficulty": "easy",
-      "question": "[Rounding and Estimation] Complete the straightforward calculation for this subtopic.",
+      "question": "Round 54.286 to 1 decimal place",
       "marks": 1,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Check hundredths digit.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "Hundredths is 8, so 54.2 rounds up to 54.3"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "54.3"
       }
     },
     {
       "number": 2,
       "difficulty": "easy",
-      "question": "[Rounding and Estimation] Complete the second straightforward calculation.",
+      "question": "Round 6,492 to 2 significant figures",
       "marks": 1,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Keep first two significant digits.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "First two significant digits are 6 and 4, next digit is 9",
+          "Round to 6500"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "6500"
       }
     },
     {
       "number": 3,
       "difficulty": "medium",
-      "question": "[Rounding and Estimation] Apply the method in a two-step calculation.",
+      "question": "Estimate 398 ÷ 19",
       "marks": 2,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Round to compatible numbers.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "398 ≈ 400 and 19 ≈ 20",
+          "400 ÷ 20 = 20"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "Approximately 20"
       }
     },
     {
       "number": 4,
       "difficulty": "medium",
-      "question": "[Rounding and Estimation] Apply the method with extra structure.",
+      "question": "Estimate 0.49 × 201",
       "marks": 2,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Use 0.5 and 200 for quick estimate.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "0.49 ≈ 0.5 and 201 ≈ 200",
+          "0.5 × 200 = 100"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "Approximately 100"
       }
     },
     {
       "number": 5,
       "difficulty": "hard",
-      "question": "[Rounding and Estimation] Solve the extended GCSE-style question.",
+      "question": "A calculator gives 63.214 for 7.9 × 8.01. Is this sensible?",
       "marks": 3,
-      "hint": "Follow the lesson method step by step.",
+      "hint": "Estimate first then compare.",
       "solution": {
         "steps": [
-          "Identify the relevant rule from the lesson.",
-          "Apply the rule carefully to each part of the question.",
-          "Write the final result clearly."
+          "7.9 ≈ 8 and 8.01 ≈ 8",
+          "Estimated product ≈ 64",
+          "63.214 is close to 64, so sensible"
         ],
-        "final_answer": "See full worked steps above."
+        "final_answer": "Yes, sensible"
       }
     }
   ],
