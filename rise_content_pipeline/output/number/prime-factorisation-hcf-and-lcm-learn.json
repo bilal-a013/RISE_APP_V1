@@ -5,7 +5,7 @@
   "intro": {
     "topic_name": "Prime Factorisation, HCF and LCM",
     "what_you_will_learn": [
-      "Core methods for prime factorisation, hcf and lcm",
+      "Core methods for prime factorisation, HCF and LCM",
       "How to apply the method in exam-style calculations",
       "How to avoid common procedural mistakes"
     ]
@@ -16,7 +16,7 @@
     "This skill supports connected topics later in the course."
   ],
   "explanation": {
-    "body": "This lesson develops the key process for prime factorisation, hcf and lcm. Work through each stage in order, show clear line-by-line working, and check whether your final answer is sensible in context.",
+    "body": "This lesson develops the key process for prime factorisation, HCF and LCM. Work through each stage in order, show clear line-by-line working, and check whether your final answer is sensible in context.",
     "formula": "HCF uses lowest shared powers; LCM uses highest powers",
     "key_terms": [
       {
@@ -81,7 +81,7 @@
     "Sense-check the final result."
   ],
   "scaffolding": {
-    "simplified_explanation": "Think of prime factorisation, hcf and lcm as a fixed routine: identify, apply, then check.",
+    "simplified_explanation": "Think of prime factorisation, HCF and LCM as a fixed routine: identify, apply, then check.",
     "extra_hints": [
       "Underline the operation or value you need to handle first.",
       "Rewrite each step on a fresh line to reduce slips."

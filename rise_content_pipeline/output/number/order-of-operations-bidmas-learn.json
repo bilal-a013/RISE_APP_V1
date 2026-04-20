@@ -5,7 +5,7 @@
   "intro": {
     "topic_name": "Order of Operations (BIDMAS)",
     "what_you_will_learn": [
-      "Core methods for order of operations (bidmas)",
+      "Core methods for order of operations (BIDMAS)",
       "How to apply the method in exam-style calculations",
       "How to avoid common procedural mistakes"
     ]
@@ -16,7 +16,7 @@
     "This skill supports connected topics later in the course."
   ],
   "explanation": {
-    "body": "This lesson develops the key process for order of operations (bidmas). Work through each stage in order, show clear line-by-line working, and check whether your final answer is sensible in context.",
+    "body": "This lesson develops the key process for order of operations (BIDMAS). Work through each stage in order, show clear line-by-line working, and check whether your final answer is sensible in context.",
     "formula": "B I D M A S",
     "key_terms": [
       {
@@ -81,7 +81,7 @@
     "Sense-check the final result."
   ],
   "scaffolding": {
-    "simplified_explanation": "Think of order of operations (bidmas) as a fixed routine: identify, apply, then check.",
+    "simplified_explanation": "Think of order of operations (BIDMAS) as a fixed routine: identify, apply, then check.",
     "extra_hints": [
       "Underline the operation or value you need to handle first.",
       "Rewrite each step on a fresh line to reduce slips."
