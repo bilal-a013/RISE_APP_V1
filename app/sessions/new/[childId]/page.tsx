@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { BookOpen, FileText, Info, Save, Sparkles, UserRound } from "lucide-react";
+import { FileText, Save, Sparkles } from "lucide-react";
 import { BrandButton } from "../../../../components/rise/BrandButton";
 import { Card } from "../../../../components/rise/Card";
 import { ChipSelector } from "../../../../components/rise/ChipSelector";
@@ -11,9 +11,8 @@ import { confidenceOptions, progressOptions, RatingSelector } from "../../../../
 import { SegmentedSelector } from "../../../../components/rise/SegmentedSelector";
 import { SessionTimeline } from "../../../../components/rise/SessionTimeline";
 import { TopNav } from "../../../../components/rise/TopNav";
-import { addParentReport, addSessionLog, getRiseStore, syncReportToSupabase, syncSessionToSupabase } from "../../../../lib/localStorageStore";
-import { mockTutor } from "../../../../lib/mockRiseData";
 import { generateParentReport } from "../../../../lib/reportGenerator";
+import { getStudent, insertReport, insertSession, listSessions } from "../../../../lib/supabaseData";
 import { initialsFromName } from "../../../../lib/tutorKey";
 import type { ChildProfile, HomeworkStatus, Rating, ReportTone, SessionLog, UnderstandingToday } from "../../../../types/rise";
 
@@ -50,10 +49,21 @@ export default function NewSessionPage() {
   const [status, setStatus] = useState("Ready to log");
 
   useEffect(() => {
-    const store = getRiseStore();
-    const found = store.children.find((item) => item.id === params.childId) ?? store.children[0];
-    setChild(found);
-    setPreviousSessions(store.sessions.filter((session) => session.childId === found.id));
+    async function load() {
+      try {
+        const found = await getStudent(params.childId);
+        const previous = await listSessions(found.id);
+        setChild(found);
+        setPreviousSessions(previous);
+        setTopic(found.subjects[0] || "Session focus");
+        setQuickNotes("");
+        setHomeworkDetails(found.currentHomework || "");
+      } catch (error) {
+        setStatus(error instanceof Error ? error.message : "Could not load child profile.");
+      }
+    }
+
+    load();
   }, [params.childId]);
 
   const session = useMemo<SessionLog | null>(() => {
@@ -61,8 +71,9 @@ export default function NewSessionPage() {
     return {
       id: `session-${child.id}-${Date.now()}`,
       childId: child.id,
-      tutorId: mockTutor.id,
+      tutorId: child.tutorId || "",
       sessionDate,
+      subject: child.subjects[0] || undefined,
       topic,
       quickNotes,
       sessionFocus,
@@ -100,20 +111,25 @@ export default function NewSessionPage() {
 
   async function saveSession() {
     if (!session) return;
-    // TODO: Swap local mock persistence for Supabase/Firebase insert.
-    addSessionLog(session);
-    const syncResult = await syncSessionToSupabase(session);
-    setStatus(syncResult.ok ? "Session saved locally and synced" : "Session saved locally");
+    try {
+      await insertSession(session, child!);
+      setPreviousSessions(await listSessions(child!.id));
+      setStatus("Session saved to Supabase");
+    } catch (error) {
+      setStatus(error instanceof Error ? error.message : "Could not save session.");
+    }
   }
 
   async function generateReport() {
     if (!child || !session) return;
-    addSessionLog(session);
-    const report = generateParentReport(child, session, previousSessions);
-    addParentReport(report, { ...session, parentReport: report });
-    await syncSessionToSupabase(session);
-    await syncReportToSupabase(report);
-    router.push(`/reports/${report.id}`);
+    try {
+      const savedSession = await insertSession(session, child);
+      const report = generateParentReport(child, savedSession, previousSessions);
+      await insertReport(report, savedSession, child);
+      router.push(`/reports/${report.id}`);
+    } catch (error) {
+      setStatus(error instanceof Error ? error.message : "Could not generate report.");
+    }
   }
 
   if (!child) return null;

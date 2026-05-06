@@ -2,19 +2,21 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Bell } from "lucide-react";
-import { mockTutor } from "../../lib/mockRiseData";
+import { Bell, LogOut } from "lucide-react";
 import { initialsFromName } from "../../lib/tutorKey";
+import { useAuth } from "./AuthProvider";
 import { cn } from "./utils";
 
 const navItems = [
   { href: "/dashboard", label: "Dashboard" },
-  { href: "/students/new", label: "Students" },
-  { href: "/tutor-key", label: "Reports" },
+  { href: "/students", label: "Students" },
+  { href: "/reports", label: "Reports" },
 ];
 
 export function TopNav() {
   const pathname = usePathname();
+  const { user, signOut } = useAuth();
+  const displayName = user?.user_metadata?.full_name || user?.email || "RISE Tutor";
 
   return (
     <header className="sticky top-0 z-40 border-b border-[#c7c4d7] bg-white/95 shadow-sm backdrop-blur print:hidden">
@@ -46,8 +48,11 @@ export function TopNav() {
             <Bell className="h-5 w-5" />
           </button>
           <div className="flex h-10 w-10 items-center justify-center rounded-full border border-[#c7c4d7] bg-[#efecf8] text-sm font-bold text-[#4648d4]">
-            {initialsFromName(mockTutor.fullName)}
+            {initialsFromName(displayName)}
           </div>
+          <button type="button" onClick={signOut} className="rounded-full p-2 text-[#464554] hover:bg-[#f5f2fe]" aria-label="Log out">
+            <LogOut className="h-5 w-5" />
+          </button>
         </div>
       </div>
     </header>

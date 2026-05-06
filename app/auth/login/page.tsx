@@ -1,12 +1,61 @@
 "use client";
 
+import type { FormEvent } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowRight, ShieldCheck } from "lucide-react";
 import { BrandButton } from "../../../components/rise/BrandButton";
 import { Footer } from "../../../components/rise/Footer";
+import { isSupabaseConfigured, supabase } from "../../../lib/supabase";
+import { upsertProfile } from "../../../lib/supabaseData";
 
 export default function LoginPage() {
   const router = useRouter();
+  const [mode, setMode] = useState<"login" | "signup">("login");
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [status, setStatus] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  async function submitAuth(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (!supabase) {
+      setStatus("Supabase is not configured yet. Add your environment variables and restart the dev server.");
+      return;
+    }
+
+    setLoading(true);
+    setStatus("");
+
+    try {
+      if (mode === "signup") {
+        const { data, error } = await supabase.auth.signUp({
+          email,
+          password,
+          options: {
+            data: {
+              full_name: fullName,
+            },
+          },
+        });
+        if (error) throw error;
+        if (data.user) {
+          await upsertProfile(fullName || email, email);
+        }
+        setStatus(data.session ? "Account created." : "Account created. Check your email if confirmation is enabled.");
+      } else {
+        const { error } = await supabase.auth.signInWithPassword({ email, password });
+        if (error) throw error;
+      }
+
+      router.push("/dashboard");
+    } catch (error) {
+      setStatus(error instanceof Error ? error.message : "Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <main className="flex min-h-screen flex-col bg-[#fcf8ff]">
@@ -25,36 +74,67 @@ export default function LoginPage() {
               <p className="mt-2 text-sm text-[#464554]">Log sessions, track progress, and keep parents updated.</p>
             </div>
 
-            <form
-              className="space-y-5"
-              onSubmit={(event) => {
-                event.preventDefault();
-                router.push("/dashboard");
-              }}
-            >
+            <div className="mb-5 grid grid-cols-2 rounded-2xl bg-[#f5f2fe] p-1">
+              {(["login", "signup"] as const).map((option) => (
+                <button
+                  key={option}
+                  type="button"
+                  onClick={() => setMode(option)}
+                  className={`rounded-xl px-3 py-2 text-sm font-semibold transition ${
+                    mode === option ? "bg-white text-[#4648d4] shadow-sm" : "text-[#464554]"
+                  }`}
+                >
+                  {option === "login" ? "Log in" : "Sign up"}
+                </button>
+              ))}
+            </div>
+
+            {!isSupabaseConfigured ? (
+              <div className="mb-5 rounded-xl border border-[#c7c4d7] bg-[#f5f2fe] p-4 text-sm leading-6 text-[#464554]">
+                Add `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` to enable authentication.
+              </div>
+            ) : null}
+
+            <form className="space-y-5" onSubmit={submitAuth}>
+              {mode === "signup" ? (
+                <label className="block space-y-2">
+                  <span className="text-sm font-medium text-[#464554]">Full name</span>
+                  <input
+                    value={fullName}
+                    onChange={(event) => setFullName(event.target.value)}
+                    placeholder="e.g. Elena Dragan"
+                    className="h-12 w-full rounded-xl border border-[#c7c4d7] bg-white px-4 text-[#1b1b23] outline-none transition placeholder:text-[#767586] focus:border-[#4648d4] focus:bg-[#fcf8ff] focus:ring-4 focus:ring-[#e1e0ff] focus:ring-offset-2 focus:ring-offset-white"
+                  />
+                </label>
+              ) : null}
+
               <label className="block space-y-2">
-                <span className="text-sm font-medium text-[#464554]">Email Address</span>
+                <span className="text-sm font-medium text-[#464554]">Email address</span>
                 <input
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
                   type="email"
                   placeholder="name@education.com"
                   className="h-12 w-full rounded-xl border border-[#c7c4d7] bg-white px-4 text-[#1b1b23] outline-none transition placeholder:text-[#767586] focus:border-[#4648d4] focus:bg-[#fcf8ff] focus:ring-4 focus:ring-[#e1e0ff] focus:ring-offset-2 focus:ring-offset-white"
+                  required
                 />
               </label>
               <label className="block space-y-2">
                 <span className="flex items-center justify-between text-sm font-medium text-[#464554]">
                   Password
-                  <a href="#" className="text-xs font-semibold text-[#4648d4] underline underline-offset-4">
-                    Forgot password?
-                  </a>
+                  <span className="text-xs font-semibold text-[#767586]">Minimum 6 characters</span>
                 </span>
                 <input
+                  value={password}
+                  onChange={(event) => setPassword(event.target.value)}
                   type="password"
                   placeholder="Password"
                   className="h-12 w-full rounded-xl border border-[#c7c4d7] bg-white px-4 text-[#1b1b23] outline-none transition placeholder:text-[#767586] focus:border-[#4648d4] focus:bg-[#fcf8ff] focus:ring-4 focus:ring-[#e1e0ff] focus:ring-offset-2 focus:ring-offset-white"
+                  required
                 />
               </label>
-              <BrandButton type="submit" className="w-full">
-                Log in
+              <BrandButton type="submit" className="w-full" disabled={loading || !isSupabaseConfigured}>
+                {loading ? "Working..." : mode === "login" ? "Log in" : "Create account"}
                 <ArrowRight className="h-4 w-4" />
               </BrandButton>
             </form>
@@ -65,30 +145,11 @@ export default function LoginPage() {
               <span className="h-px flex-1 bg-[#c7c4d7]" />
             </div>
 
-            <BrandButton
-              variant="secondary"
-              className="w-full"
-              onClick={() => {
-                // TODO: Wire real Google OAuth sign-in.
-                router.push("/auth/google");
-              }}
-            >
-              Continue with Google
+            <BrandButton variant="secondary" className="w-full opacity-60" disabled>
+              Continue with Google - Coming Soon
             </BrandButton>
 
-            <p className="mt-7 text-center text-sm text-[#464554]">
-              New to RISE?{" "}
-              <button
-                type="button"
-                onClick={() => {
-                  // TODO: Route to a dedicated signup flow.
-                  router.push("/students/new");
-                }}
-                className="font-semibold text-[#4648d4] underline underline-offset-4"
-              >
-                Create tutor account
-              </button>
-            </p>
+            {status ? <p className="mt-5 rounded-xl bg-[#f5f2fe] p-3 text-center text-sm font-semibold text-[#464554]">{status}</p> : null}
           </div>
 
           <div className="mt-8 flex items-center justify-center gap-2 text-sm text-[#767586]">

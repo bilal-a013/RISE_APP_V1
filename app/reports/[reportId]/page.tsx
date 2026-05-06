@@ -1,18 +1,19 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { Download, Send } from "lucide-react";
+import { ProtectedContent } from "../../../components/rise/AuthProvider";
 import { BrandButton } from "../../../components/rise/BrandButton";
 import { Card } from "../../../components/rise/Card";
 import { Footer } from "../../../components/rise/Footer";
 import { ProgressSegments } from "../../../components/rise/ProgressSegments";
 import { ReportSectionCard } from "../../../components/rise/ReportSectionCard";
 import { TopNav } from "../../../components/rise/TopNav";
-import { getRiseStore } from "../../../lib/localStorageStore";
 import { generateParentReport } from "../../../lib/reportGenerator";
+import { getReportBundle } from "../../../lib/supabaseData";
 import { initialsFromName } from "../../../lib/tutorKey";
-import type { ChildProfile, ParentReport, RiseStore, SessionLog } from "../../../types/rise";
+import type { ChildProfile, ParentReport, SessionLog } from "../../../types/rise";
 
 function priorityLabel(session?: SessionLog) {
   if (!session) return "Medium Priority";
@@ -23,27 +24,41 @@ function priorityLabel(session?: SessionLog) {
 
 export default function ReportPage() {
   const params = useParams<{ reportId: string }>();
-  const [store, setStore] = useState<RiseStore | null>(null);
+  const [data, setData] = useState<{ child: ChildProfile; session: SessionLog; report: ParentReport } | null>(null);
+  const [status, setStatus] = useState("Loading report...");
 
   useEffect(() => {
-    setStore(getRiseStore());
-  }, []);
+    getReportBundle(params.reportId)
+      .then((bundle) => {
+        if (!bundle.session) {
+          setStatus("No session found for this report.");
+          return;
+        }
+        setData({
+          child: bundle.child,
+          session: bundle.session,
+          report: bundle.parentReport ?? generateParentReport(bundle.child, bundle.session, bundle.sessions),
+        });
+        setStatus("");
+      })
+      .catch((error) => setStatus(error instanceof Error ? error.message : "Could not load report."));
+  }, [params.reportId]);
 
-  const data = useMemo(() => {
-    if (!store) return null;
-    const existingReport = store.reports.find((item) => item.id === params.reportId);
-    const session =
-      store.sessions.find((item) => item.id === existingReport?.sessionLogId) ??
-      store.sessions.find((item) => `report-${item.id}` === params.reportId) ??
-      store.sessions[0];
-    const child = store.children.find((item) => item.id === (existingReport?.childId ?? session?.childId)) ?? store.children[0];
-    const report = existingReport ?? generateParentReport(child, session, store.sessions.filter((item) => item.childId === child.id));
-    return { child, session, report };
-  }, [params.reportId, store]);
+  if (!data) {
+    return (
+      <ProtectedContent>
+        <main className="min-h-screen bg-[#fcf8ff]">
+          <TopNav />
+          <div className="mx-auto max-w-7xl px-6 py-10">
+            <p className="rounded-xl border border-[#c7c4d7] bg-white p-4 text-sm font-semibold text-[#464554]">{status}</p>
+          </div>
+          <Footer />
+        </main>
+      </ProtectedContent>
+    );
+  }
 
-  if (!data) return null;
-
-  const { child, session, report } = data as { child: ChildProfile; session: SessionLog; report: ParentReport };
+  const { child, session, report } = data;
   const metadata = { child, session, report };
   const date = new Intl.DateTimeFormat("en-GB", { dateStyle: "long" }).format(new Date(session.sessionDate));
   const progressSkillOne = Math.min(95, 45 + session.progressRating * 10);
@@ -66,9 +81,10 @@ export default function ReportPage() {
   );
 
   return (
-    <main className="min-h-screen bg-[#fcf8ff]">
-      <TopNav />
-      <div className="mx-auto max-w-7xl px-6 py-10">
+    <ProtectedContent>
+      <main className="min-h-screen bg-[#fcf8ff]">
+        <TopNav />
+        <div className="mx-auto max-w-7xl px-6 py-10">
         <header className="mb-8 flex flex-col gap-5 md:flex-row md:items-center md:justify-between print:hidden">
           <div>
             <h1 className="text-3xl font-semibold text-[#1b1b23]">Parent Session Report</h1>
@@ -204,8 +220,9 @@ export default function ReportPage() {
             {JSON.stringify(metadata, null, 2)}
           </pre>
         </details>
-      </div>
-      <Footer />
-    </main>
+        </div>
+        <Footer />
+      </main>
+    </ProtectedContent>
   );
 }

@@ -1,89 +1,98 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { BookOpen, Info, KeyRound, Smile, UsersRound } from "lucide-react";
+import { ProtectedContent } from "../../../components/rise/AuthProvider";
 import { BrandButton } from "../../../components/rise/BrandButton";
 import { Card } from "../../../components/rise/Card";
 import { ChipSelector } from "../../../components/rise/ChipSelector";
 import { Footer } from "../../../components/rise/Footer";
 import { TopNav } from "../../../components/rise/TopNav";
 import { TutorKeyBadge } from "../../../components/rise/TutorKeyBadge";
-import { getRiseStore, syncChildToSupabase, upsertChildProfile } from "../../../lib/localStorageStore";
+import { getStudent, upsertStudent } from "../../../lib/supabaseData";
 import { generateTutorKey } from "../../../lib/tutorKey";
 import type { ChildProfile } from "../../../types/rise";
-
-function makeId(fullName: string) {
-  return fullName.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "") || `child-${Date.now()}`;
-}
 
 export default function NewStudentPageClient() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [fullName, setFullName] = useState("Ayaan Khan");
-  const [preferredName, setPreferredName] = useState("Ayaan");
-  const [age, setAge] = useState("15");
-  const [yearGroup, setYearGroup] = useState("Year 10");
-  const [pronouns, setPronouns] = useState("he/him");
-  const [school, setSchool] = useState("Northbridge Academy");
-  const [subjects, setSubjects] = useState(["GCSE Physics", "Maths"]);
-  const [examBoard, setExamBoard] = useState("AQA");
-  const [currentWorkingLevel, setCurrentWorkingLevel] = useState("Grade 5");
-  const [targetLevel, setTargetLevel] = useState("Grade 7");
-  const [mainGoals, setMainGoals] = useState("Build exam confidence and secure Grade 7 across Physics problem-solving.");
-  const [strengths, setStrengths] = useState(["Visual reasoning", "Good recall"]);
-  const [struggles, setStruggles] = useState(["Interference patterns", "Explaining current direction"]);
-  const [currentTopics, setCurrentTopics] = useState("EM Induction, Wave Optics");
-  const [learningStyle, setLearningStyle] = useState("Visual examples followed by short independent practice.");
-  const [parentName, setParentName] = useState("Zara Khan");
-  const [parentEmail, setParentEmail] = useState("zara.khan@example.com");
-  const [parentPhone, setParentPhone] = useState("+44 7700 900234");
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [createdAt, setCreatedAt] = useState<string | null>(null);
+  const [fullName, setFullName] = useState("");
+  const [preferredName, setPreferredName] = useState("");
+  const [age, setAge] = useState("");
+  const [yearGroup, setYearGroup] = useState("");
+  const [pronouns, setPronouns] = useState("");
+  const [school, setSchool] = useState("");
+  const [subjects, setSubjects] = useState<string[]>([]);
+  const [examBoard, setExamBoard] = useState("");
+  const [currentWorkingLevel, setCurrentWorkingLevel] = useState("");
+  const [targetLevel, setTargetLevel] = useState("");
+  const [mainGoals, setMainGoals] = useState("");
+  const [strengths, setStrengths] = useState<string[]>([]);
+  const [struggles, setStruggles] = useState<string[]>([]);
+  const [currentTopics, setCurrentTopics] = useState("");
+  const [learningStyle, setLearningStyle] = useState("");
+  const [parentName, setParentName] = useState("");
+  const [parentEmail, setParentEmail] = useState("");
+  const [parentPhone, setParentPhone] = useState("");
   const [reportMethod, setReportMethod] = useState<ChildProfile["preferredReportMethod"]>("email");
-  const [currentHomework, setCurrentHomework] = useState("Exam-style EM induction questions 1-8.");
+  const [currentHomework, setCurrentHomework] = useState("");
   const [upcomingTestDate, setUpcomingTestDate] = useState("");
-  const [sessionFrequency, setSessionFrequency] = useState("Weekly");
-  const [longTermGoal, setLongTermGoal] = useState("Secure GCSE Grade 7 in Physics.");
-  const [tutorNotes, setTutorNotes] = useState("Responds well when abstract physics is linked to diagrams.");
-  const tutorKey = useMemo(() => (fullName.trim() === "Ayaan Khan" ? "RISE-AK47" : generateTutorKey(fullName)), [fullName]);
+  const [sessionFrequency, setSessionFrequency] = useState("");
+  const [longTermGoal, setLongTermGoal] = useState("");
+  const [tutorNotes, setTutorNotes] = useState("");
+  const [tutorKey, setTutorKey] = useState("RISE-NEW");
   const [status, setStatus] = useState("Tutor key ready");
 
   useEffect(() => {
     const childId = searchParams.get("childId");
     if (!childId) return;
-    const child = getRiseStore().children.find((item) => item.id === childId);
-    if (!child) return;
 
-    setFullName(child.fullName);
-    setPreferredName(child.preferredName || "");
-    setAge(child.age?.toString() || "");
-    setYearGroup(child.yearGroup);
-    setPronouns(child.pronouns || "");
-    setSchool(child.school || "");
-    setSubjects(child.subjects.length ? child.subjects : ["GCSE Physics"]);
-    setExamBoard(child.examBoard || "");
-    setCurrentWorkingLevel(child.currentWorkingLevel);
-    setTargetLevel(child.targetLevel);
-    setMainGoals(child.mainGoals || "");
-    setStrengths(child.strengths || []);
-    setStruggles(child.struggles || []);
-    setCurrentTopics(child.currentTopics?.join(", ") || "");
-    setLearningStyle(child.learningStyle || "");
-    setParentName(child.parentName);
-    setParentEmail(child.parentEmail);
-    setParentPhone(child.parentPhone || "");
-    setReportMethod(child.preferredReportMethod || "email");
-    setCurrentHomework(child.currentHomework || "");
-    setUpcomingTestDate(child.upcomingTestDate || "");
-    setSessionFrequency(child.sessionFrequency || "");
-    setLongTermGoal(child.longTermGoal || "");
-    setTutorNotes(child.tutorNotes || "");
-    setStatus("Loaded child profile for editing");
+    getStudent(childId)
+      .then((child) => {
+        setEditingId(child.id);
+        setCreatedAt(child.createdAt);
+        setTutorKey(child.tutorKey);
+        setFullName(child.fullName);
+        setPreferredName(child.preferredName || "");
+        setAge(child.age?.toString() || "");
+        setYearGroup(child.yearGroup);
+        setPronouns(child.pronouns || "");
+        setSchool(child.school || "");
+        setSubjects(child.subjects.length ? child.subjects : []);
+        setExamBoard(child.examBoard || "");
+        setCurrentWorkingLevel(child.currentWorkingLevel);
+        setTargetLevel(child.targetLevel);
+        setMainGoals(child.mainGoals || "");
+        setStrengths(child.strengths || []);
+        setStruggles(child.struggles || []);
+        setCurrentTopics(child.currentTopics?.join(", ") || "");
+        setLearningStyle(child.learningStyle || "");
+        setParentName(child.parentName);
+        setParentEmail(child.parentEmail);
+        setParentPhone(child.parentPhone || "");
+        setReportMethod(child.preferredReportMethod || "email");
+        setCurrentHomework(child.currentHomework || "");
+        setUpcomingTestDate(child.upcomingTestDate || "");
+        setSessionFrequency(child.sessionFrequency || "");
+        setLongTermGoal(child.longTermGoal || "");
+        setTutorNotes(child.tutorNotes || "");
+        setStatus("Loaded child profile for editing");
+      })
+      .catch((error) => setStatus(error instanceof Error ? error.message : "Could not load child profile."));
   }, [searchParams]);
+
+  useEffect(() => {
+    if (editingId) return;
+    setTutorKey(fullName.trim() ? generateTutorKey(fullName) : "RISE-NEW");
+  }, [editingId, fullName]);
 
   function buildChild(): ChildProfile {
     const timestamp = new Date().toISOString();
     return {
-      id: makeId(fullName),
+      id: editingId || crypto.randomUUID(),
       tutorKey,
       fullName,
       preferredName,
@@ -113,28 +122,34 @@ export default function NewStudentPageClient() {
       longTermGoal,
       sessionFrequency,
       tutorNotes,
-      createdAt: timestamp,
+      createdAt: createdAt || timestamp,
       updatedAt: timestamp,
     };
   }
 
   async function saveProfile() {
-    // TODO: Swap local mock persistence for Supabase/Firebase upsert.
-    const child = buildChild();
-    upsertChildProfile(child);
-    const syncResult = await syncChildToSupabase(child);
-    setStatus(syncResult.ok ? "Profile saved locally and synced" : "Profile saved locally");
+    try {
+      const child = await upsertStudent(buildChild());
+      setEditingId(child.id);
+      setTutorKey(child.tutorKey);
+      setStatus("Profile saved to Supabase");
+    } catch (error) {
+      setStatus(error instanceof Error ? error.message : "Could not save profile.");
+    }
   }
 
   async function startFirstSession() {
-    const child = buildChild();
-    upsertChildProfile(child);
-    await syncChildToSupabase(child);
-    router.push(`/sessions/new/${child.id}`);
+    try {
+      const child = await upsertStudent(buildChild());
+      router.push(`/sessions/new/${child.id}`);
+    } catch (error) {
+      setStatus(error instanceof Error ? error.message : "Could not save profile.");
+    }
   }
 
   return (
-    <main className="min-h-screen bg-[#fcf8ff]">
+    <ProtectedContent>
+      <main className="min-h-screen bg-[#fcf8ff]">
       <TopNav />
       <div className="mx-auto max-w-6xl px-6 py-10">
         <header className="mb-8">
@@ -257,6 +272,7 @@ export default function NewStudentPageClient() {
         </div>
       </div>
       <Footer />
-    </main>
+      </main>
+    </ProtectedContent>
   );
 }
