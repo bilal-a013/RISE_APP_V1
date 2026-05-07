@@ -21,7 +21,9 @@ interface CurrentLesson {
 interface CompletedProgressRow extends LessonProgress {
   lesson: {
     topic: {
-      subject: Pick<Subject, 'name' | 'slug' | 'icon'>
+      subject: Pick<Subject, 'name' | 'slug'> & {
+        icon_name?: string | null
+      }
     } | null
   } | null
 }
@@ -86,13 +88,13 @@ async function getCurrentLesson(
         *,
         topic:topics(
           *,
-          subject:subjects(*)
+          subject:subjects(name, slug, icon_name)
         )
       )
     `)
     .eq('student_id', userId)
     .is('completed_at', null)
-    .order('created_at', { ascending: false })
+    .order('last_accessed_at', { ascending: false })
     .limit(18)
 
   if (progressError) {
@@ -113,7 +115,7 @@ async function getCurrentLesson(
       *,
       topic:topics(
         *,
-        subject:subjects(*)
+        subject:subjects(name, slug, icon_name)
       )
     `)
     .eq('type', 'learn')
@@ -140,7 +142,7 @@ async function getLastSession(
     .from('student_sessions')
     .select('*')
     .eq('student_id', userId)
-    .order('session_date', { ascending: false })
+    .order('created_at', { ascending: false })
     .limit(1)
     .maybeSingle()
 
@@ -223,7 +225,9 @@ export default async function HomePage() {
     const streak = Math.max(1, Math.min(7, completedProgress.length || 1))
     const xp = completedProgress.length * 50
     const introCopy = lastSession
-      ? `Last tutor session: ${new Date(lastSession.session_date).toLocaleDateString('en-GB', {
+      ? `Last tutor session recorded on ${new Date(
+          (lastSession as StudentSession & { created_at?: string }).created_at ?? Date.now()
+        ).toLocaleDateString('en-GB', {
           weekday: 'short',
           day: 'numeric',
           month: 'short',
