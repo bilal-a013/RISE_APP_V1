@@ -1,6 +1,10 @@
 import { copyFileSync, existsSync } from 'node:fs'
 import { join } from 'node:path'
 
+if (process.env.VERCEL || process.env.CI) {
+  process.exit(0)
+}
+
 const cwd = process.cwd()
 const envLocalPath = join(cwd, '.env.local')
 const envLocalExamplePath = join(cwd, '.env.local.example')
