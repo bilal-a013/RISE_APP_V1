@@ -12,15 +12,24 @@ interface PageProps {
 async function getTopicsWithProgress(subjectSlug: string, userId: string | null) {
   const supabase = await createClient()
 
-  const { data: subject } = await supabase
+  const { data: subject, error: subjectError } = await supabase
     .from('subjects')
     .select('*')
     .eq('slug', subjectSlug)
-    .single()
+    .maybeSingle()
+
+  if (subjectError) {
+    console.error('[subject] Failed to load subject', subjectError)
+    return {
+      subject: { id: 'maths', name: 'Maths', slug: 'maths' },
+      topics: [],
+      loadError: 'Maths lesson data is not connected to this shared backend yet.',
+    }
+  }
 
   if (!subject) return null
 
-  const { data: topics } = await supabase
+  const { data: topics, error: topicsError } = await supabase
     .from('topics')
     .select(`
       *,
@@ -29,23 +38,33 @@ async function getTopicsWithProgress(subjectSlug: string, userId: string | null)
     .eq('subject_id', subject.id)
     .order('order_index', { ascending: true })
 
-  if (!topics) return { subject, topics: [] }
+  if (topicsError) {
+    console.error('[subject] Failed to load topics', topicsError)
+    return { subject, topics: [], loadError: 'Maths topics could not load yet.' }
+  }
+
+  if (!topics) return { subject, topics: [], loadError: null }
 
   // Fetch progress for authenticated users
   let progressMap: Record<string, LessonProgress> = {}
   if (userId) {
     const lessonIds = topics.flatMap((t) => (t.lessons as Lesson[]).map((l) => l.id))
-    const { data: progress } = await supabase
+    const { data: progress, error: progressError } = await supabase
       .from('lesson_progress')
       .select('*')
       .eq('student_id', userId)
       .in('lesson_id', lessonIds)
 
-    progressMap = Object.fromEntries((progress ?? []).map((p) => [p.lesson_id, p]))
+    if (progressError) {
+      console.error('[subject] Failed to load progress', progressError)
+    } else {
+      progressMap = Object.fromEntries((progress ?? []).map((p) => [p.lesson_id, p]))
+    }
   }
 
   return {
     subject,
+    loadError: null,
     topics: (topics as Array<Topic & { lessons: Lesson[] }>).map((topic) => ({
       ...topic,
       lessons: topic.lessons
@@ -66,7 +85,7 @@ export default async function SubjectPage({ params }: PageProps) {
 
   if (!result) notFound()
 
-  const { subject, topics } = result
+  const { subject, topics, loadError } = result
   if (!isMathsSubject(subject)) notFound()
 
   return (
@@ -93,6 +112,23 @@ export default async function SubjectPage({ params }: PageProps) {
           <p className="text-3xl font-extrabold text-primary-600">{topics.length}</p>
         </div>
       </div>
+
+      {loadError ? (
+        <div className="mb-6 rounded-2xl border border-amber-200 bg-amber-50/80 px-5 py-4">
+          <p className="rise-overline text-[10px] mb-2">Lessons coming across</p>
+          <p className="text-sm font-medium text-secondary-800">{loadError}</p>
+        </div>
+      ) : null}
+
+      {topics.length === 0 ? (
+        <div className="glass-card-solid py-16 text-center">
+          <span className="mb-3 block text-5xl">📚</span>
+          <h2 className="text-3xl font-extrabold tracking-tight text-secondary-900">No lessons here yet</h2>
+          <p className="mt-3 max-w-md mx-auto text-sm text-secondary-400 leading-relaxed">
+            Tutor Key login is connected. Maths lessons can be migrated into this shared backend next.
+          </p>
+        </div>
+      ) : null}
 
       <div className="grid gap-4 xl:grid-cols-2">
         {topics.map((topic) => {

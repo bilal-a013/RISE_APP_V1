@@ -44,7 +44,7 @@ export default function LoginPage({
             </div>
             <div>
               <p className="rise-overline text-[10px]">RISE</p>
-              <p className="text-base font-semibold leading-none text-secondary-900">GCSE Maths</p>
+              <p className="text-base font-semibold leading-none text-secondary-900">Returning students</p>
             </div>
           </div>
           <Link href="/" className="text-xs font-medium text-secondary-400 hover:text-primary-600 transition-colors">
@@ -56,11 +56,12 @@ export default function LoginPage({
         <div className="mb-7">
           <p className="rise-overline mb-2">Welcome back</p>
           <h1 className="text-4xl font-extrabold leading-tight tracking-tight text-secondary-900 lg:text-5xl">
-            Continue your{' '}
-            <span className="rise-gradient-text">maths journey</span>.
+            Sign in to your{' '}
+            <span className="rise-gradient-text">RISE account</span>.
           </h1>
           <p className="mt-3 text-sm leading-relaxed text-secondary-400">
-            Sign in to pick up your next lesson and keep the streak alive.
+            Email sign-in is for returning students who already set up an account.
+            If your tutor gave you a code, enter that instead.
           </p>
         </div>
 
@@ -114,15 +115,18 @@ export default function LoginPage({
         {/* Footer links */}
         <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-secondary-400">
           <span>
-            New to RISE?{' '}
-            <Link href="/auth/signup" className="font-semibold text-primary-600 hover:text-primary-700 transition-colors">
-              Create account
+            Got a tutor code?{' '}
+            <Link href="/auth/tutor-code" className="font-semibold text-primary-600 hover:text-primary-700 transition-colors">
+              Enter it here
             </Link>
           </span>
           <span className="text-primary-200">·</span>
-          <Link href="/auth/tutor-code" className="font-semibold text-primary-600 hover:text-primary-700 transition-colors">
-            Enter tutor code
-          </Link>
+          <span>
+            Demo account path:{' '}
+            <Link href="/auth/signup" className="font-semibold text-primary-600 hover:text-primary-700 transition-colors">
+              create account
+            </Link>
+          </span>
         </div>
       </div>
     </div>

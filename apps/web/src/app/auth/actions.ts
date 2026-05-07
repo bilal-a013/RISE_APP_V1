@@ -1,6 +1,8 @@
 'use server'
 
 import { createClient } from '@/lib/supabase/server'
+import { clearStudentSession, setStudentSession } from '@/lib/student-session'
+import { validateTutorKey } from '@/lib/tutor-key'
 import { redirect } from 'next/navigation'
 
 function getField(formData: FormData, key: string) {
@@ -34,24 +36,85 @@ function buildSignupRedirect(formData: FormData, error: string) {
   return `/auth/signup?${params.toString()}`
 }
 
-export async function login(formData: FormData) {
-  const supabase = await createClient()
+function getLoginErrorMessage(error: unknown) {
+  if (error instanceof Error) {
+    if (error.message.includes('NEXT_PUBLIC_SUPABASE_URL is missing')) {
+      return 'RISE is missing its Supabase URL on this deployment.'
+    }
 
-  const email = getField(formData, 'email')
-  const password = getField(formData, 'password')
+    if (error.message.includes('NEXT_PUBLIC_SUPABASE_ANON_KEY is missing')) {
+      return 'RISE is missing its Supabase anon key on this deployment.'
+    }
 
-  const { error } = await supabase.auth.signInWithPassword({ email, password })
+    if (error.message.includes('must point at a Supabase project URL')) {
+      return 'RISE is using an invalid Supabase URL on this deployment.'
+    }
 
-  if (error) {
-    redirect(`/auth/login?error=${encodeURIComponent(error.message)}`)
+    if (error.message.includes('fetch failed')) {
+      return 'RISE could not reach Supabase from this deployment.'
+    }
+
+    if (error.message) {
+      return error.message
+    }
   }
 
-  redirect('/')
+  return 'Something went wrong while signing you in.'
+}
+
+export async function login(formData: FormData) {
+  let errorMessage = ''
+
+  try {
+    const supabase = await createClient()
+
+    const email = getField(formData, 'email')
+    const password = getField(formData, 'password')
+
+    const { error } = await supabase.auth.signInWithPassword({ email, password })
+
+    if (error) {
+      errorMessage =
+        error.message === 'Invalid login credentials'
+          ? 'Your email or password is incorrect.'
+          : error.message
+    }
+  } catch (error) {
+    errorMessage = getLoginErrorMessage(error)
+  }
+
+  if (errorMessage) {
+    redirect(`/auth/login?error=${encodeURIComponent(errorMessage)}`)
+  }
+
+  redirect('/home')
+}
+
+export async function enterTutorKey(formData: FormData) {
+  const tutorKey = getField(formData, 'tutor_key')
+  const result = await validateTutorKey(tutorKey)
+
+  if (!result.ok) {
+    const params = new URLSearchParams({
+      error: result.message,
+    })
+
+    if (tutorKey) {
+      params.set('code', tutorKey)
+    }
+
+    redirect(`/auth/tutor-code?${params.toString()}`)
+  }
+
+  await setStudentSession({
+    childProfileId: result.childProfileId,
+    tutorKeyId: result.tutorKeyId,
+  })
+
+  redirect('/home')
 }
 
 export async function signup(formData: FormData) {
-  const supabase = await createClient()
-
   const email = getField(formData, 'email')
   const password = getField(formData, 'password')
   const full_name = getField(formData, 'full_name')
@@ -77,27 +140,39 @@ export async function signup(formData: FormData) {
     )
   }
 
-  const { error } = await supabase.auth.signUp({
-    email,
-    password,
-    options: {
-      data: {
-        full_name,
-        age_range,
-        working_level,
-        target_grade,
-        study_style,
-        preferred_subject,
-        onboarding_mode,
-        tutor_code: tutor_code || null,
-        recommended_topic: recommended_topic || null,
-        onboarding_complete: true,
-      },
-    },
-  })
+  let errorMessage = ''
 
-  if (error) {
-    redirect(buildSignupRedirect(formData, error.message))
+  try {
+    const supabase = await createClient()
+
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          full_name,
+          age_range,
+          working_level,
+          target_grade,
+          study_style,
+          preferred_subject,
+          onboarding_mode,
+          tutor_code: tutor_code || null,
+          recommended_topic: recommended_topic || null,
+          onboarding_complete: true,
+        },
+      },
+    })
+
+    if (error) {
+      errorMessage = error.message
+    }
+  } catch (error) {
+    errorMessage = getLoginErrorMessage(error)
+  }
+
+  if (errorMessage) {
+    redirect(buildSignupRedirect(formData, errorMessage))
   }
 
   const successMessage =
@@ -109,7 +184,11 @@ export async function signup(formData: FormData) {
 }
 
 export async function logout() {
-  const supabase = await createClient()
-  await supabase.auth.signOut()
-  redirect('/auth/login')
+  try {
+    await clearStudentSession()
+    const supabase = await createClient()
+    await supabase.auth.signOut()
+  } finally {
+    redirect('/')
+  }
 }

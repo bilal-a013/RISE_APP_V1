@@ -1,15 +1,34 @@
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
+import { getStudentSession } from '@/lib/student-session'
 import BottomNav from '@/components/layout/BottomNav'
 
-export default async function AppLayout({ children }: { children: React.ReactNode }) {
-  const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
+export const dynamic = 'force-dynamic'
 
-  if (!user) {
-    redirect('/')
+export default async function AppLayout({ children }: { children: React.ReactNode }) {
+  let sessionUser: unknown = null
+  let studentSession = null
+
+  try {
+    const [studentSessionResult, supabase] = await Promise.all([
+      getStudentSession(),
+      createClient(),
+    ])
+    studentSession = studentSessionResult
+    const result = await supabase.auth.getUser()
+
+    if (result.error) {
+      console.error('[app layout] Failed to read Supabase session', result.error)
+    }
+
+    sessionUser = result.data.user ?? null
+  } catch (error) {
+    console.error('[app layout] Unexpected app shell failure', error)
+    redirect('/?error=We could not load RISE. Please try again.')
+  }
+
+  if (!sessionUser && !studentSession) {
+    redirect('/?message=Enter your tutor code to continue.')
   }
 
   return (
