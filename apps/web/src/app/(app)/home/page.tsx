@@ -6,6 +6,11 @@ import { createClient } from '@/lib/supabase/server'
 import { isMathsSubject } from '@/lib/onboarding'
 import { getStudentSession, type StudentSession as TutorStudentSession } from '@/lib/student-session'
 import {
+  getRecentStudentAppActivity,
+  recordStudentAppActivity,
+  type StudentAppActivity,
+} from '@/lib/student-activity'
+import {
   getChildProfileForStudentSession,
   getStudentHomeSnapshot,
   type TutorKeyChildProfile,
@@ -226,6 +231,24 @@ async function getTutorHomeSnapshot(
   return getStudentHomeSnapshot(session)
 }
 
+async function getTutorAppActivity(session: TutorStudentSession): Promise<StudentAppActivity[]> {
+  try {
+    await recordStudentAppActivity(session, {
+      activityType: 'home_viewed',
+      title: 'Home opened',
+      description: 'Opened the RISE student home dashboard.',
+      metadata: {
+        route: '/home',
+        source: 'rise_app',
+      },
+    })
+  } catch (error) {
+    console.error('[home] Failed to record student app activity', error)
+  }
+
+  return getRecentStudentAppActivity(session, 6)
+}
+
 function greetingForHour() {
   const hour = new Date().getHours()
   if (hour < 12) return 'Good morning'
@@ -250,6 +273,19 @@ function formatDate(value?: string | null) {
     weekday: 'short',
     day: 'numeric',
     month: 'short',
+  })
+}
+
+function formatActivityTime(value?: string | null) {
+  if (!value) return null
+  const date = new Date(value)
+  if (Number.isNaN(date.getTime())) return null
+
+  return date.toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'short',
+    hour: '2-digit',
+    minute: '2-digit',
   })
 }
 
@@ -301,7 +337,7 @@ export default async function HomePage() {
     redirect('/?message=Enter your tutor code to continue.')
   }
 
-  const [currentLessonResult, lastSessionResult, completedProgressResult, tutorProfileResult, tutorHomeResult] =
+  const [currentLessonResult, lastSessionResult, completedProgressResult, tutorProfileResult, tutorHomeResult, tutorActivityResult] =
     await Promise.all([
       safeLoad('current lesson', () =>
         user ? getCurrentLesson(supabase, user.id) : getFirstMathsLesson(supabase)
@@ -318,6 +354,9 @@ export default async function HomePage() {
       tutorSession
         ? safeLoad('tutor updates', () => getTutorHomeSnapshot(tutorSession))
         : Promise.resolve({ data: null, error: null }),
+      tutorSession
+        ? safeLoad('recent app activity', () => getTutorAppActivity(tutorSession))
+        : Promise.resolve({ data: [], error: null }),
     ])
 
     const homeErrors = [
@@ -326,12 +365,14 @@ export default async function HomePage() {
       completedProgressResult.error,
       tutorProfileResult.error,
       tutorHomeResult.error,
+      tutorActivityResult.error,
     ].filter(Boolean) as string[]
 
     const currentLesson = currentLessonResult.data
     const lastSession = lastSessionResult.data
     const completedProgress = completedProgressResult.data ?? []
     const tutorHome = tutorHomeResult.data
+    const recentAppActivity = tutorActivityResult.data ?? []
     const dashboardProfile = tutorHome?.profile ?? null
     const tutorProfile = tutorProfileResult.data ?? dashboardProfile
     const latestTutorSession = tutorHome?.latest_session ?? null
@@ -548,7 +589,7 @@ export default async function HomePage() {
           </section>
         </div>
 
-        <div className="mb-6 grid gap-4 xl:grid-cols-[minmax(0,1fr)_280px]">
+        <div className="mb-6 grid gap-4 xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_280px]">
           <div className="glass-card-solid p-5">
             <p className="rise-overline text-[10px] mb-3">Progress coming soon</p>
             <h2 className="text-2xl font-extrabold tracking-tight text-secondary-900">
@@ -558,6 +599,41 @@ export default async function HomePage() {
               For now, your Tutor Key profile is connected. Next, lessons and quiz progress will be written into the shared Dashboard backend.
             </p>
           </div>
+
+          <section className="glass-card-solid p-5">
+            <p className="rise-overline text-[10px] mb-3">Recent app activity</p>
+            {recentAppActivity.length ? (
+              <div className="space-y-3">
+                {recentAppActivity.map((activity) => (
+                  <div
+                    key={activity.id}
+                    className="rounded-xl border border-primary-200/30 bg-white/60 px-4 py-3"
+                  >
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <p className="text-sm font-bold text-secondary-900">
+                        {activity.title || humaniseToken(activity.activity_type) || 'App activity'}
+                      </p>
+                      {activity.created_at ? (
+                        <span className="text-[11px] font-semibold text-secondary-300">
+                          {formatActivityTime(activity.created_at)}
+                        </span>
+                      ) : null}
+                    </div>
+                    {activity.description ? (
+                      <p className="mt-1 text-xs leading-relaxed text-secondary-500">
+                        {activity.description}
+                      </p>
+                    ) : null}
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <EmptyTutorCard
+                title="Activity will appear here"
+                body="When you start lessons, practice, or quizzes in RISE, your tutor will be able to see the useful progress signals here later."
+              />
+            )}
+          </section>
 
           <div className="flex flex-col gap-3">
             <Link href="/progress?focus=streak" className="block">
