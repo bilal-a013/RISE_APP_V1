@@ -1,0 +1,497 @@
+# Instincts generated from https://github.com/bilal-a013/RISE_APP_V1
+# Generated: 2026-05-07T22:15:48.943Z
+# Version: 2.0
+# NOTE: This file supplements (does not replace) any existing curated instincts.
+# High-confidence manually curated instincts should be preserved alongside these.
+
+---
+id: RISE_APP_V1-commit-conventional
+trigger: "when writing a commit message"
+confidence: 0.85
+domain: git
+source: repo-analysis
+source_repo: https://github.com/bilal-a013/RISE_APP_V1
+---
+
+# RISE_APP_V1 Commit Conventional
+
+## Action
+
+Use conventional commit format with prefixes: fix, feat, chore
+
+## Evidence
+
+- 14 commits analyzed
+- Detected conventional commit pattern
+- Examples: fix: stabilize Supabase auth on Vercel, chore: redeploy live-dev with preview envs
+
+---
+id: RISE_APP_V1-commit-length
+trigger: "when writing a commit message"
+confidence: 0.6
+domain: git
+source: repo-analysis
+source_repo: https://github.com/bilal-a013/RISE_APP_V1
+---
+
+# RISE_APP_V1 Commit Length
+
+## Action
+
+Keep commit messages concise (~43 characters)
+
+## Evidence
+
+- Average commit message length: 43 chars
+- Based on 14 commits
+
+---
+id: RISE_APP_V1-naming-files
+trigger: "when creating a new file"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/bilal-a013/RISE_APP_V1
+---
+
+# RISE_APP_V1 Naming Files
+
+## Action
+
+Use camelCase naming convention
+
+## Evidence
+
+- Analyzed file naming patterns in repository
+- Dominant pattern: camelCase
+
+---
+id: RISE_APP_V1-import-alias
+trigger: "when importing modules"
+confidence: 0.85
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/bilal-a013/RISE_APP_V1
+---
+
+# RISE_APP_V1 Import Alias
+
+## Action
+
+Use path aliases (@/, ~/) instead of relative imports
+
+## Evidence
+
+- Import analysis shows alias pattern
+- Example: import { x } from '@/lib/x'
+
+---
+id: RISE_APP_V1-export-style
+trigger: "when exporting from a module"
+confidence: 0.7
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/bilal-a013/RISE_APP_V1
+---
+
+# RISE_APP_V1 Export Style
+
+## Action
+
+Prefer mixed exports
+
+## Evidence
+
+- Export pattern analysis
+- Dominant style: mixed
+
+---
+id: RISE_APP_V1-arch-type-based
+trigger: "when adding new code"
+confidence: 0.8
+domain: architecture
+source: repo-analysis
+source_repo: https://github.com/bilal-a013/RISE_APP_V1
+---
+
+# RISE_APP_V1 Arch Type Based
+
+## Action
+
+Place code in the appropriate type folder (components/, services/, utils/, etc.)
+
+## Evidence
+
+- Type-based module organization detected
+- Folders: 
+
+---
+id: RISE_APP_V1-test-separate
+trigger: "when writing tests"
+confidence: 0.8
+domain: testing
+source: repo-analysis
+source_repo: https://github.com/bilal-a013/RISE_APP_V1
+---
+
+# RISE_APP_V1 Test Separate
+
+## Action
+
+Place tests in the tests/ or __tests__/ directory, mirroring src structure
+
+## Evidence
+
+- Separate test directory pattern detected
+- Tests live in dedicated test folders
+
+---
+id: RISE_APP_V1-workflow-feature-development
+trigger: "when implementing a new feature"
+confidence: 0.9
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/bilal-a013/RISE_APP_V1
+---
+
+# RISE_APP_V1 Workflow Feature Development
+
+## Action
+
+Follow the feature-development workflow:
+1. Add feature implementation
+2. Add tests for feature
+3. Update documentation
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~11x per month
+- Files: apps/web/src/app/auth/login/*, apps/web/src/app/auth/tutor-code/*, apps/web/src/app/*
+
+---
+id: RISE_APP_V1-workflow-feature-development-with-shared-module-update
+trigger: "when doing feature development with shared module update"
+confidence: 0.65
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/bilal-a013/RISE_APP_V1
+---
+
+# RISE_APP_V1 Workflow Feature Development With Shared Module Update
+
+## Action
+
+Follow the feature-development-with-shared-module-update workflow:
+1. Create or update page component(s) in apps/web/src/app/(app)/*/page.tsx
+2. Create or update related shared module(s) in apps/web/src/lib/*.ts
+3. Update or create any necessary auth or onboarding logic in apps/web/src/app/auth/* or apps/web/src/lib/onboarding.ts
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~3x per month
+- Files: apps/web/src/app/(app)/*/page.tsx, apps/web/src/lib/*.ts, apps/web/src/app/auth/*
+
+---
+id: RISE_APP_V1-workflow-supabase-schema-and-migration-update
+trigger: "when doing supabase schema and migration update"
+confidence: 0.6
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/bilal-a013/RISE_APP_V1
+---
+
+# RISE_APP_V1 Workflow Supabase Schema And Migration Update
+
+## Action
+
+Follow the supabase-schema-and-migration-update workflow:
+1. Create or update a migration SQL file in supabase/migrations/
+2. Update or create corresponding shared logic in apps/web/src/lib/*.ts
+3. Update or create related page component(s) in apps/web/src/app/(app)/*/page.tsx
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~2x per month
+- Files: supabase/migrations/*.sql, apps/web/src/lib/*.ts, apps/web/src/app/(app)/*/page.tsx
+
+---
+id: RISE_APP_V1-workflow-supabase-auth-environment-fix
+trigger: "when doing supabase auth environment fix"
+confidence: 0.6
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/bilal-a013/RISE_APP_V1
+---
+
+# RISE_APP_V1 Workflow Supabase Auth Environment Fix
+
+## Action
+
+Follow the supabase-auth-environment-fix workflow:
+1. Update apps/web/middleware.ts to adjust auth handling
+2. Edit or create environment scripts in apps/web/scripts/
+3. Update auth logic in apps/web/src/app/auth/actions.ts
+4. Update Supabase client/server environment files in apps/web/src/lib/supabase/
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~2x per month
+- Files: apps/web/middleware.ts, apps/web/scripts/ensure-env-local.mjs, apps/web/src/app/auth/actions.ts
+
+---
+id: rise_app_v1-instinct-file-naming
+trigger: "When creating a new file in the codebase."
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: bilal-a013/RISE_APP_V1
+---
+
+# Rise_app_v1 Instinct File Naming
+
+## Action
+
+Name the file using camelCase.
+
+## Evidence
+
+- Pattern in namingConventions.files
+- Consistent usage in apps/web/src/app/auth/login/page.tsx
+
+---
+id: rise_app_v1-instinct-function-naming
+trigger: "When defining a new function."
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: bilal-a013/RISE_APP_V1
+---
+
+# Rise_app_v1 Instinct Function Naming
+
+## Action
+
+Name the function using camelCase.
+
+## Evidence
+
+- Pattern in namingConventions.functions
+- Consistent usage in apps/web/src/lib/onboarding.ts
+
+---
+id: rise_app_v1-instinct-class-naming
+trigger: "When defining a new class."
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: bilal-a013/RISE_APP_V1
+---
+
+# Rise_app_v1 Instinct Class Naming
+
+## Action
+
+Name the class using PascalCase.
+
+## Evidence
+
+- Pattern in namingConventions.classes
+
+---
+id: rise_app_v1-instinct-constant-naming
+trigger: "When defining a constant."
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: bilal-a013/RISE_APP_V1
+---
+
+# Rise_app_v1 Instinct Constant Naming
+
+## Action
+
+Name the constant using SCREAMING_SNAKE_CASE.
+
+## Evidence
+
+- Pattern in namingConventions.constants
+
+---
+id: rise_app_v1-instinct-import-alias
+trigger: "When importing modules."
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: bilal-a013/RISE_APP_V1
+---
+
+# Rise_app_v1 Instinct Import Alias
+
+## Action
+
+Use import aliases instead of relative paths where possible.
+
+## Evidence
+
+- Pattern in importStyle: alias
+
+---
+id: rise_app_v1-instinct-export-mixed
+trigger: "When exporting modules."
+confidence: 0.7
+domain: code-style
+source: repo-analysis
+source_repo: bilal-a013/RISE_APP_V1
+---
+
+# Rise_app_v1 Instinct Export Mixed
+
+## Action
+
+Use both named and default exports as appropriate.
+
+## Evidence
+
+- Pattern in exportStyle: mixed
+
+---
+id: rise_app_v1-instinct-try-catch-errors
+trigger: "When handling errors in code."
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: bilal-a013/RISE_APP_V1
+---
+
+# Rise_app_v1 Instinct Try Catch Errors
+
+## Action
+
+Use try-catch blocks for error handling.
+
+## Evidence
+
+- Pattern in errorHandling.style: try-catch
+
+---
+id: rise_app_v1-instinct-test-location
+trigger: "When adding or updating tests."
+confidence: 0.8
+domain: testing
+source: repo-analysis
+source_repo: bilal-a013/RISE_APP_V1
+---
+
+# Rise_app_v1 Instinct Test Location
+
+## Action
+
+Place tests in a separate location from source code.
+
+## Evidence
+
+- Pattern in architecture.testLocation: separate
+
+---
+id: rise_app_v1-instinct-git-commit-format
+trigger: "When writing a git commit message."
+confidence: 0.9
+domain: git
+source: repo-analysis
+source_repo: bilal-a013/RISE_APP_V1
+---
+
+# Rise_app_v1 Instinct Git Commit Format
+
+## Action
+
+Use conventional commits with prefixes: fix, feat, chore.
+
+## Evidence
+
+- Pattern in commits.type: conventional
+- Examples: 'fix: stabilize Supabase auth on Vercel', 'feat: make tutor code the primary entry'
+
+---
+id: rise_app_v1-instinct-git-commit-length
+trigger: "When writing a git commit message."
+confidence: 0.7
+domain: git
+source: repo-analysis
+source_repo: bilal-a013/RISE_APP_V1
+---
+
+# Rise_app_v1 Instinct Git Commit Length
+
+## Action
+
+Keep commit messages concise, around 43 characters on average.
+
+## Evidence
+
+- Pattern in commits.averageLength: 43
+
+---
+id: rise_app_v1-instinct-feature-shared-module
+trigger: "When adding a new feature that requires both UI and shared logic changes."
+confidence: 0.9
+domain: workflow
+source: repo-analysis
+source_repo: bilal-a013/RISE_APP_V1
+---
+
+# Rise_app_v1 Instinct Feature Shared Module
+
+## Action
+
+Update or create page components in apps/web/src/app/(app)/*/page.tsx, shared modules in apps/web/src/lib/*.ts, and any necessary auth/onboarding logic.
+
+## Evidence
+
+- Workflow: feature-development-with-shared-module-update
+- Example commits and files in workflow definition
+
+---
+id: rise_app_v1-instinct-supabase-migration
+trigger: "When introducing or updating a data model in Supabase."
+confidence: 0.85
+domain: workflow
+source: repo-analysis
+source_repo: bilal-a013/RISE_APP_V1
+---
+
+# Rise_app_v1 Instinct Supabase Migration
+
+## Action
+
+Create or update a migration SQL file in supabase/migrations/, update shared logic in apps/web/src/lib/*.ts, and update related page components in apps/web/src/app/(app)/*/page.tsx.
+
+## Evidence
+
+- Workflow: supabase-schema-and-migration-update
+- Example commits and files in workflow definition
+
+---
+id: rise_app_v1-instinct-supabase-auth-fix
+trigger: "When resolving Supabase authentication issues in deployment or local environments."
+confidence: 0.85
+domain: workflow
+source: repo-analysis
+source_repo: bilal-a013/RISE_APP_V1
+---
+
+# Rise_app_v1 Instinct Supabase Auth Fix
+
+## Action
+
+Update apps/web/middleware.ts, environment scripts in apps/web/scripts/, auth logic in apps/web/src/app/auth/actions.ts, and Supabase environment files in apps/web/src/lib/supabase/.
+
+## Evidence
+
+- Workflow: supabase-auth-environment-fix
+- Example commits and files in workflow definition
+
