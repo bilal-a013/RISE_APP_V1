@@ -5,7 +5,15 @@ import { logout } from '@/app/auth/actions'
 import { createClient } from '@/lib/supabase/server'
 import { isMathsSubject } from '@/lib/onboarding'
 import { getStudentSession, type StudentSession as TutorStudentSession } from '@/lib/student-session'
-import { getChildProfileForStudentSession, type TutorKeyChildProfile } from '@/lib/tutor-key'
+import {
+  getChildProfileForStudentSession,
+  getStudentHomeSnapshot,
+  type TutorKeyChildProfile,
+  type TutorKeyDashboardReport,
+  type TutorKeyDashboardSession,
+  type TutorKeyDashboardStudent,
+  type TutorKeyHomeSnapshot,
+} from '@/lib/tutor-key'
 import type {
   DifficultyLevel,
   Lesson,
@@ -212,11 +220,69 @@ async function getTutorChildProfile(
   return getChildProfileForStudentSession(session)
 }
 
+async function getTutorHomeSnapshot(
+  session: TutorStudentSession
+): Promise<TutorKeyHomeSnapshot | null> {
+  return getStudentHomeSnapshot(session)
+}
+
 function greetingForHour() {
   const hour = new Date().getHours()
   if (hour < 12) return 'Good morning'
   if (hour < 18) return 'Good afternoon'
   return 'Good evening'
+}
+
+function compactText(value: unknown) {
+  return typeof value === 'string' && value.trim() ? value.trim() : null
+}
+
+function compactList(values: Array<string | null | undefined>) {
+  return values.map(compactText).filter(Boolean) as string[]
+}
+
+function formatDate(value?: string | null) {
+  if (!value) return null
+  const date = new Date(value)
+  if (Number.isNaN(date.getTime())) return null
+
+  return date.toLocaleDateString('en-GB', {
+    weekday: 'short',
+    day: 'numeric',
+    month: 'short',
+  })
+}
+
+function humaniseToken(value?: string | null) {
+  return compactText(value)?.replace(/[-_]/g, ' ') ?? null
+}
+
+function reportSectionText(report: TutorKeyDashboardReport | null | undefined, key: string) {
+  const value = report?.report_sections?.[key]
+  if (Array.isArray(value)) return value.map(compactText).filter(Boolean).join(', ')
+  return compactText(value)
+}
+
+function getHomework(profile?: TutorKeyDashboardStudent | null, session?: TutorKeyDashboardSession | null, report?: TutorKeyDashboardReport | null) {
+  return (
+    compactText(profile?.current_homework) ||
+    compactText(session?.homework) ||
+    reportSectionText(report, 'homework') ||
+    null
+  )
+}
+
+function getFocusTopic(profile?: TutorKeyDashboardStudent | null, session?: TutorKeyDashboardSession | null, homework?: string | null) {
+  return (
+    compactText(session?.topic) ||
+    compactText(session?.key_skill) ||
+    compactText(profile?.main_learning_priority) ||
+    compactText(profile?.current_topics?.[0]) ||
+    compactText(profile?.struggles?.[0]) ||
+    homework ||
+    compactText(profile?.working_level) ||
+    "your tutor's next maths focus"
+  )
 }
 
 export default async function HomePage() {
@@ -235,7 +301,7 @@ export default async function HomePage() {
     redirect('/?message=Enter your tutor code to continue.')
   }
 
-  const [currentLessonResult, lastSessionResult, completedProgressResult, tutorProfileResult] =
+  const [currentLessonResult, lastSessionResult, completedProgressResult, tutorProfileResult, tutorHomeResult] =
     await Promise.all([
       safeLoad('current lesson', () =>
         user ? getCurrentLesson(supabase, user.id) : getFirstMathsLesson(supabase)
@@ -249,6 +315,9 @@ export default async function HomePage() {
       tutorSession
         ? safeLoad('tutor profile', () => getTutorChildProfile(tutorSession))
         : Promise.resolve({ data: null, error: null }),
+      tutorSession
+        ? safeLoad('tutor updates', () => getTutorHomeSnapshot(tutorSession))
+        : Promise.resolve({ data: null, error: null }),
     ])
 
     const homeErrors = [
@@ -256,12 +325,49 @@ export default async function HomePage() {
       lastSessionResult.error,
       completedProgressResult.error,
       tutorProfileResult.error,
+      tutorHomeResult.error,
     ].filter(Boolean) as string[]
 
     const currentLesson = currentLessonResult.data
     const lastSession = lastSessionResult.data
     const completedProgress = completedProgressResult.data ?? []
-    const tutorProfile = tutorProfileResult.data
+    const tutorHome = tutorHomeResult.data
+    const dashboardProfile = tutorHome?.profile ?? null
+    const tutorProfile = tutorProfileResult.data ?? dashboardProfile
+    const latestTutorSession = tutorHome?.latest_session ?? null
+    const latestReport = tutorHome?.latest_report ?? null
+    const homework = getHomework(dashboardProfile, latestTutorSession, latestReport)
+    const focusTopic = getFocusTopic(dashboardProfile, latestTutorSession, homework)
+    const sessionDate = formatDate(latestTutorSession?.session_date ?? latestTutorSession?.created_at)
+    const reportDate = formatDate(latestReport?.created_at)
+    const tutorCovered = compactList([
+      latestTutorSession?.topic,
+      latestTutorSession?.key_skill,
+      ...(latestTutorSession?.session_focus ?? []),
+    ])
+    const struggles = compactList([
+      ...(latestTutorSession?.struggles ?? []),
+      ...(dashboardProfile?.struggles ?? []),
+    ])
+    const confidenceNote =
+      humaniseToken(latestTutorSession?.understanding_level) ||
+      (typeof latestTutorSession?.confidence_rating === 'number'
+        ? `Confidence ${latestTutorSession.confidence_rating}/5`
+        : null)
+    const engagementNote =
+      typeof latestTutorSession?.effort_rating === 'number'
+        ? `Effort ${latestTutorSession.effort_rating}/5`
+        : null
+    const nextPlan =
+      compactText(latestTutorSession?.next_steps) ||
+      compactText(dashboardProfile?.next_session_focus) ||
+      reportSectionText(latestReport, 'nextFocus') ||
+      null
+    const reportSummary =
+      reportSectionText(latestReport, 'tutorSummary') ||
+      reportSectionText(latestReport, 'todayFocus') ||
+      compactText(latestReport?.title) ||
+      null
 
     const userMetadata = (user?.user_metadata ?? {}) as Record<string, unknown>
     const userName =
@@ -274,7 +380,7 @@ export default async function HomePage() {
       typeof userMetadata.recommended_topic === 'string' ? userMetadata.recommended_topic : ''
     const profileSummary = [
       tutorProfile?.year_group,
-      tutorProfile?.working_level,
+      tutorProfile?.working_level ?? dashboardProfile?.current_grade,
       tutorProfile?.target_grade ? `Target ${tutorProfile.target_grade}` : null,
     ].filter(Boolean).join(' · ')
     const hasStartedLesson = Boolean(currentLesson?.progress)
@@ -342,66 +448,117 @@ export default async function HomePage() {
           </form>
         </div>
 
-        {/* Main grid: lesson hero + stat cards */}
-        <div className="mb-6 grid gap-4 xl:grid-cols-[minmax(0,1fr)_280px]">
-          {/* Current lesson card */}
-          <div className="glass-card-solid p-5">
-            <div className="mb-4 flex flex-wrap items-center gap-2">
-              <span className="rise-chip">
-                {hasStartedLesson ? 'Continue lesson' : 'Start here'}
-              </span>
-              {recommendedTopic ? <span className="rise-chip">{recommendedTopic}</span> : null}
-            </div>
-
-            {currentLesson ? (
-              <Link href={`/lessons/${currentLesson.lesson.id}`} className="block">
-                <div className="relative overflow-hidden rounded-xl border border-primary-200/30 bg-white/60">
-                  {hasStartedLesson ? (
-                    <>
-                      <div className="pointer-events-none select-none blur-[3px] p-5">
-                        <LessonPreview lesson={currentLesson} />
-                      </div>
-                      <div
-                        className="absolute inset-x-0 bottom-0 p-5 pt-14"
-                        style={{
-                          background:
-                            'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.95) 40%, rgba(255,255,255,1) 100%)',
-                        }}
-                      >
-                        <div className="rise-btn-primary text-sm">Continue lesson</div>
-                      </div>
-                    </>
-                  ) : (
-                    <div className="p-5">
-                      <LessonPreview lesson={currentLesson} />
-                      <div className="mt-5 rise-btn-primary text-sm">Start lesson</div>
-                    </div>
-                  )}
+        <div className="mb-6 grid gap-4 xl:grid-cols-[minmax(0,1.1fr)_minmax(320px,0.9fr)]">
+          <section className="glass-card-solid p-5">
+            <p className="rise-overline text-[10px] mb-3">Your tutor update</p>
+            {latestTutorSession ? (
+              <div>
+                <div className="mb-4 flex flex-wrap items-center gap-2">
+                  {sessionDate ? <span className="rise-chip">{sessionDate}</span> : null}
+                  {latestTutorSession.subject ? <span className="rise-chip">{latestTutorSession.subject}</span> : null}
+                  {confidenceNote ? <span className="rise-chip capitalize">{confidenceNote}</span> : null}
+                  {engagementNote ? <span className="rise-chip">{engagementNote}</span> : null}
                 </div>
-              </Link>
-            ) : (
-              <Link href="/subjects" className="block">
-                <div className="rounded-xl border border-dashed border-primary-300/50 bg-primary-50/50 px-5 py-10 text-center transition-all hover:bg-primary-50">
-                  <p className="rise-overline text-[10px] mb-2">
-                    {homeErrors.length ? 'Dashboard data paused' : 'No lesson queued'}
-                  </p>
-                  <h2 className="text-3xl font-extrabold tracking-tight text-secondary-900">
-                    {homeErrors.length ? 'We could not load your lesson yet' : 'Pick a maths topic'}
-                  </h2>
-                  <p className="mt-2 text-sm text-secondary-400">
-                    {homeErrors.length
-                      ? 'Your login still worked. Try refreshing in a moment, or open maths and keep going.'
-                      : 'Open maths to pick a lesson manually.'}
-                  </p>
-                  <div className="mt-5 inline-flex rise-btn-primary w-auto px-6 py-3 text-sm">
-                    Open maths
+                <h2 className="text-3xl font-extrabold tracking-tight text-secondary-900">
+                  {latestTutorSession.topic || latestTutorSession.key_skill || 'Latest session'}
+                </h2>
+                <p className="mt-3 text-sm leading-relaxed text-secondary-500">
+                  {latestTutorSession.summary || 'Your tutor has logged a session update for you.'}
+                </p>
+                {tutorCovered.length ? (
+                  <InfoList title="Worked on" items={tutorCovered.slice(0, 4)} />
+                ) : null}
+                {struggles.length ? (
+                  <InfoList title="Needs practice" items={struggles.slice(0, 4)} tone="amber" />
+                ) : null}
+                {nextPlan ? (
+                  <div className="mt-4 rounded-xl border border-primary-200/30 bg-primary-50/60 px-4 py-3">
+                    <p className="rise-overline text-[9px] mb-1">Next plan</p>
+                    <p className="text-sm font-semibold text-secondary-800">{nextPlan}</p>
                   </div>
-                </div>
-              </Link>
+                ) : null}
+              </div>
+            ) : (
+              <EmptyTutorCard
+                title="Session updates will appear here"
+                body="Your tutor profile is connected. Once your tutor logs a session, you will see what you covered and what to practise next."
+              />
             )}
+          </section>
+
+          <section className="glass-card-solid p-5">
+            <p className="rise-overline text-[10px] mb-3">Student profile</p>
+            <h2 className="text-3xl font-extrabold tracking-tight text-secondary-900">
+              {tutorProfile?.full_name || 'Tutor-linked student'}
+            </h2>
+            <div className="mt-4 grid gap-3 sm:grid-cols-2">
+              <ProfilePill label="Year group" value={tutorProfile?.year_group ?? dashboardProfile?.age_range} />
+              <ProfilePill label="Working level" value={tutorProfile?.working_level ?? dashboardProfile?.current_grade} />
+              <ProfilePill label="Target" value={tutorProfile?.target_grade ?? dashboardProfile?.student_target_grade} />
+              <ProfilePill label="Subject" value={tutorProfile?.preferred_subject ?? dashboardProfile?.preferred_subject} />
+            </div>
+            {reportSummary ? (
+              <div className="mt-4 rounded-xl border border-primary-200/30 bg-white/60 px-4 py-3">
+                <p className="rise-overline text-[9px] mb-1">
+                  {reportDate ? `Report · ${reportDate}` : 'Latest report'}
+                </p>
+                <p className="text-sm leading-relaxed text-secondary-600">{reportSummary}</p>
+              </div>
+            ) : null}
+          </section>
+        </div>
+
+        <div className="mb-6 grid gap-4 xl:grid-cols-3">
+          <section className="glass-card-solid p-5">
+            <p className="rise-overline text-[10px] mb-3">Homework set</p>
+            {homework ? (
+              <>
+                <h2 className="text-2xl font-extrabold tracking-tight text-secondary-900">{homework}</h2>
+                {dashboardProfile?.homework_status ? (
+                  <p className="mt-3 text-sm font-semibold text-primary-600">{dashboardProfile.homework_status}</p>
+                ) : null}
+              </>
+            ) : (
+              <EmptyTutorCard
+                title="No homework has been set yet"
+                body="When your tutor sets homework, it will show up here."
+              />
+            )}
+          </section>
+
+          <section className="glass-card-solid p-5">
+            <p className="rise-overline text-[10px] mb-3">Focus for this week</p>
+            <h2 className="text-2xl font-extrabold tracking-tight text-secondary-900">{focusTopic}</h2>
+            <p className="mt-3 text-sm leading-relaxed text-secondary-500">
+              This is based on your tutor profile, latest session notes, homework, and struggle areas.
+            </p>
+          </section>
+
+          <section className="glass-card-solid p-5">
+            <p className="rise-overline text-[10px] mb-3">Recommended practice</p>
+            <h2 className="text-2xl font-extrabold tracking-tight text-secondary-900">
+              Practise: {focusTopic}
+            </h2>
+            <p className="mt-3 text-sm leading-relaxed text-secondary-500">
+              Your tutor has not linked a RISE lesson yet, but your next practice should focus here.
+            </p>
+            <Link href="/subjects" className="mt-5 inline-flex rise-btn-primary w-auto px-5 py-3 text-sm">
+              Browse maths
+            </Link>
+          </section>
+        </div>
+
+        <div className="mb-6 grid gap-4 xl:grid-cols-[minmax(0,1fr)_280px]">
+          <div className="glass-card-solid p-5">
+            <p className="rise-overline text-[10px] mb-3">Progress coming soon</p>
+            <h2 className="text-2xl font-extrabold tracking-tight text-secondary-900">
+              App progress will sync back to your tutor here.
+            </h2>
+            <p className="mt-3 text-sm leading-relaxed text-secondary-500">
+              For now, your Tutor Key profile is connected. Next, lessons and quiz progress will be written into the shared Dashboard backend.
+            </p>
           </div>
 
-          {/* Stat cards column */}
           <div className="flex flex-col gap-3">
             <Link href="/progress?focus=streak" className="block">
               <div className="glass-card-solid rise-card-interactive p-5">
@@ -418,21 +575,6 @@ export default async function HomePage() {
                   ⚡ {xp.toLocaleString()}
                 </p>
                 <p className="mt-2 text-sm text-secondary-400">See the full breakdown.</p>
-              </div>
-            </Link>
-
-            <Link href="/subjects" className="block">
-              <div
-                className="rise-card-interactive rounded-2xl border border-primary-200/40 p-5 transition-all duration-200 hover:-translate-y-0.5"
-                style={{ background: 'linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%)' }}
-              >
-                <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/60">
-                  Choose yourself
-                </p>
-                <p className="text-2xl font-extrabold leading-tight tracking-tight text-white">
-                  Pick a different topic.
-                </p>
-                <p className="mt-2 text-sm text-white/70">Browse maths any time.</p>
               </div>
             </Link>
           </div>
@@ -462,6 +604,57 @@ export default async function HomePage() {
           </div>
         </section>
       </div>
+  )
+}
+
+function InfoList({
+  title,
+  items,
+  tone = 'primary',
+}: {
+  title: string
+  items: string[]
+  tone?: 'primary' | 'amber'
+}) {
+  const toneClasses =
+    tone === 'amber'
+      ? 'border-amber-200/60 bg-amber-50/70 text-amber-900'
+      : 'border-primary-200/40 bg-primary-50/70 text-secondary-800'
+
+  return (
+    <div className="mt-4">
+      <p className="rise-overline mb-2 text-[9px]">{title}</p>
+      <div className="grid gap-2 sm:grid-cols-2">
+        {items.map((item) => (
+          <div
+            key={item}
+            className={`rounded-xl border px-3 py-2 text-sm font-semibold ${toneClasses}`}
+          >
+            {item}
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function EmptyTutorCard({ title, body }: { title: string; body: string }) {
+  return (
+    <div className="rounded-2xl border border-primary-200/30 bg-white/55 px-4 py-5">
+      <h2 className="text-2xl font-extrabold tracking-tight text-secondary-900">{title}</h2>
+      <p className="mt-3 text-sm leading-relaxed text-secondary-500">{body}</p>
+    </div>
+  )
+}
+
+function ProfilePill({ label, value }: { label: string; value?: string | null }) {
+  const displayValue = humaniseToken(value) ?? 'Not set yet'
+
+  return (
+    <div className="rounded-xl border border-primary-200/30 bg-primary-50/45 px-4 py-3">
+      <p className="rise-overline mb-1 text-[9px]">{label}</p>
+      <p className="text-sm font-bold capitalize text-secondary-900">{displayValue}</p>
+    </div>
   )
 }
 

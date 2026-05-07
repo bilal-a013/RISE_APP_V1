@@ -26,6 +26,58 @@ export interface TutorKeyChildProfile {
   active?: boolean | null
 }
 
+export interface TutorKeyDashboardStudent {
+  id?: string | null
+  full_name?: string | null
+  year_group?: string | null
+  age_range?: string | null
+  working_level?: string | null
+  target_grade?: string | null
+  preferred_subject?: string | null
+  active?: boolean | null
+  current_homework?: string | null
+  homework_status?: string | null
+  struggles?: string[] | null
+  current_topics?: string[] | null
+  next_session_focus?: string | null
+  main_learning_priority?: string | null
+  current_grade?: string | null
+  student_target_grade?: string | null
+}
+
+export interface TutorKeyDashboardSession {
+  id?: string | null
+  session_date?: string | null
+  subject?: string | null
+  topic?: string | null
+  summary?: string | null
+  strengths?: string[] | null
+  struggles?: string[] | null
+  homework?: string | null
+  next_steps?: string | null
+  understanding_level?: string | null
+  effort_rating?: number | null
+  confidence_rating?: number | null
+  session_focus?: string[] | null
+  key_skill?: string | null
+  created_at?: string | null
+}
+
+export interface TutorKeyDashboardReport {
+  id?: string | null
+  title?: string | null
+  body?: string | null
+  report_sections?: Record<string, unknown> | null
+  sent_status?: string | null
+  created_at?: string | null
+}
+
+export interface TutorKeyHomeSnapshot {
+  profile?: TutorKeyDashboardStudent | null
+  latest_session?: TutorKeyDashboardSession | null
+  latest_report?: TutorKeyDashboardReport | null
+}
+
 const SCHEMA_MISSING_CODES = new Set(['42P01', '42703', 'PGRST200', 'PGRST204', 'PGRST205'])
 
 export function normaliseTutorKey(key: string) {
@@ -256,4 +308,21 @@ export async function getChildProfileForStudentSession(input: {
   }
 
   return data as TutorKeyChildProfile | null
+}
+
+export async function getStudentHomeSnapshot(input: {
+  childProfileId: string
+  tutorKeyId: string
+}): Promise<TutorKeyHomeSnapshot | null> {
+  const supabase = await createClient()
+  const { data, error } = await supabase.rpc('get_student_home_snapshot', {
+    lookup_child_profile_id: input.childProfileId,
+    lookup_tutor_key_id: input.tutorKeyId,
+  })
+
+  if (error) {
+    throw error
+  }
+
+  return data as TutorKeyHomeSnapshot | null
 }
