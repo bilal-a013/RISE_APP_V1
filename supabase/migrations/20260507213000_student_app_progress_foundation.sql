@@ -175,6 +175,31 @@ begin
     raise exception 'invalid student session';
   end if;
 
+  if v_activity_type in ('app_opened', 'home_viewed') then
+    select jsonb_build_object(
+      'id', a.id,
+      'child_profile_id', a.child_profile_id,
+      'activity_type', a.activity_type,
+      'title', a.title,
+      'description', a.description,
+      'metadata', a.metadata,
+      'created_at', a.created_at
+    )
+    into v_activity
+    from public.student_app_activity a
+    where a.child_profile_id = lookup_child_profile_id
+      and a.activity_type = v_activity_type
+      and a.created_at > now() - interval '10 minutes'
+      and coalesce(a.metadata ->> 'source', '') = coalesce(v_metadata ->> 'source', '')
+      and coalesce(a.metadata ->> 'route', '') = coalesce(v_metadata ->> 'route', '')
+    order by a.created_at desc
+    limit 1;
+
+    if v_activity is not null then
+      return v_activity;
+    end if;
+  end if;
+
   insert into public.student_app_activity (
     child_profile_id,
     activity_type,
