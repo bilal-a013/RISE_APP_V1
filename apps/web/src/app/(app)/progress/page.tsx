@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { isMathsSubject } from '@/lib/onboarding'
+import { getStudentSession } from '@/lib/student-session'
 import { DIFFICULTY_CONFIG, type DifficultyLevel, type LessonProgress } from '@rise/shared'
 
 interface ProgressPageProps {
@@ -58,11 +59,12 @@ function getNextTier(xp: number) {
 
 export default async function ProgressPage({ searchParams }: ProgressPageProps) {
   const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
+  const [{ data: { user } }, tutorSession] = await Promise.all([
+    supabase.auth.getUser(),
+    getStudentSession(),
+  ])
 
-  if (!user) {
+  if (!user && !tutorSession) {
     return (
       <div className="rise-page flex min-h-[70dvh] items-center justify-center">
         <div className="glass-card-solid max-w-md p-8 text-center">
@@ -76,17 +78,23 @@ export default async function ProgressPage({ searchParams }: ProgressPageProps) 
     )
   }
 
-  const { data: progressRows } = await supabase
-    .from('lesson_progress')
-    .select(`
-      *,
-      lesson:lessons(
-        topic:topics(
-          subject:subjects(name, slug)
+  const { data: progressRows, error: progressError } = user
+    ? await supabase
+      .from('lesson_progress')
+      .select(`
+        *,
+        lesson:lessons(
+          topic:topics(
+            subject:subjects(name, slug)
+          )
         )
-      )
-    `)
-    .eq('student_id', user.id)
+      `)
+      .eq('student_id', user.id)
+    : { data: [], error: null }
+
+  if (progressError) {
+    console.error('[progress] Failed to load progress rows', progressError)
+  }
 
   const allProgress = ((progressRows ?? []) as ProgressRow[]).filter((row) =>
     isMathsSubject(row.lesson?.topic?.subject)
@@ -151,10 +159,16 @@ export default async function ProgressPage({ searchParams }: ProgressPageProps) 
 
       {allProgress.length === 0 ? (
         <div className="mb-6 glass-card-solid p-6">
-          <p className="rise-overline text-[10px] mb-2">Fresh start</p>
-          <h2 className="text-2xl font-extrabold tracking-tight text-secondary-900">No maths progress yet</h2>
+          <p className="rise-overline text-[10px] mb-2">
+            {progressError ? 'Progress paused' : 'Fresh start'}
+          </p>
+          <h2 className="text-2xl font-extrabold tracking-tight text-secondary-900">
+            {progressError ? 'Progress data could not load yet' : 'No maths progress yet'}
+          </h2>
           <p className="mt-3 max-w-2xl text-sm text-secondary-400 leading-relaxed">
-            Once you complete lessons, this page will start tracking streaks, XP, tier movement, and how confidently you are handling the work.
+            {progressError
+              ? 'Tutor Key login is connected. Lesson progress will appear here once the shared progress tables are ready.'
+              : 'Once you complete lessons, this page will start tracking streaks, XP, tier movement, and how confidently you are handling the work.'}
           </p>
         </div>
       ) : null}

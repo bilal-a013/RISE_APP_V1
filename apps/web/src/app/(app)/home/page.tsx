@@ -5,6 +5,7 @@ import { logout } from '@/app/auth/actions'
 import { createClient } from '@/lib/supabase/server'
 import { isMathsSubject } from '@/lib/onboarding'
 import { getStudentSession, type StudentSession as TutorStudentSession } from '@/lib/student-session'
+import { getChildProfileForStudentSession, type TutorKeyChildProfile } from '@/lib/tutor-key'
 import type {
   DifficultyLevel,
   Lesson,
@@ -27,17 +28,6 @@ interface CompletedProgressRow extends LessonProgress {
       }
     } | null
   } | null
-}
-
-interface TutorChildProfile {
-  id: string
-  full_name?: string | null
-  year_group?: string | null
-  age_range?: string | null
-  working_level?: string | null
-  target_grade?: string | null
-  preferred_subject?: string | null
-  active?: boolean | null
 }
 
 type LoadResult<T> = {
@@ -217,20 +207,9 @@ async function getMathsProgress(
 }
 
 async function getTutorChildProfile(
-  supabase: Awaited<ReturnType<typeof createClient>>,
   session: TutorStudentSession
-): Promise<TutorChildProfile | null> {
-  const { data, error } = await supabase
-    .from('child_profiles')
-    .select('id, full_name, year_group, age_range, working_level, target_grade, preferred_subject, active')
-    .eq('id', session.childProfileId)
-    .maybeSingle()
-
-  if (error) {
-    throw error
-  }
-
-  return data
+): Promise<TutorKeyChildProfile | null> {
+  return getChildProfileForStudentSession(session)
 }
 
 function greetingForHour() {
@@ -268,7 +247,7 @@ export default async function HomePage() {
         ? safeLoad('progress summary', () => getMathsProgress(supabase, user.id))
         : Promise.resolve({ data: [], error: null }),
       tutorSession
-        ? safeLoad('tutor profile', () => getTutorChildProfile(supabase, tutorSession))
+        ? safeLoad('tutor profile', () => getTutorChildProfile(tutorSession))
         : Promise.resolve({ data: null, error: null }),
     ])
 
@@ -293,6 +272,11 @@ export default async function HomePage() {
           : 'there'
     const recommendedTopic =
       typeof userMetadata.recommended_topic === 'string' ? userMetadata.recommended_topic : ''
+    const profileSummary = [
+      tutorProfile?.year_group,
+      tutorProfile?.working_level,
+      tutorProfile?.target_grade ? `Target ${tutorProfile.target_grade}` : null,
+    ].filter(Boolean).join(' · ')
     const hasStartedLesson = Boolean(currentLesson?.progress)
     const streak = Math.max(1, Math.min(7, completedProgress.length || 1))
     const xp = completedProgress.length * 50
@@ -341,6 +325,11 @@ export default async function HomePage() {
               <span className="rise-gradient-text">{userName}</span>
             </h1>
             <p className="mt-2 text-sm text-secondary-400">{introCopy}</p>
+            {tutorProfile ? (
+              <p className="mt-2 text-sm font-semibold text-primary-600">
+                {profileSummary || 'Your tutor profile is connected.'}
+              </p>
+            ) : null}
           </div>
 
           <form action={logout}>
