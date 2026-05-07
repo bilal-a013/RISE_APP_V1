@@ -2,14 +2,28 @@ import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import BottomNav from '@/components/layout/BottomNav'
 
-export default async function AppLayout({ children }: { children: React.ReactNode }) {
-  const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
+export const dynamic = 'force-dynamic'
 
-  if (!user) {
-    redirect('/')
+export default async function AppLayout({ children }: { children: React.ReactNode }) {
+  let sessionUser: unknown = null
+
+  try {
+    const supabase = await createClient()
+    const result = await supabase.auth.getUser()
+
+    if (result.error) {
+      console.error('[app layout] Failed to read Supabase session', result.error)
+      throw result.error
+    }
+
+    sessionUser = result.data.user
+  } catch (error) {
+    console.error('[app layout] Unexpected app shell failure', error)
+    redirect('/auth/login?error=We could not load RISE. Please try signing in again.')
+  }
+
+  if (!sessionUser) {
+    redirect('/auth/login?message=Please sign in to continue.')
   }
 
   return (
