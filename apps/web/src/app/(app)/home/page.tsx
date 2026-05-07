@@ -142,7 +142,6 @@ async function getLastSession(
     .from('student_sessions')
     .select('*')
     .eq('student_id', userId)
-    .order('created_at', { ascending: false })
     .limit(1)
     .maybeSingle()
 
@@ -163,7 +162,7 @@ async function getMathsProgress(
       *,
       lesson:lessons(
         topic:topics(
-          subject:subjects(name, slug, icon)
+          subject:subjects(name, slug, icon_name)
         )
       )
     `)
