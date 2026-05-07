@@ -57,42 +57,6 @@ export const STUDY_STYLE_OPTIONS: OnboardingOption[] = [
   },
 ]
 
-export interface TutorCodePreset {
-  code: string
-  studentName: string
-  ageRange: string
-  workingLevel: string
-  targetGrade: string
-  recommendedTopic: string
-  tutorLabel: string
-  summary: string
-}
-
-// Transitional demo only. Layer 2 replaces this with a server-side Supabase Tutor Key lookup.
-const TUTOR_CODE_PRESETS: TutorCodePreset[] = [
-  {
-    code: 'RAYAN-SIMS',
-    studentName: 'Rayan',
-    ageRange: '13-14',
-    workingLevel: 'higher_push',
-    targetGrade: '7',
-    recommendedTopic: 'Simultaneous equations',
-    tutorLabel: 'Bilal tutoring',
-    summary:
-      'Your tutor has already pointed the app toward simultaneous equations, so your first path is curated before you even start.',
-  },
-]
-
-export function normaliseTutorCode(code: string) {
-  return code.trim().toUpperCase().replace(/\s+/g, '-')
-}
-
-export function getTutorCodePreset(code?: string | null) {
-  if (!code) return null
-  const normalised = normaliseTutorCode(code)
-  return TUTOR_CODE_PRESETS.find((preset) => preset.code === normalised) ?? null
-}
-
 export function isMathsSubject(subject?: { name?: string | null; slug?: string | null } | null) {
   if (!subject) return false
   const label = `${subject.name ?? ''} ${subject.slug ?? ''}`.toLowerCase()

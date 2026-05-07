@@ -1,6 +1,8 @@
 'use server'
 
 import { createClient } from '@/lib/supabase/server'
+import { clearStudentSession, setStudentSession } from '@/lib/student-session'
+import { validateTutorKey } from '@/lib/tutor-key'
 import { redirect } from 'next/navigation'
 
 function getField(formData: FormData, key: string) {
@@ -88,6 +90,30 @@ export async function login(formData: FormData) {
   redirect('/home')
 }
 
+export async function enterTutorKey(formData: FormData) {
+  const tutorKey = getField(formData, 'tutor_key')
+  const result = await validateTutorKey(tutorKey)
+
+  if (!result.ok) {
+    const params = new URLSearchParams({
+      error: result.message,
+    })
+
+    if (tutorKey) {
+      params.set('code', tutorKey)
+    }
+
+    redirect(`/auth/tutor-code?${params.toString()}`)
+  }
+
+  await setStudentSession({
+    childProfileId: result.childProfileId,
+    tutorKeyId: result.tutorKeyId,
+  })
+
+  redirect('/home')
+}
+
 export async function signup(formData: FormData) {
   const email = getField(formData, 'email')
   const password = getField(formData, 'password')
@@ -159,9 +185,10 @@ export async function signup(formData: FormData) {
 
 export async function logout() {
   try {
+    await clearStudentSession()
     const supabase = await createClient()
     await supabase.auth.signOut()
   } finally {
-    redirect('/auth/login')
+    redirect('/')
   }
 }

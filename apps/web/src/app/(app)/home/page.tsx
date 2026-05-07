@@ -4,6 +4,7 @@ import DifficultyBadge from '@/components/ui/DifficultyBadge'
 import { logout } from '@/app/auth/actions'
 import { createClient } from '@/lib/supabase/server'
 import { isMathsSubject } from '@/lib/onboarding'
+import { getStudentSession, type StudentSession as TutorStudentSession } from '@/lib/student-session'
 import type {
   DifficultyLevel,
   Lesson,
@@ -26,6 +27,17 @@ interface CompletedProgressRow extends LessonProgress {
       }
     } | null
   } | null
+}
+
+interface TutorChildProfile {
+  id: string
+  full_name?: string | null
+  year_group?: string | null
+  age_range?: string | null
+  working_level?: string | null
+  target_grade?: string | null
+  preferred_subject?: string | null
+  active?: boolean | null
 }
 
 type LoadResult<T> = {
@@ -134,6 +146,34 @@ async function getCurrentLesson(
   return null
 }
 
+async function getFirstMathsLesson(
+  supabase: Awaited<ReturnType<typeof createClient>>
+): Promise<CurrentLesson | null> {
+  const { data: lessons, error: lessonsError } = await supabase
+    .from('lessons')
+    .select(`
+      *,
+      topic:topics(
+        *,
+        subject:subjects(name, slug, icon_name)
+      )
+    `)
+    .eq('type', 'learn')
+    .order('order_index', { ascending: true })
+    .limit(40)
+
+  if (lessonsError) {
+    throw lessonsError
+  }
+
+  const firstMathsLesson = (lessons ?? []).find((lesson) => isMathsSubject(lesson.topic?.subject))
+  if (firstMathsLesson) {
+    return { lesson: firstMathsLesson as CurrentLesson['lesson'], progress: null }
+  }
+
+  return null
+}
+
 async function getLastSession(
   supabase: Awaited<ReturnType<typeof createClient>>,
   userId: string
@@ -176,6 +216,23 @@ async function getMathsProgress(
   return ((data ?? []) as CompletedProgressRow[]).filter((row) => isMathsSubject(row.lesson?.topic?.subject))
 }
 
+async function getTutorChildProfile(
+  supabase: Awaited<ReturnType<typeof createClient>>,
+  session: TutorStudentSession
+): Promise<TutorChildProfile | null> {
+  const { data, error } = await supabase
+    .from('child_profiles')
+    .select('id, full_name, year_group, age_range, working_level, target_grade, preferred_subject, active')
+    .eq('id', session.childProfileId)
+    .maybeSingle()
+
+  if (error) {
+    throw error
+  }
+
+  return data
+}
+
 function greetingForHour() {
   const hour = new Date().getHours()
   if (hour < 12) return 'Good morning'
@@ -185,39 +242,55 @@ function greetingForHour() {
 
 export default async function HomePage() {
   const supabase = await createClient()
-  const {
-    data: { user },
-    error: authError,
-  } = await supabase.auth.getUser()
-
-  if (authError) {
-    console.error('[home] Failed to read Supabase session', authError)
-    redirect('/auth/login?error=We could not read your session. Please sign in again.')
-  }
-
-  if (!user) {
-    redirect('/auth/login?message=Please sign in to continue.')
-  }
-
-  const [currentLessonResult, lastSessionResult, completedProgressResult] = await Promise.all([
-    safeLoad('current lesson', () => getCurrentLesson(supabase, user.id)),
-    safeLoad('latest session', () => getLastSession(supabase, user.id)),
-    safeLoad('progress summary', () => getMathsProgress(supabase, user.id)),
+  const [authResult, tutorSession] = await Promise.all([
+    supabase.auth.getUser(),
+    getStudentSession(),
   ])
+  const user = authResult.data.user
+
+  if (authResult.error) {
+    console.error('[home] Failed to read Supabase session', authResult.error)
+  }
+
+  if (!user && !tutorSession) {
+    redirect('/?message=Enter your tutor code to continue.')
+  }
+
+  const [currentLessonResult, lastSessionResult, completedProgressResult, tutorProfileResult] =
+    await Promise.all([
+      safeLoad('current lesson', () =>
+        user ? getCurrentLesson(supabase, user.id) : getFirstMathsLesson(supabase)
+      ),
+      user
+        ? safeLoad('latest session', () => getLastSession(supabase, user.id))
+        : Promise.resolve({ data: null, error: null }),
+      user
+        ? safeLoad('progress summary', () => getMathsProgress(supabase, user.id))
+        : Promise.resolve({ data: [], error: null }),
+      tutorSession
+        ? safeLoad('tutor profile', () => getTutorChildProfile(supabase, tutorSession))
+        : Promise.resolve({ data: null, error: null }),
+    ])
 
     const homeErrors = [
       currentLessonResult.error,
       lastSessionResult.error,
       completedProgressResult.error,
+      tutorProfileResult.error,
     ].filter(Boolean) as string[]
 
     const currentLesson = currentLessonResult.data
     const lastSession = lastSessionResult.data
     const completedProgress = completedProgressResult.data ?? []
+    const tutorProfile = tutorProfileResult.data
 
-    const userMetadata = (user.user_metadata ?? {}) as Record<string, unknown>
+    const userMetadata = (user?.user_metadata ?? {}) as Record<string, unknown>
     const userName =
-      typeof userMetadata.full_name === 'string' ? userMetadata.full_name.split(' ')[0] : 'there'
+      tutorProfile?.full_name
+        ? tutorProfile.full_name.split(' ')[0]
+        : typeof userMetadata.full_name === 'string'
+          ? userMetadata.full_name.split(' ')[0]
+          : 'there'
     const recommendedTopic =
       typeof userMetadata.recommended_topic === 'string' ? userMetadata.recommended_topic : ''
     const hasStartedLesson = Boolean(currentLesson?.progress)
