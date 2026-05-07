@@ -68,6 +68,7 @@ export interface TutorCodePreset {
   summary: string
 }
 
+// Transitional demo only. Layer 2 replaces this with a server-side Supabase Tutor Key lookup.
 const TUTOR_CODE_PRESETS: TutorCodePreset[] = [
   {
     code: 'RAYAN-SIMS',

@@ -66,7 +66,7 @@ export default function NewStudentSignupFlow({
           <div>
             <p className="rise-overline text-[10px]">RISE</p>
             <p className="text-base font-semibold leading-none text-secondary-900">
-              {isTutorPath ? 'Tutor path' : 'New student'}
+              {isTutorPath ? 'Demo tutor path' : 'Optional account'}
             </p>
           </div>
         </div>
@@ -78,19 +78,19 @@ export default function NewStudentSignupFlow({
       {/* Page heading */}
       <div className="mb-6">
         <p className="rise-overline mb-2">
-          {isTutorPath ? 'Tutor-coded signup' : 'New-student signup'}
+          {isTutorPath ? 'Demo account setup' : 'Optional account setup'}
         </p>
         <h1 className="text-3xl font-extrabold leading-tight tracking-tight text-secondary-900 lg:text-4xl">
           {isTutorPath ? (
-            <>Finish your <span className="rise-gradient-text">account</span></>
+            <>Preview the <span className="rise-gradient-text">demo path</span></>
           ) : (
-            <>Build your <span className="rise-gradient-text">maths setup</span></>
+            <>Set up an <span className="rise-gradient-text">optional account</span></>
           )}
         </h1>
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-secondary-400">
           {isTutorPath
-            ? 'Your tutor code has shaped the path. Add a few personal details so the first screen feels ready.'
-            : 'Keep it short. We only ask what helps RISE recommend the right first lesson.'}
+            ? 'This is temporary while Tutor Keys move to Supabase. The final student flow will open from the tutor code without needing email first.'
+            : 'Most students should start with the tutor code from their tutor. Account setup is only for returning users or demo access right now.'}
         </p>
       </div>
 
@@ -113,7 +113,7 @@ export default function NewStudentSignupFlow({
             {initialValues.tutorCode} · {initialValues.recommendedTopic || 'Tutor-picked maths path'}
           </p>
           <p className="mt-2 text-sm text-secondary-400">
-            The tutor path is already aimed at the right topic. Tweak age range, level, and account details below.
+            The demo path is already aimed at the right topic. The real Tutor Key flow will use tutor-entered profile data instead.
           </p>
         </div>
       )}
@@ -321,7 +321,7 @@ export default function NewStudentSignupFlow({
 
         <div className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-primary-200/30 pt-5">
           <p className="text-sm text-secondary-400">
-            {step < 3 ? 'Keep it moving — only the essentials.' : 'Account details finish the setup.'}
+            {step < 3 ? 'Demo-only setup for now.' : 'Account details are optional for the future Tutor Key flow.'}
           </p>
 
           <div className="flex flex-wrap items-center gap-3">
@@ -353,8 +353,8 @@ export default function NewStudentSignupFlow({
               <SubmitButton
                 label={
                   isTutorPath
-                    ? 'Create account and open tutor path'
-                    : 'Create account and open maths path'
+                    ? 'Preview demo tutor path'
+                    : 'Set up optional account'
                 }
               />
             )}
