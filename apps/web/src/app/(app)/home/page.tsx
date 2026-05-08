@@ -2,6 +2,8 @@ import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import DifficultyBadge from '@/components/ui/DifficultyBadge'
 import { logout } from '@/app/auth/actions'
+import { updateHomeworkStatus } from '@/app/(app)/home/actions'
+import { getStudentHomeworkTask, type HomeworkTask, type HomeworkStatus } from '@/lib/homework'
 import { createClient } from '@/lib/supabase/server'
 import { isMathsSubject } from '@/lib/onboarding'
 import { getStudentSession, type StudentSession as TutorStudentSession } from '@/lib/student-session'
@@ -46,6 +48,13 @@ interface CompletedProgressRow extends LessonProgress {
 type LoadResult<T> = {
   data: T | null
   error: string | null
+}
+
+interface HomePageProps {
+  searchParams?: {
+    homework_success?: string
+    homework_error?: string
+  }
 }
 
 function getHomeLoadErrorMessage(label: string, error: unknown) {
@@ -249,6 +258,10 @@ async function getTutorAppActivity(session: TutorStudentSession): Promise<Studen
   return getRecentStudentAppActivity(session, 6)
 }
 
+async function getTutorHomeworkTask(session: TutorStudentSession): Promise<HomeworkTask | null> {
+  return getStudentHomeworkTask(session)
+}
+
 function greetingForHour() {
   const hour = new Date().getHours()
   if (hour < 12) return 'Good morning'
@@ -308,6 +321,21 @@ function getHomework(profile?: TutorKeyDashboardStudent | null, session?: TutorK
   )
 }
 
+function homeworkStatusLabel(status?: string | null) {
+  switch (status) {
+    case 'in_progress':
+      return 'In progress'
+    case 'completed':
+      return 'Completed'
+    case 'need_help':
+      return 'Need help'
+    case 'not_started':
+      return 'Not started'
+    default:
+      return humaniseToken(status) ?? 'Not started'
+  }
+}
+
 function getFocusTopic(profile?: TutorKeyDashboardStudent | null, session?: TutorKeyDashboardSession | null, homework?: string | null) {
   return (
     compactText(session?.topic) ||
@@ -321,7 +349,7 @@ function getFocusTopic(profile?: TutorKeyDashboardStudent | null, session?: Tuto
   )
 }
 
-export default async function HomePage() {
+export default async function HomePage({ searchParams }: HomePageProps) {
   const supabase = await createClient()
   const [authResult, tutorSession] = await Promise.all([
     supabase.auth.getUser(),
@@ -337,7 +365,7 @@ export default async function HomePage() {
     redirect('/?message=Enter your tutor code to continue.')
   }
 
-  const [currentLessonResult, lastSessionResult, completedProgressResult, tutorProfileResult, tutorHomeResult, tutorActivityResult] =
+  const [currentLessonResult, lastSessionResult, completedProgressResult, tutorProfileResult, tutorHomeResult, tutorActivityResult, tutorHomeworkResult] =
     await Promise.all([
       safeLoad('current lesson', () =>
         user ? getCurrentLesson(supabase, user.id) : getFirstMathsLesson(supabase)
@@ -357,6 +385,9 @@ export default async function HomePage() {
       tutorSession
         ? safeLoad('recent app activity', () => getTutorAppActivity(tutorSession))
         : Promise.resolve({ data: [], error: null }),
+      tutorSession
+        ? safeLoad('homework', () => getTutorHomeworkTask(tutorSession))
+        : Promise.resolve({ data: null, error: null }),
     ])
 
     const homeErrors = [
@@ -366,6 +397,7 @@ export default async function HomePage() {
       tutorProfileResult.error,
       tutorHomeResult.error,
       tutorActivityResult.error,
+      tutorHomeworkResult.error,
     ].filter(Boolean) as string[]
 
     const currentLesson = currentLessonResult.data
@@ -373,11 +405,17 @@ export default async function HomePage() {
     const completedProgress = completedProgressResult.data ?? []
     const tutorHome = tutorHomeResult.data
     const recentAppActivity = tutorActivityResult.data ?? []
+    const homeworkTask = tutorHomeworkResult.data
     const dashboardProfile = tutorHome?.profile ?? null
     const tutorProfile = tutorProfileResult.data ?? dashboardProfile
     const latestTutorSession = tutorHome?.latest_session ?? null
     const latestReport = tutorHome?.latest_report ?? null
-    const homework = getHomework(dashboardProfile, latestTutorSession, latestReport)
+    const legacyHomework = getHomework(dashboardProfile, latestTutorSession, latestReport)
+    const homework = homeworkTask?.title ?? legacyHomework
+    const homeworkInstructions = homeworkTask?.instructions ?? null
+    const homeworkStatus = homeworkTask?.status ?? dashboardProfile?.homework_status ?? 'not_started'
+    const homeworkSuccess = searchParams?.homework_success
+    const homeworkError = searchParams?.homework_error
     const focusTopic = getFocusTopic(dashboardProfile, latestTutorSession, homework)
     const sessionDate = formatDate(latestTutorSession?.session_date ?? latestTutorSession?.created_at)
     const reportDate = formatDate(latestReport?.created_at)
@@ -555,9 +593,48 @@ export default async function HomePage() {
             {homework ? (
               <>
                 <h2 className="text-2xl font-extrabold tracking-tight text-secondary-900">{homework}</h2>
-                {dashboardProfile?.homework_status ? (
-                  <p className="mt-3 text-sm font-semibold text-primary-600">{dashboardProfile.homework_status}</p>
+                {homeworkInstructions ? (
+                  <p className="mt-3 text-sm leading-relaxed text-secondary-500">{homeworkInstructions}</p>
                 ) : null}
+                <p className="mt-3 text-sm font-semibold text-primary-600">
+                  {homeworkStatusLabel(homeworkStatus)}
+                </p>
+                {homeworkSuccess ? (
+                  <p className="mt-3 rounded-xl border border-emerald-200 bg-emerald-50/80 px-3 py-2 text-sm font-semibold text-emerald-700">
+                    {homeworkSuccess}
+                  </p>
+                ) : null}
+                {homeworkError ? (
+                  <p className="mt-3 rounded-xl border border-red-200 bg-red-50/80 px-3 py-2 text-sm font-semibold text-red-700">
+                    {homeworkError}
+                  </p>
+                ) : null}
+                {homeworkTask ? (
+                  <div className="mt-5 grid gap-2">
+                    <HomeworkStatusButton
+                      homeworkTaskId={homeworkTask.id}
+                      status="in_progress"
+                      label={homeworkTask.status === 'in_progress' ? 'In progress' : 'Start'}
+                      active={homeworkTask.status === 'in_progress'}
+                    />
+                    <HomeworkStatusButton
+                      homeworkTaskId={homeworkTask.id}
+                      status="completed"
+                      label="Mark completed"
+                      active={homeworkTask.status === 'completed'}
+                    />
+                    <HomeworkStatusButton
+                      homeworkTaskId={homeworkTask.id}
+                      status="need_help"
+                      label="Need help"
+                      active={homeworkTask.status === 'need_help'}
+                    />
+                  </div>
+                ) : (
+                  <p className="mt-4 text-xs leading-relaxed text-secondary-400">
+                    Your tutor set this before homework status tracking was connected.
+                  </p>
+                )}
               </>
             ) : (
               <EmptyTutorCard
@@ -720,6 +797,32 @@ function EmptyTutorCard({ title, body }: { title: string; body: string }) {
       <h2 className="text-2xl font-extrabold tracking-tight text-secondary-900">{title}</h2>
       <p className="mt-3 text-sm leading-relaxed text-secondary-500">{body}</p>
     </div>
+  )
+}
+
+function HomeworkStatusButton({
+  homeworkTaskId,
+  status,
+  label,
+  active,
+}: {
+  homeworkTaskId: string
+  status: Exclude<HomeworkStatus, 'not_started'>
+  label: string
+  active?: boolean
+}) {
+  const buttonClass = active
+    ? 'rounded-xl border border-primary-200 bg-primary-50 px-4 py-3 text-sm font-bold text-primary-700'
+    : 'rise-btn-outline rounded-xl px-4 py-3 text-sm'
+
+  return (
+    <form action={updateHomeworkStatus}>
+      <input type="hidden" name="homework_task_id" value={homeworkTaskId} />
+      <input type="hidden" name="status" value={status} />
+      <button type="submit" className={`${buttonClass} w-full`}>
+        {label}
+      </button>
+    </form>
   )
 }
 
