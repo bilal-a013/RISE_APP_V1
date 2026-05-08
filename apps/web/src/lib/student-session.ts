@@ -28,7 +28,6 @@ function getSessionSecret() {
   return (
     process.env.STUDENT_SESSION_SECRET?.trim() ||
     process.env.SUPABASE_SERVICE_ROLE_KEY?.trim() ||
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.trim() ||
     ''
   )
 }
