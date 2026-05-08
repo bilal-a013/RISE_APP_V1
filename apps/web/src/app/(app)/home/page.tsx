@@ -368,7 +368,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
   const [currentLessonResult, lastSessionResult, completedProgressResult, tutorProfileResult, tutorHomeResult, tutorActivityResult, tutorHomeworkResult] =
     await Promise.all([
       safeLoad('current lesson', () =>
-        user ? getCurrentLesson(supabase, user.id) : getFirstMathsLesson(supabase)
+        user ? getCurrentLesson(supabase, user.id) : Promise.resolve(null)
       ),
       user
         ? safeLoad('latest session', () => getLastSession(supabase, user.id))
