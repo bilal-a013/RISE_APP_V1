@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
+import { isMissingSupabaseAuthSession } from '@/lib/supabase/auth-errors'
 import { getStudentSession } from '@/lib/student-session'
 import BottomNav from '@/components/layout/BottomNav'
 
@@ -17,7 +18,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
     studentSession = studentSessionResult
     const result = await supabase.auth.getUser()
 
-    if (result.error) {
+    if (result.error && !isMissingSupabaseAuthSession(result.error)) {
       console.error('[app layout] Failed to read Supabase session', result.error)
     }
 

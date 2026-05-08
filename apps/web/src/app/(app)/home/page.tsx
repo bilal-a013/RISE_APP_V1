@@ -5,6 +5,7 @@ import { logout } from '@/app/auth/actions'
 import { updateHomeworkStatus } from '@/app/(app)/home/actions'
 import { getStudentHomeworkTask, type HomeworkTask, type HomeworkStatus } from '@/lib/homework'
 import { createClient } from '@/lib/supabase/server'
+import { isMissingSupabaseAuthSession } from '@/lib/supabase/auth-errors'
 import { isMathsSubject } from '@/lib/onboarding'
 import { getStudentSession, type StudentSession as TutorStudentSession } from '@/lib/student-session'
 import {
@@ -357,7 +358,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
   ])
   const user = authResult.data.user
 
-  if (authResult.error) {
+  if (authResult.error && !isMissingSupabaseAuthSession(authResult.error)) {
     console.error('[home] Failed to read Supabase session', authResult.error)
   }
 
